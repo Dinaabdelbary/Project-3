@@ -102,3 +102,13 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .topnav a {
+    float: left;
+    color: #2E0001;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.4s;
+  }
