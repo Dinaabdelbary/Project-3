@@ -1,17 +1,17 @@
 const router = require("express").Router();
-const User = require('../models/User.model');
+const User = require('../models/User');
 
 
 // ===================================//Post /api/user ==== CREATE A USER  =============================
 
-router.post('/user/signup', (req, res) => {  
-  const { name, email, password, instruments } = req.body; // The required fields
-  User.create({name, email, password, instruments})
-  .then(newUser => {
-    res.json(newUser)
-  }).catch(error => res.json(error));
+// router.post('/user/signup', (req, res) => {  
+//   const { name, email, password, instruments } = req.body; // The required fields
+//   User.create({name, email, password, instruments})
+//   .then(newUser => {
+//     res.json(newUser)
+//   }).catch(error => res.json(error));
 
-});
+// });
 
 //================================//Get /api/user/ === GET ALL USERS =======================================
 
