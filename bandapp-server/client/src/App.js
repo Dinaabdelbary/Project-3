@@ -6,7 +6,8 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
 import { logout } from './services/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 
 
@@ -15,11 +16,16 @@ function App() {
   const navigate = useNavigate();
 
   const [loggedInUser, setLoggedInUser] = React.useState(null);
+
   React.useEffect(() => {
     axios.get('/api/auth/loggedin')
-      .then(response => setLoggedInUser(response.data))
+      .then(response =>{
+        console.log(response.data);
+        setLoggedInUser(response.data)
+      })
       .catch(err => console.log(err))
   }, [])
+
   const logoutHandler = () => {
     logout().then(done=>{
       setLoggedInUser(null)
@@ -29,8 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
-      <button type="button" onClick={ logoutHandler} >Logout</button>
+    <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
           <Route path="/" element={<Home />} />
