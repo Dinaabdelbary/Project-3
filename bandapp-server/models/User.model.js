@@ -5,10 +5,11 @@ const userSchema = Schema({
     email : {
       type: String,
       required: true,
+      unique: true
     },
     password : {
       type: String,
-      required: true
+      required: true,
     },
     name : {
       type: String, //list of instruments and proficiency(not required)
