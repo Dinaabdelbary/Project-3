@@ -1,12 +1,13 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
 import { logout } from './services/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 import { loggedin } from './features/auth/authApi'
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,6 +35,7 @@ function App() {
       })
       .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
   }, [])
+
   const logoutHandler = () => {
     logout().then(done => {
       console.log(done)
@@ -61,6 +63,7 @@ function App() {
             </>
           )
       }
+    <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
           <Route path="/" element={<Home />} />
