@@ -28,12 +28,16 @@ function App() {
 
   useEffect(() => {
     loggedin()
-      .then(response => dispatch((currentUser({ currentUser: response.data }))))
+      .then(response => {
+        console.log(response, 'response from loggedin')
+        dispatch((currentUser(response.data)))
+      })
       .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
   }, [])
   const logoutHandler = () => {
     logout().then(done => {
-      dispatch(currentUser({currentUser: null}))
+      console.log(done)
+      dispatch(currentUser(null))
       navigate('/');
     })
   }
@@ -42,7 +46,7 @@ function App() {
     <div className="App">
       <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
       {
-        userData.user.currentUser ?
+        userData.user.currentUser.name ?
           (
             <>
               <p>We have a user in storage: {userData.user.currentUser.name}</p>

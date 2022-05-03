@@ -69,7 +69,7 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/loggedin', (req, res) => {
-    console.log(req.user)
+    console.log(req.user, 'req.user from loggedin')
     res.json(req.user);
 })
 

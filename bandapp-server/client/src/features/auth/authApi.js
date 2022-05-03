@@ -13,7 +13,7 @@ const logout = () => {
 }
 const loggedin = () => {
     
-    return axios.get('http://localhost:3005/api/auth/loggedin', {withCredentials: true})
+    return axios.get('http://localhost:3005/api/auth/loggedin')
 }
 
 export {

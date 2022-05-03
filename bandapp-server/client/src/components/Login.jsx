@@ -27,6 +27,7 @@ const Login = (props) => {
         login(email, password)
             .then(user => {
                 // props.setLoggedInUser(user)
+                console.log(user, 'response from login')
                 dispatch(currentUser(user))
                 navigate('/');
             })
