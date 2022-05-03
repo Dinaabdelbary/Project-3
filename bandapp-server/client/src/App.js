@@ -5,10 +5,8 @@ import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
-import { logout } from './services/auth';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-
 import { loggedin } from './features/auth/authApi'
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -35,6 +33,7 @@ function App() {
       })
       .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
   }, [])
+
 
   const logoutHandler = () => {
     logout().then(done => {
@@ -66,9 +65,9 @@ function App() {
     <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser} />} />
-          <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser} />} />
+          <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
+          <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser}/>} />
+          <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
         </Routes>
       </div>
     </div>

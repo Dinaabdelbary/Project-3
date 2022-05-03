@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
 import { logout } from '../services/auth'
 
 
@@ -21,12 +20,12 @@ const navigate = useNavigate();
   }
 
   return (
-    <nav>
+    <nav className='nav topnav'>
     <Link to='/'>Home</Link>
     <Link to='/search'>Search</Link>
-    <Link to='/profile'>{loggedInUser ? loggedInUser.name : ""}</Link>
+    <Link to='/:user/profile'>{loggedInUser ? loggedInUser.name : ""}</Link>
     {!loggedInUser ? <Link to='/login'>Login</Link> :
-    <button type="button" onClick={ logoutHandler} >Logout</button>}
+    <button className='buttons' type="button" onClick={ logoutHandler}>Logout</button>}
 
     </nav>
   )
