@@ -5,15 +5,14 @@ import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
-import { logout } from './services/auth';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
 
 
 
 function App() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [loggedInUser, setLoggedInUser] = React.useState(null);
 
@@ -26,19 +25,12 @@ function App() {
       .catch(err => console.log(err))
   }, [])
 
-  const logoutHandler = () => {
-    logout().then(done=>{
-      setLoggedInUser(null)
-      navigate('/');
-    })
-  }
-
-  return (
+   return (
     <div className="App">
     <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
           <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser}/>} />
           <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
         </Routes>

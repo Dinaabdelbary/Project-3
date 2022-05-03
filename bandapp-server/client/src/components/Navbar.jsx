@@ -25,7 +25,7 @@ const navigate = useNavigate();
     <Link to='/search'>Search</Link>
     <Link to='/:user/profile'>{loggedInUser ? loggedInUser.name : ""}</Link>
     {!loggedInUser ? <Link to='/login'>Login</Link> :
-    <button className='buttons' type="button" onClick={ logoutHandler} >Logout</button>}
+    <button className='buttons' type="button" onClick={ logoutHandler}>Logout</button>}
 
     </nav>
   )
