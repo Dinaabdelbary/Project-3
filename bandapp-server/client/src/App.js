@@ -1,32 +1,67 @@
 import './App.css';
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-
+import { loggedin } from './features/auth/authApi'
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  storedUser,
+  currentUser
+} from './features/auth/authSlice';
 
 
 
 function App() {
-  // const navigate = useNavigate();
+  const userData = useSelector(storedUser); // returns data from redux store
+  console.log(userData, 'user data from redux storage');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [loggedInUser, setLoggedInUser] = React.useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  // dispatch(currentUser());
 
-  React.useEffect(() => {
-    axios.get('/api/auth/loggedin')
-      .then(response =>{
-        console.log(response.data);
-        setLoggedInUser(response.data)
+  useEffect(() => {
+    loggedin()
+      .then(response => {
+        console.log(response, 'response from loggedin')
+        dispatch((currentUser(response.data)))
       })
-      .catch(err => console.log(err))
+      .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
   }, [])
 
-   return (
+
+  const logoutHandler = () => {
+    logout().then(done => {
+      console.log(done)
+      dispatch(currentUser(null))
+      navigate('/');
+    })
+  }
+
+  return (
     <div className="App">
+      <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
+      {
+        userData.user.currentUser.name ?
+          (
+            <>
+              <p>We have a user in storage: {userData.user.currentUser.name}</p>
+              <button type="button" onClick={logoutHandler} >Logout</button>
+            </>
+          ) :
+          (
+            <>
+              <p>We don't have a user in the redux storage.</p>
+              <Link to='/login'>Login</Link>
+
+            </>
+          )
+      }
     <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
