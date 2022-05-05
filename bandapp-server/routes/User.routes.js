@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require('../models/User');
+const User = require('../models/User.model');
 
 
 // ===================================//Post /api/user ==== CREATE A USER  =============================
@@ -61,4 +61,6 @@ router.delete('/user/:id', (req, res) => {
 });
 
 module.exports = router;
+
+//================================//Get /api/user/:id === Get all users currentUser is connected to  ( all connections) =======================================
 

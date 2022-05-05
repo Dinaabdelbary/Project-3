@@ -8,6 +8,9 @@ import axios from 'axios';
 import { logout } from './services/auth';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Chat from './components/Chat'
+
+import io from 'socket.io-client'
 
 import { loggedin } from './features/auth/authApi'
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,7 +19,7 @@ import {
   currentUser
 } from './features/auth/authSlice';
 
-
+const socket = io.connect('http://localhost:3001')  ///connection to the backend
 
 function App() {
   const userData = useSelector(storedUser); // returns data from redux store
@@ -70,6 +73,7 @@ function App() {
           <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser} />} />
           <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser} />} />
         </Routes>
+        <Chat/>
       </div>
     </div>
   );
