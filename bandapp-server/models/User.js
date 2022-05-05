@@ -1,5 +1,6 @@
 
 const { Schema, model } = require("mongoose");
+const Band = require('./Band')
 
 const userSchema = Schema({
     email : {
@@ -16,12 +17,15 @@ const userSchema = Schema({
       required: true
     },
     instruments : [String],
-    location : String,
+    location : String, //possible API call to location API, otherwise just city
     image : String,
-    listensto : [String],
+    listensto : [String], //possible API call to Spotify
     genres : [String],
     history : String,
-    connections : [String]
+    currentBands: [{type: Schema.Types.ObjectId, ref:Band}],
+    pendingRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    successfulMatch: [{type: Schema.Types.ObjectId, ref: "User"}],
+    notifications: [{type: Schema.Types.Mixed, ref: "User"}]
 })
 
 

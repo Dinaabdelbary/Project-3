@@ -5,7 +5,7 @@ import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { loggedin } from './features/auth/authApi'
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ import {
   storedUser,
   currentUser
 } from './features/auth/authSlice';
+import { logout } from './services/auth'
 
 
 
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div className="App">
+    <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
       {
         userData.user.currentUser.name ?
@@ -62,7 +64,6 @@ function App() {
             </>
           )
       }
-    <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <div >
         <Routes>
           <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
