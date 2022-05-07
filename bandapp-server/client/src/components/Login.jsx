@@ -1,48 +1,47 @@
 import React, { useState } from 'react';
-import { login } from '../services/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useLoginMutation } from '../features/auth/authApi';
+import { setCurrentUser } from '../features/auth/authSlice';
 
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    currentUser,
-    storedUser,
-} from '../features/auth/authSlice';
-
-
-
-const Login = (props) => {
-
+const Login = () => {
     const dispatch = useDispatch();
-
-    const navigate = useNavigate();
+    const [login, { isLoading, isError, isSuccess, data }] = useLoginMutation();
 
     const [email, setEmail] = useState('');
     const [password, sePassword] = useState('');
 
-    const handleEmail = (event) => setEmail(event.target.value);
-    const handlePasswordChange = (event) => sePassword(event.target.value);
+    const handleEmail = event => setEmail(event.target.value);
+    const handlePasswordChange = event => sePassword(event.target.value);
 
     const handleSubmit = () => {
-
-        login(email, password)
-            .then(user => {
-                // props.setLoggedInUser(user)
-                console.log(user, 'response from login')
-                dispatch(currentUser(user))
-                navigate('/');
+        login({ email, password })
+            .then(({ data: user }) => {
+                dispatch(setCurrentUser(user));
             })
-            .catch(error => {
-                console.log(error, 'Error when trying to send login request')
-            })
+            .catch(err => {
+                console.error(err);
+            });
     };
 
     return (
         <div>
-            <input type="text" placeholder="Email" onChange={handleEmail} value={email} />
-            <input type="password" placeholder="Password" onChange={handlePasswordChange} value={password} />
-            <button type="button" onClick={handleSubmit}>Login</button>
+            <input
+                type='text'
+                placeholder='Email'
+                onChange={handleEmail}
+                value={email}
+            />
+            <input
+                type='password'
+                placeholder='Password'
+                onChange={handlePasswordChange}
+                value={password}
+            />
+            <button type='button' onClick={handleSubmit}>
+                Login
+            </button>
         </div>
-    )
+    );
 };
 
-export default Login
+export default Login;

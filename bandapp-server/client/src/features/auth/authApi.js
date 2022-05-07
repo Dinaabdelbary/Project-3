@@ -1,24 +1,44 @@
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const signup = (name, email, password) => {
-    return axios.post('/api/auth/signup', { name, email, password })
-}
+export const authApiSlice = createApi({
+    reducerPath: 'auth-api',
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://localhost:3005/api/auth',
+    }),
+    endpoints: builder => ({
+        // queries (GET)
+        loggedIn: builder.query({
+            query: () => ({
+                url: '/loggedin',
+            }),
+        }),
+        // mutations (POST, PATCH, PUT, DELETE)
+        signup: builder.mutation({
+            query: signupInfo => ({
+                url: '/signup',
+                method: 'POST',
+                body: signupInfo,
+            }),
+        }),
+        login: builder.mutation({
+            query: loginInfo => ({
+                url: '/login',
+                method: 'POST',
+                body: loginInfo,
+            }),
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: '/logout',
+            }),
+            method: 'DELETE',
+        }),
+    }),
+});
 
-const login = (email, password) => {
-    return axios.post('/api/auth/login', {email, password})
-}
-
-const logout = () => {
-    return axios.delete('/api/auth/logout')
-}
-const loggedin = () => {
-    
-    return axios.get('/api/auth/loggedin')
-}
-
-export {
-    signup,
-    login,
-    logout,
-    loggedin
-}
+export const {
+    useLazyLoggedInQuery,
+    useSignupMutation,
+    useLoginMutation,
+    useLogoutMutation,
+} = authApiSlice;
