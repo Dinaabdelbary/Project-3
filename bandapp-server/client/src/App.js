@@ -4,7 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import axios from 'axios';
+
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { loggedin } from './features/auth/authApi'
@@ -14,6 +14,7 @@ import {
   storedUser,
   currentUser
 } from './features/auth/authSlice';
+import axios from 'axios';
 
 import UserProfile from './components/Geolocation';
 
@@ -32,7 +33,7 @@ function App() {
         dispatch((currentUser(response.data)))
       })
       .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
-  }, [])
+  }, [dispatch])
 
 
   const logoutHandler = () => {
@@ -76,3 +77,9 @@ function App() {
 }
 
 export default App;
+
+
+
+const searchParams = new URLSearchParams("name=test1")
+
+axios.get("localhost:3005/search" + searchParams)
