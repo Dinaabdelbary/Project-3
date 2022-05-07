@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../features/auth/authApi';
 import { setCurrentUser } from '../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -10,6 +11,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, sePassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleEmail = event => setEmail(event.target.value);
     const handlePasswordChange = event => sePassword(event.target.value);
 
@@ -17,14 +20,18 @@ const Login = () => {
         login({ email, password })
             .then(({ data: user }) => {
                 dispatch(setCurrentUser(user));
+                navigate('/')
             })
             .catch(err => {
                 console.error(err);
             });
     };
 
+
+
     return (
         <div>
+
             <input
                 type='text'
                 placeholder='Email'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../services/auth'
+
 
 
 
@@ -13,10 +13,10 @@ const navigate = useNavigate();
   //when we use redux toolkit, good example of context
 
   const logoutHandler = () => {
-    logout().then(done=>{
-      setLoggedInUser(null)
-      navigate('/');
-    })
+    // logout().then(done=>{
+    //   setLoggedInUser(null)
+    //   navigate('/');
+    // })
   }
 
   return (

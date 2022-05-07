@@ -22,14 +22,16 @@ function App() {
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     useEffect(() => {
-        // loggedInQuery()
-        //     .then(({ data: user }) => {
-        //         dispatch(setCurrentUser(user));
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-    }, [dispatch, loggedInQuery]);
+
+        loggedInQuery()
+            .then(({ data: user }) => {
+                console.log(user)
+                dispatch(setCurrentUser(user));
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }, []);
 
     const logoutHandler = () => {
         logout()
