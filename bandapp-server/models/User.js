@@ -23,10 +23,10 @@ const userSchema = Schema({
     genres : [String],
     history : String,
     currentBands: [{type: Schema.Types.ObjectId, ref:Band}],
-    pendingRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
-    successfulMatch: [{type: Schema.Types.ObjectId, ref: "User"}],
-    notifications: [{type: Schema.Types.Mixed, ref: "User"}]
+    pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    friendList: [{type: Schema.Types.ObjectId, ref: "User"}]
 })
 
 
-module.exports = model("User",userSchema);
+module.exports = model("User", userSchema);

@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
-const User = require('../models/User.model');
+const User = require('../models/User');
 const router = require('express').Router();
 
-router.get("/connect/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     const otherUserId = req.params.id;
-    const currentUserId = req.session.currentUser._id;
+    console.log('req.session:', req.session)
+    const currentUserId = req.session.passport.user;
 
     User.findOneAndUpdate(
         { _id: currentUserId },
-        { $push: { pendingRequests: otherUserId } },
+        { $push: { pendingSentRequests: otherUserId } },
         { new: true }
     )
         .then(updatedUser => {
@@ -17,7 +18,7 @@ router.get("/connect/:id", (req, res) => {
 
             return User.findOneAndUpdate(
                 { _id: otherUserId },
-                { $push: { notifications: currentUserId } },
+                { $push: { pendingReceivedRequests: currentUserId } },
                 { new: true }
             )
 
@@ -28,17 +29,15 @@ router.get("/connect/:id", (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get("/connect/accept/:id", (req, res) => {
+router.get("/accept/:id", (req, res) => {
     const otherUserId = req.params.id;
-    const currentUserId = req.session.currentUser._id;
-    // I am in the pending of the other
-    // the other is in my notifications
+    const currentUserId = req.session.passport.user;
 
     User.findOneAndUpdate(
         { _id: currentUserId },
         {
-            $push: { successfulMatch: otherUserId },
-            $pull: { notifications: otherUserId }
+            $push: { friendList: otherUserId },
+            $pull: { pendingSentRequests: otherUserId }
         },
         { new: true }
     ).then(updatedSelf => {
@@ -46,8 +45,8 @@ router.get("/connect/accept/:id", (req, res) => {
         return User.findOneAndUpdate(
             { _id: otherUserId },
             {
-                $push: { successfulMatch: currentUserId },
-                $pull: { pendingRequests: currentUserId }
+                $push: { friendList: currentUserId },
+                $pull: { pendingReceivedRequests: currentUserId }
             },
             { new: true }
         ).then(update => {
@@ -57,22 +56,20 @@ router.get("/connect/accept/:id", (req, res) => {
     }).catch(err => console.log(err))
 })
 
-router.get("/connect/decline/:id", (req, res) => {
+router.get("/decline/:id", (req, res) => {
     const otherUserId = req.params.id;
-    const currentUserId = req.session.currentUser._id;
+    const currentUserId = req.session.passport.user;
 
     User.findOneAndUpdate(
         { _id: currentUserId },
-        {
-            $pull: { notifications: otherUserId }
-        },
+        { $pull: { pendingSentRequests: otherUserId } },
         { new: true }
     ).then(updatedSelf => {
         req.session.currentUser = updatedSelf
         return User.findOneAndUpdate(
             { _id: otherUserId },
             {
-                $pull: { pendingRequests: currentUserId }
+                $pull: { pendingReceivedRequests: currentUserId }
             },
             { new: true }
         )

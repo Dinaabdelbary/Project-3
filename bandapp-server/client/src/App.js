@@ -19,7 +19,6 @@ import { logout } from './services/auth'
 
 function App() {
   const userData = useSelector(storedUser); // returns data from redux store
-  console.log(userData, 'user data from redux storage');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +28,6 @@ function App() {
   useEffect(() => {
     loggedin()
       .then(response => {
-        console.log(response, 'response from loggedin')
         dispatch((currentUser(response.data)))
       })
       .catch(error => console.log(error, 'Error when trying to get info from loggedin axios request'))
