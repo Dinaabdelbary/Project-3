@@ -15,6 +15,7 @@ import {
   currentUser
 } from './features/auth/authSlice';
 
+import UserProfile from './components/Geolocation';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
           <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser}/>} />
           <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
+          <Route path="/location" element={<UserProfile />} />
         </Routes>
       </div>
     </div>
