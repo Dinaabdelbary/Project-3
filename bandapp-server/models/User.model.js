@@ -1,4 +1,3 @@
-
 const { Schema, model } = require("mongoose");
 const Band = require('./Band.model')
 
@@ -16,7 +15,6 @@ const userSchema = Schema({
       type: String, //list of instruments and proficiency(not required)
       required: true
     },
-    personalchat : [{type: Schema.Types.ObjectId, ref:'Chat'}],
     instruments : [String],
     location : String, //possible API call to location API, otherwise just city
     image : String,
