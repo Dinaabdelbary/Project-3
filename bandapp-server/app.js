@@ -39,7 +39,7 @@ let store = new MongoStore({
 });
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
-const allRoutes = require("./routes/User.routes");
+const allRoutes = require("./routes/user.routes");
 app.use("/api", allRoutes);
 
 app.use(
@@ -71,8 +71,16 @@ app.locals.title = "Express - Generated with IronGenerator";
 const userRoutes = require("./routes/user.routes");
 app.use("/api", userRoutes);
 
+
 const searchRoutes = require("./routes/search.routes");
 app.use("/api", searchRoutes);
+
+const connectRoutes = require("./routes/connect.routes");
+app.use("/connect", connectRoutes);
+
+const bandRoutes = require('./routes/band.routes');
+app.use('/band', bandRoutes);
+
 
 const auth = require("./routes/auth.routes");
 

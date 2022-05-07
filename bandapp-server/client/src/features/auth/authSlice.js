@@ -12,7 +12,6 @@ export const authSlice = createSlice({
 
     reducers: {
         currentUser: (state, action) => {
-            console.log(action, 'action from slice checking state')
             const currentUser  = action.payload
             // console.log(currentUser)
             state.currentUser = currentUser
