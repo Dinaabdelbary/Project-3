@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../features/auth/authApi';
 import { setCurrentUser } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Login = () => {
     const handlePasswordChange = event => sePassword(event.target.value);
 
     const handleSubmit = () => {
-        login({ email, password })
+        axios.post('http://localhost:3005/api/auth/login', { email, password })
             .then(({ data: user }) => {
                 dispatch(setCurrentUser(user));
                 navigate('/')

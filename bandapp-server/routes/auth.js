@@ -69,8 +69,11 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/loggedin', (req, res) => {
-    console.log(req, 'req.user from loggedin')
-    console.log(req.socket.remoteAddress)
+    let  { ip } = req.ipinfo;
+    if (ip.substr(0, 7) == "::ffff:") {
+        ip = ip.substr(7)
+      }
+      console.log(req.user);
     res.json(req.user);
 })
 

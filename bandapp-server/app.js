@@ -9,21 +9,20 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const MongoStore = require('connect-mongo');
 
-const LocalStrategy = require('passport-local').Strategy;
+require('./db/index')
+
+const ipinfo = require('ipinfo-express');
+
 const User = require('./models/User.model');
+
+
+
 
 require('./configs/passport.js');
 
 const app = express();
 
-mongoose
-  .connect(process.env.MONGO_CONNECT || 'mongodb://localhost/bandmatchDB', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  })
-  .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+
 const cors = require('cors');
 
 app.use(cors());
@@ -59,6 +58,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(ipinfo({
+  token: 'f0585fac666470',
+  cache: null,
+  timeout: 5000
+}));
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
@@ -75,3 +79,4 @@ app.use('/api/auth', auth);
 
 
 module.exports = app;
+

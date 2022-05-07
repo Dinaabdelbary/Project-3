@@ -5,15 +5,11 @@ const mongoose = require("mongoose");
 // ℹ️ Sets the MongoDB URI for our app to have access to it.
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/bandapp-server";
-
 mongoose
-  .connect(MONGO_URI)
-  .then((x) => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
+  .connect(process.env.MONGO_CONNECT || 'mongodb://localhost/bandmatchDB', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
+  .catch(err => {
+    console.error('Error connecting to mongo', err)
   });
