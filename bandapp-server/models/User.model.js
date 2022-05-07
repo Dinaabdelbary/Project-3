@@ -1,6 +1,6 @@
 
 const { Schema, model } = require("mongoose");
-const Band = require('./Band')
+const Band = require('./Band.model')
 
 const userSchema = Schema({
     email : {

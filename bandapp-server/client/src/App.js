@@ -14,7 +14,6 @@ import {
   storedUser,
   currentUser
 } from './features/auth/authSlice';
-import { logout } from './services/auth'
 
 
 

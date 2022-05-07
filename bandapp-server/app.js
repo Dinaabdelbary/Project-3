@@ -71,6 +71,9 @@ app.use("/api", userRoutes);
 const connectRoutes = require("./routes/connect.routes");
 app.use("/connect", connectRoutes);
 
+const bandRoutes = require('./routes/band.routes');
+app.use('/band', bandRoutes);
+
 
 const auth = require('./routes/auth');
 app.use('/api/auth', auth);
