@@ -11,10 +11,13 @@ const MongoStore = require('connect-mongo');
 
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User.model');
+// const messageRoute = require('./routes/messagesRoute')
 
 require('./configs/passport.js');
 
 const app = express();
+
+const server = require('./configs/socketio')(app);
 
 mongoose
   .connect(process.env.MONGO_CONNECT || 'mongodb://localhost/bandmatchDB', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -72,6 +75,10 @@ app.use("/api", userRoutes);
 const auth = require('./routes/auth');
 app.use('/api/auth', auth);
 
+
+// Chat
+
+// app.use("/api/messages", messageRoute)
 
 
 module.exports = app;

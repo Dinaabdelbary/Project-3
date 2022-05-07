@@ -14,8 +14,8 @@ import {
   storedUser,
   currentUser
 } from './features/auth/authSlice';
-
-
+import io from "socket.io-client";
+import ChatContainer from './components/ChatContainer';
 
 function App() {
   const userData = useSelector(storedUser); // returns data from redux store
@@ -69,6 +69,7 @@ function App() {
           <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
           <Route path="/signup" element={<SignUp setLoggedInUser={setLoggedInUser}/>} />
           <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
+          <Route path="/chat/:id" element={<ChatContainer loggedInUser={loggedInUser} />} />
         </Routes>
       </div>
     </div>
