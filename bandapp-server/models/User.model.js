@@ -17,13 +17,14 @@ const userSchema = Schema({
     },
     instruments : [String],
     location : String, //possible API call to location API, otherwise just city
-    imageUrl : String,
+    image : String,
     listensto : [String], //possible API call to Spotify
     genres : [String],
+    history : String,
     currentBands: [{type: Schema.Types.ObjectId, ref:Band}],
-    pendingRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
-    successfulMatch: [{type: Schema.Types.ObjectId, ref: "User"}],
-    notifications: [{type: Schema.Types.Mixed, ref: "User"}]
+    pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    friendList: [{type: Schema.Types.ObjectId, ref: "User"}]
 })
 
 
