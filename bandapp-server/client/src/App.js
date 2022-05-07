@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { loggedin } from './features/auth/authApi'
 import { useSelector, useDispatch } from 'react-redux';
+import { logout } from './services/auth';
 import {
   storedUser,
   currentUser

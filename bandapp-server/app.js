@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const MongoStore = require('connect-mongo');
 
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./models/User');
+const User = require('./models/User.model');
 
 require('./configs/passport.js');
 

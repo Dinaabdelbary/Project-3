@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
@@ -69,7 +69,8 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/loggedin', (req, res) => {
-    console.log(req.user, 'req.user from loggedin')
+    console.log(req, 'req.user from loggedin')
+    console.log(req.socket.remoteAddress)
     res.json(req.user);
 })
 
