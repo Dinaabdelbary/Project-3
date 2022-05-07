@@ -17,7 +17,7 @@ const userSchema = Schema({
     },
     instruments : [String],
     location : String, //possible API call to location API, otherwise just city
-    image : String,
+    imageUrl : String,
     listensto : [String], //possible API call to Spotify
     genres : [String],
     history : String,

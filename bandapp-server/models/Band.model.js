@@ -8,7 +8,7 @@ const bandSchema = Schema({
     },
     genres: [String],
     members: [{type: Schema.Types.ObjectId, ref:User}],
-    image: String,
+    imageUrl: String,
     description: String,
     //medialinks: [String], In case we wanna add Spotify, bandcamp links to listen to their music
     //referenceBands: [String], Possible API calls from Spotify

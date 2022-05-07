@@ -34,7 +34,7 @@ let store = new MongoStore({
 });
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
-const allRoutes = require("./routes/User.routes");
+const allRoutes = require("./routes/user.routes");
 app.use("/api", allRoutes);
 
 
