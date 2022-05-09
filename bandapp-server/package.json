@@ -9,6 +9,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "ajv-errors": "^1.0.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
@@ -20,6 +23,7 @@
     "dotenv": "^16.0.0",
     "express": "~4.16.1",
     "express-session": "^1.17.2",
+    "framer-motion": "^6.3.3",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",
     "mongoose": "^6.3.1",

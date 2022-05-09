@@ -17,9 +17,12 @@ import {
 import axios from 'axios';
 
 import UserProfile from './components/Geolocation';
+import { ChakraProvider } from '@chakra-ui/react'
 
 
-function App() {
+function App() 
+{
+
   const userData = useSelector(storedUser); // returns data from redux store
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,8 +46,8 @@ function App() {
       navigate('/');
     })
   }
-
   return (
+
     <div className="App">
     <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
       <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
@@ -74,6 +77,7 @@ function App() {
       </div>
     </div>
   );
+
 }
 
 export default App;
