@@ -3,7 +3,7 @@ import { currentUser } from '../features/auth/authSlice';
 
  class ProfilePage extends Component {
      state = {
-         img:'',
+         imgUrl:'',
          coverphoto:"",
          name:"",
          instruments:"",
