@@ -1,17 +1,21 @@
 import React from 'react'
+import { useLinkClickHandler } from 'react-router-dom'
 import UsersList from './ListOfUsers'
 import User from './User'
 
 
+clickHandler = () =>{
+  console.log("clicked")
+}
+
 function ProfileCard() {
-    {ListOfUsers.map(User)}
   return (
     <div className='profileCard'>
-        <img src='{User.img}'></img>
-        <p>{User.name}</p>
-        <p>{User.instrument}</p>
-        <p>{User.genre}</p>
-        <button>Connect</button>
+        <img src='this.{User.img}'></img>
+        <p>{this.User.name}</p>
+        <p>{this.User.instrument}</p>
+        <p>{this.User.genre}</p>
+        <button onClick={this.clickHandler}>Connect</button>
         <button>Chat</button>
     </div>
   )

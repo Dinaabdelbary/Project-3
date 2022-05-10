@@ -17,7 +17,8 @@ import {
 import axios from 'axios';
 
 import UserProfile from './components/Geolocation';
-import { ChakraProvider } from '@chakra-ui/react'
+// import { ChakraProvider } from '@chakra-ui/react'
+import ProfileCard from './components/ProfileCard';
 
 
 function App() 
@@ -74,7 +75,11 @@ function App()
           <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
           <Route path="/location" element={<UserProfile />} />
         </Routes>
+        {/* <div>
+          <ProfileCard/>
+        </div> */}
       </div>
+   
     </div>
   );
 
