@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 const getuser = (id) => {
     return axios
-        .get(`/api/user/${id}`)
+        .get(`http://localhost:3005/api/user/${id}`)
         .then(response => {
             return (response.data) 
         })
