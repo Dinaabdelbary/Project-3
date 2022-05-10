@@ -1,42 +1,53 @@
-import React, { Component } from 'react'
-import { currentUser } from '../features/auth/authSlice';
+import React, { useState, useEffect } from 'react'
+// import { currentUser } from '../features/auth/authSlice';
+import { getuser } from '../features/userApi/userApi';
+import { useParams } from "react-router-dom";
 
- class ProfilePage extends Component {
-     state = {
-         img:'',
-         coverphoto:"",
-         name:"",
-         instruments:"",
-         genres:"",
-         listensto:"",
-         history:"",
-         location:""
-     }
 
-     clickHandler = () =>{
+function ProfilePage() {
+
+  const [user, setUser] =  useState ({
+        name:"",
+        instruments:[],
+        location:'',
+         profilePicture:'',
+        coverPhoto:"",
+        listensto:[],
+        genres:[],
+        history:"",
+        currentBands: [],
+        friendList: []
+    })
+
+    const { id } = useParams();
+
+ useEffect  (() => {setUser(getuser(id))}, [])
+ /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
+    // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+    // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
+
+    const clickHandler = () =>{
         console.log("clicked")
       }
-
-  render() {
-    return (
-      <div>
+console.log(id)
+  return (
+    <div>
           <img src=''></img>
           <imgs src="">cover photo</imgs>
-          <h4>{User.name}</h4>
-          <p>{User.instruments}</p>
-          <p>{User.genres}</p>
-          <p>{User.listensto}</p>
-          <p>{User.instruments}</p>
-          <p>{User.history}</p>
-          <p>{User.location}</p>
+          <h4>{user.name}name</h4>
+          <p>{user.instruments}instrument</p>
+          <p>{user.genres}genres</p>
+          <p>{user.listensto}listensto</p>
+          <p>{user.instruments}instruments</p>
+          <p>{user.history}history</p>
+          <p>{user.location}location</p>
           
-          <button onClick={this.clickHandler}>Connect</button>
+          <button onClick={clickHandler()}>Connect</button>
         <button>Chat</button>
 
 
       </div>
-    )
-  }
+  )
 }
 
-export default ProfilePage;
+export default ProfilePage

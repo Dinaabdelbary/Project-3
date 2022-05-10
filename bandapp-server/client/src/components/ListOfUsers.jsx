@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from"react-router-dom";
 
 const UsersList = () => {
   const [listOfUsers, setListOfUsers] = React.useState([]);
@@ -19,7 +20,8 @@ const UsersList = () => {
       .catch((error) => console.log(error));
   }, []);
   const allUsers = listOfUsers.map((user) =>{
-      return <div>
+      return  <div>
+        <Link to={`/${user._id}`}>profileid</Link>
       {user.name}
       <button onClick={() => handleConnect(user._id) }>
           Connect
