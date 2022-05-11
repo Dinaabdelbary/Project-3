@@ -35,7 +35,7 @@ const SignUp = (props) => {
             <input type="text" placeholder="John" name="name" onChange={(event) => setName(event.target.value)} />
             <input type="email" placeholder="john@doe.com" name="email" onChange={(event) => setEmail(event.target.value)} />
             <input type="password" placeholder="*********" name="password" onChange={(event) => setPassword(event.target.value)} />
-            <button onClick={submitUserRegisteration}>Register</button>
+            <button className="raise" onClick={submitUserRegisteration}>Register</button>
         </div>
     );
 }

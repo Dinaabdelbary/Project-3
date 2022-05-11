@@ -33,7 +33,7 @@ const UserProfile = () => {
       <form>
         <label>Name:</label>
         <input type="text" placeholder="location" onChange={(e) => setUserData(e.target.value)} value={userData.location} />
-        <button onClick={getCurrentLocation}>Use your current location</button>
+        <button className="raise" onClick={getCurrentLocation}>Use your current location</button>
       </form>
     </>
   );
