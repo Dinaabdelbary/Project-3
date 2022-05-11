@@ -13,7 +13,6 @@ router.post('/create', (req, res) => {
 
 //get a band
 router.get('/:id', (req, res) => {
-    console.log('Band ID')
     const {id} = req.params;
     Band.findById(id)
     .then(band => {

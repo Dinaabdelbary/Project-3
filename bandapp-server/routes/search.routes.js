@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/search", (req, res) => {
   const { query } = req;
-  console.log(query);
+  // console.log(query);
   User.find(query)
     .then((users) => console.log(users))
     .catch((err) => console.error(err));

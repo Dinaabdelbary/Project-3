@@ -16,7 +16,7 @@ const User = require('../models/User.model');
 //================================//Get /api/user/ === GET ALL USERS =======================================
 
 router.get('/user/list', (req, res) => {
-  console.log('user list working')  
+  // console.log('user list working')  
   User.find()
   .then(allUsers => {
     res.json(allUsers)
@@ -27,7 +27,7 @@ router.get('/user/list', (req, res) => {
 //================================//Get /api/user/:id === GET A SPECIFIC USER =======================================
 
 router.get('/user/:id', (req, res) => {
-  console.log('user ID')
+  // console.log('user ID')
   const { id } = req.params;
   User.findById(id)
   .then(user => {
