@@ -1,3 +1,8 @@
+// ----------- Things that don't work yet
+// 1. When logout, need to refresh to see changes. Has to do with state management.
+// 2. Search function not working yet -> check searchHandler and routes 
+// 3. Styling: need to fix the dropdown menu in mobile and color scheme
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../services/auth';
@@ -14,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     loggedin()
       .then((response) => {
-        dispatch(currentUser(response.data)); //retreive current user and send to global state
+        dispatch(currentUser(response.data));
       })
       .catch((error) =>
         console.log(
@@ -50,7 +55,7 @@ const Navbar = () => {
         <ul className='navbar'>
          <li><Link to="/">Home</Link></li>
          <li>
-            <Link to={userData.currentUser._id}>
+         <Link to={`/${userData.currentUser._id}`}>
               <img className="avatar" src={userData.currentUser.profilePicture} alt="avatar"/>
             </Link>
           </li>
@@ -66,3 +71,4 @@ const Navbar = () => {
 };
 
 export default Navbar
+
