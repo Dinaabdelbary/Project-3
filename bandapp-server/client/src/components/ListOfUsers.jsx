@@ -5,11 +5,9 @@ import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 import { getUserList } from '../features/userApi/userApi';
 
-
 const UsersList = () => {
   const userData = useSelector(storedUser); // returns data from redux store
   const [listOfUsers, setListOfUsers] = useState([]);
-
 
   const handleConnect = (id) => {
     axios
@@ -17,9 +15,7 @@ const UsersList = () => {
       .then()
       .catch((err) => console.log(err));
   };
-
-
-  
+ 
   useEffect(() => {
     getUserList()
       .then((response) => {
@@ -32,7 +28,6 @@ const UsersList = () => {
   const allUsers = listOfUsers.map((user) => {
     // console.log(userData.currentUser);
       const isPending = userData.curerntUser?.pendingSentRequests.includes(user._id)
-    
     // console.log('isPending', isPending)
     return (
       <div key={user._id}>
