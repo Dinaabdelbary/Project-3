@@ -42,8 +42,8 @@ router.get('/user/:id', (req, res) => {
 
 router.put('/user/:id', (req, res) => {
   const { id } = req.params;
-  const {name, email, password, instruments, location, imageUrl, listento, genre, history } = req.body;
-  User.findByIdAndUpdate(id, {name, email, password, instruments, location, imageUrl, listento, genre, history })
+  const {name, email, password, instruments, location, listento, genre, history, profilePicture, coverPhoto } = req.body;
+  User.findByIdAndUpdate(id, {name, email, password, instruments, location, listento, genre, history, profilePicture, coverPhoto })
   .then(() => {
     res.json('Your profile has been updated.')
   }).catch(error => res.json(error))
