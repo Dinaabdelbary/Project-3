@@ -32,11 +32,19 @@ const SignUp = (props) => {
     }
     return (
         <div className="App">
+             <div className="form">
+            <form>
             <input type="text" placeholder="John" name="name" onChange={(event) => setName(event.target.value)} />
+            <br></br>
             <input type="email" placeholder="john@doe.com" name="email" onChange={(event) => setEmail(event.target.value)} />
+            <br></br>
             <input type="password" placeholder="*********" name="password" onChange={(event) => setPassword(event.target.value)} />
-            <button className="raise" onClick={submitUserRegisteration}>Register</button>
-        </div>
+            <br></br>
+         <button className="raise" onClick={submitUserRegisteration}>Register</button>
+         </form>
+          </div>
+         </div>
+
     );
 }
 
