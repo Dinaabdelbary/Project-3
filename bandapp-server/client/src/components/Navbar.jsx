@@ -1,32 +1,73 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../services/auth'
+// ----------- Things that don't work yet
+// 1. When logout, need to refresh to see changes. Has to do with state management.
+// 2. Search function not working yet -> check searchHandler and routes 
+// 3. Styling: need to fix the dropdown menu in mobile and color scheme
 
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../services/auth';
+import { loggedin } from '../features/auth/authApi';
+import { useSelector, useDispatch } from 'react-redux';
+import { storedUser, currentUser } from '../features/auth/authSlice';
 
-const Navbar = (props) => {
-    
-const navigate = useNavigate();
+const Navbar = () => {
+  const navigate = useNavigate();
+  const userData = useSelector(storedUser);
+  const dispatch = useDispatch();
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
-  const { loggedInUser, setLoggedInUser } = props
-  //when we use redux toolkit, good example of context
+  useEffect(() => {
+    loggedin()
+      .then((response) => {
+        dispatch(currentUser(response.data));
+      })
+      .catch((error) =>
+        console.log(
+          error.message,
+          'Error when trying to get info from loggedin axios request'
+        )
+      );
+  }, [dispatch]);
 
   const logoutHandler = () => {
-    logout().then(done=>{
-      setLoggedInUser(null)
+    logout().then((done) => {
+      setLoggedInUser(null);
       navigate('/');
-    })
-  }
+    });
+  };
+
+  const searchHandler = () => {
+    //some code goes here
+    //go to ('/search-results')
+  };
 
   return (
-    <nav className='nav topnav'>
-    <Link to='/'>Home</Link>
-    <Link to='/search'>Search</Link>
-    <Link to='/:user/profile'>{loggedInUser ? loggedInUser.name : ""}</Link>
-    {!loggedInUser ? <Link to='/login'>Login</Link> :
-    <button className='buttons raise' type="button" onClick={ logoutHandler}>Logout</button>}
+ 
+<>
+<div className='content-wrapper'>
+   <div className='navmenu'>
+   <form onClick={searchHandler} id="search-form">
+         <input name='q' placeholder='Search instruments, artists...' size='15' type='text'/>
+         <input id='button-submit' type='submit' value='Search'/>
+      </form>
+      <span id='menu'><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC9JREFUeNpi/P//PwM1AQsQU9VEJgYqg8FvICgMGUeel0eTzWiyGU02Qz/ZAAQYAOPcBjEdYroKAAAAAElFTkSuQmCC'  /></span>
+      <nav id='navbar' itemprop='mainEntity' itemscope='itemscope' itemtype='https://schema.org/SiteNavigationElement'>
+        <ul className='navbar'>
+         <li><Link to="/">Home</Link></li>
+         <li>
+           <Link to={`/${userData.currentUser._id}`}>
+              <img className="avatar" src={userData.currentUser.profilePicture} alt="avatar"/>
+           </Link>
+         </li>
+         <li><button className="buttons" type='button' onClick={logoutHandler}>Logout</button></li>
+        </ul>
+      </nav>
+   </div>
+</div>
+{/* <div style='clear: both;'/>  ---------Need it to show the hamburguer menu in mobile  */} 
 
-    </nav>
-  )
-}
+</>
+  );
+};
 
 export default Navbar

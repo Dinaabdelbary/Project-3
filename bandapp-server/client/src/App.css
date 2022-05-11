@@ -17,7 +17,7 @@
 
 /* buttons */
 .buttons{
-    background-color: #2E0001;
+    background-color: red;
     border: none;
     color: white;
     padding: 10px 25px;
@@ -84,32 +84,159 @@ text-align: center;
 
   /* navbar */
 
-  .nav{
-    display: grid;
-    grid-template-columns: 300px 300px 300px;
-    align-items: center;
-    margin: auto;
-    padding-left: 60%;
-    /* background-color: #2E0001; */
-    overflow: hidden;
-    border-radius: 4px;
+  .navmenu {
+    width: 100%;
+    background:#2E0001;
+    display: inline-block
   }
-  
-  .navbar{
-    display: flex;
-    justify-content: space-between;
+  #menu {
+    color: #E9DAC1;
+    font-size: 18px;
+    position: relative;
+    top: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    padding-left: 10px;
   }
 
-  .topnav a {
-    float: left;
-    color: #2E0001;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    transition: 0.4s;
+  #menu a {
+    text-decoration: none
   }
-  
+  nav {
+    display: none
+  }
+  nav ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 0;
+    background-color: #2E0001
+  }
+  nav li {
+    display: block;
+    font-size: 16px;
+    color: white;
+          margin: 0 5px;
+  }
+  ul.navbar>li>a {
+    color: #E9DAC1
+  }
+  nav a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: inherit
+  }
+  .sub-menu li {
+    list-style-type: none;
+    display: inline-block
+  }
+  ul.navbar li ul.sub-menu {
+    display: none;
+    position: absolute
+  }
+  ul.navbar li {
+    position: relative;
+  }
+
+  ul.navbar li:hover ul.sub-menu {
+    display: block
+  }
+  .sub-menu li {
+    margin-left: 0!important
+  }
+  ul.sub-menu>li>a {
+    color: #E9DAC1;
+  }
+  ul.navbar>li>a:hover,
+  ul.sub-menu>li>a:hover {
+    color: #66a992;
+  }
+  #search-form {
+    display: inline-block;
+    padding-top: 4px;
+    padding-right: 5px;
+    float: right
+  }
+  #search-form input {
+    width: 200px;
+    float: left;
+    border-radius: 2px 0 0 2px;
+    font-size: 13px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 0;
+          outline: 0;
+    font-size: 100%;
+    font: inherit
+  }
+
+  #button-submit {
+    width: auto!important;
+    float: right;
+    border-radius: 0 2px 2px 0;
+    background: #66a992;
+    font-size: 13px;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    color: white
+  }
+  @media only screen and (max-width:720px) {
+    nav ul {
+      width: 100%!important
+    }
+    #sub-menu {
+      display: none
+    }
+    nav a {
+      padding: 5px 10px
+    }
+      .navmenu {
+          padding: 5px;
+      }
+      #navbar{
+           display: none;
+          height: 24px;
+          line-height: 24px;
+      }
+    .toggle-nav {
+      padding: 6px 10px
+    }
+    #search-form input {
+      width: 150px;
+          padding: 5px;
+          margin: 0;
+    }
+  }
+  @media only screen and (min-width:720px) {
+    #menu {
+      display: none
+    }
+      #navbar{
+      height: 50px;
+      line-height: 50px;
+  }
+    nav {
+      display: block!important
+    }
+    nav li {
+      display: inline-block
+    }
+      #search-form input {
+    height: 50px;
+      padding: 10px;
+    margin: 5px 0;
+   }
+  }
+
+  .avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+
   .name{
     font-size:1.3rem;
     font-weight:500;
@@ -164,4 +291,3 @@ button {
 body {
   background-image: url("../public/WhatsApp\ Image\ 2022-05-11\ at\ 10.29.43\ AM.jpeg");
 }
-

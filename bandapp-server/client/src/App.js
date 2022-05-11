@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     loggedin()
       .then((response) => {
-        dispatch(currentUser(response.data)); //retreive current user and send to global state
+        dispatch(currentUser(response.data)); //retrieve current user and send to global state
       })
       .catch((error) =>
         console.log(
@@ -41,15 +41,9 @@ function App() {
   };
   return (
     <div className="App">
-      <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
-      <h1>{loggedInUser ? loggedInUser.name : ""}</h1>
+      
       {userData.currentUser ? (
-        <>
-          <p>We have a user in storage: {userData.currentUser.name}</p>
-          <button type="button" onClick={logoutHandler}>
-            Logout
-          </button>
-        </>
+        <Navbar />
       ) : (
         <>
           <p>We don't have a user in the redux storage.</p>

@@ -17,7 +17,10 @@ const userSchema = Schema({
     },
     instruments : [String],
     location : String, //possible API call to location API, otherwise just city
-    profilePicture : String,
+    profilePicture : {
+      type: String,
+      default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Musician_-_The_Noun_Project.svg/1200px-Musician_-_The_Noun_Project.svg.png'
+    },
     coverPhoto: String,
     listensto : [String], //possible API call to Spotify
     genres : [String],
