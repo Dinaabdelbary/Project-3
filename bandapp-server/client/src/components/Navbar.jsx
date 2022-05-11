@@ -55,11 +55,11 @@ const Navbar = () => {
         <ul className='navbar'>
          <li><Link to="/">Home</Link></li>
          <li>
-         <Link to={`/${userData.currentUser._id}`}>
+           <Link to={`/${userData.currentUser._id}`}>
               <img className="avatar" src={userData.currentUser.profilePicture} alt="avatar"/>
-            </Link>
-          </li>
-          <li><button className="buttons" type='button' onClick={logoutHandler}>Logout</button></li>
+           </Link>
+         </li>
+         <li><button className="buttons" type='button' onClick={logoutHandler}>Logout</button></li>
         </ul>
       </nav>
    </div>
@@ -71,4 +71,3 @@ const Navbar = () => {
 };
 
 export default Navbar
-

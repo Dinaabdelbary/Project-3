@@ -1,16 +1,19 @@
-/* wrap profile cards with this */
-.userslist {
 
+/* Profile */
+.profileList{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-
-
-/* Profile card */
 .profileCard {
-    border: 1px solid black;
+    border: 1px solid gray;
     width: 25%;
     padding: 15px 25px;
     
 } 
+.cardimg{
+  width: 150px;
+}
 
 /* buttons */
 .buttons{
@@ -53,37 +56,31 @@
     color: darkslategrey;
   }
 
-  /* colors */
- .colors{
-      background-color: #E9DAC1;
-      background-color: #2E0001;
-      background: #460000;
 
-      /* body{
-        background-image: linear-gradient(240deg, #E9DAC1,#E9DAC1, white, white, white); 
-        height: 100vh;
-      } */
-
- }
 /* login/signupform */
 .form{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    /* in case I need a separate tag for the form */
-  background: rgba(255, 255, 255, 0.06);
-  padding: 3em;
-  height: 320px;
-  border-radius: 10px;
-  border-left: 2px rgba(255, 255, 255, 0.03);
-  border-top: 2px rgba(255, 255, 255, 0.03);
-  /* backdrop-filter: blur(10px);  test on home page */
-  box-shadow: 10px 10px 40px -6px;
-  text-align: center;
-  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  /* in case I need a separate tag for the form */
+background: rgba(255, 255, 255, 0.06);
+padding: 3em;
+height: 320px;
+border-radius: 10px;
+border-left: 2px rgba(255, 255, 255, 0.03);
+border-top: 2px rgba(255, 255, 255, 0.03);
+/* backdrop-filter: blur(10px);  test on home page */
+box-shadow: 10px 10px 40px -6px;
+text-align: center;
+
+}
+
+  form{
+    padding-top: 30% ;
   }
+ 
 
   /* navbar */
 
@@ -140,6 +137,7 @@
   ul.navbar li {
     position: relative;
   }
+
   ul.navbar li:hover ul.sub-menu {
     display: block
   }
@@ -238,3 +236,58 @@
     border-radius: 50%;
     background-color: #fff;
   }
+
+  .name{
+    font-size:1.3rem;
+    font-weight:500;
+    color:#444;
+  }
+
+  .details{
+    color:#888;
+    font-size:0.9rem;
+    padding-bottom:7px;
+  }
+
+  
+  .CoverImage {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    max-height: 300px;
+    max-width: 1000px;
+  }
+
+  .raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid gray;
+}
+
+input[type=password] {
+  border: none;
+  border-bottom: 2px solid gray;
+}
+
+
+button {
+  background:#460000;
+  color: #FFF6EA;
+  border: 2px solid;
+  border-radius: 5px;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+body {
+  background-image: url("../public/WhatsApp\ Image\ 2022-05-11\ at\ 10.29.43\ AM.jpeg");
+}
