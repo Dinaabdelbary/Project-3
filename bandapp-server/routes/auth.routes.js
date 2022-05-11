@@ -69,8 +69,7 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/loggedin', (req, res) => {
-    console.log(req, 'req.user from loggedin')
-    console.log(req.socket.remoteAddress)
+    
     res.json(req.user);
 })
 

@@ -15,10 +15,10 @@ const UserProfile = () => {
           ...userData,
           location: `${city},${country}`
         })
-        console.log(city, country)
+
       })
       .catch((error) => console.error(error))
-      console.log(location);
+
   }
   // getLocation()
   // .then((response) => consoleresponse.json())

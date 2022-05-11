@@ -1,20 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
-const initialState = {
-    currentUser: {}
-
-};
+const initialState = {};
 
 export const authSlice = createSlice({
-    name: 'user',
+    name: 'currentUser',
     initialState,
 
     reducers: {
         currentUser: (state, action) => {
-            const currentUser  = action.payload
             // console.log(currentUser)
-            state.currentUser = currentUser
+            // console.log(action, 'action in slice')
+            
+            state.currentUser = action.payload
 
         }
     }
@@ -24,6 +22,6 @@ export const {
     currentUser
 } = authSlice.actions;
 
-export const storedUser = (state) => state
+export const storedUser = (state) => state.currentUser
 
 export default authSlice.reducer;

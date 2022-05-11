@@ -1,44 +1,62 @@
-import React from "react";
-import axios from "axios";
-import { Link } from"react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { storedUser } from '../features/auth/authSlice';
+import { getUserList } from '../features/userApi/userApi';
+
 
 const UsersList = () => {
-  const [listOfUsers, setListOfUsers] = React.useState([]);
+  const userData = useSelector(storedUser); // returns data from redux store
+  const [listOfUsers, setListOfUsers] = useState([]);
+
 
   const handleConnect = (id) => {
-      axios.get(`/connect/${id}`)
-  }
-
-  React.useEffect(() => {
     axios
-      .get("/api/user/list")
+      .get(`/connect/${id}`)
+      .then()
+      .catch((err) => console.log(err));
+  };
+
+
+  
+  useEffect(() => {
+    getUserList()
       .then((response) => {
         const users = response.data;
-        console.log('This is the list of users:', users)
-        setListOfUsers(users)
+        setListOfUsers(users);
       })
       .catch((error) => console.log(error));
   }, []);
-  const allUsers = listOfUsers.map((user) =>{
-      return  <div>
-        <Link to={`/${user._id}`}>profileid</Link>
-      {user.name}
-      <button onClick={() => handleConnect(user._id) }>
-          Connect
-      </button>
-      </div>
-  })
 
+  const allUsers = listOfUsers.map((user) => {
+    // console.log(userData.currentUser);
+      const isPending = userData.curerntUser?.pendingSentRequests.includes(user._id)
+    
+    // console.log('isPending', isPending)
+    return (
+      <div key={user._id}>
+        <Link to={`/${user._id}`}>{user.name}</Link>
+        (
+          <button
+            disabled={isPending}
+            onClick={() => {
+              handleConnect(user._id);
+            }}
+          >
+            Connect
+          </button>
+        )
+      </div>
+    );
+  });
 
   return (
-<div>
-    <h2>List of users</h2>
-    {allUsers}
-</div>
-
-  )
-  
-
+    <div>
+      <h2>List of users</h2>
+      {allUsers}
+    </div>
+  );
 };
 
 export default UsersList;

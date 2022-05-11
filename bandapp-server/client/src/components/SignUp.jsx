@@ -25,7 +25,6 @@ const SignUp = (props) => {
     const submitUserRegisteration = () => {
         signup(name, email, password)
             .then(user => {
-                console.log(name, email, password)
                 dispatch(currentUser({currentUser:user.data}))
                 navigate('/');
             })
