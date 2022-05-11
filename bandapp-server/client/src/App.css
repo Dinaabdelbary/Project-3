@@ -56,18 +56,7 @@
     color: darkslategrey;
   }
 
-  /* colors */
- .colors{
-      background-color: #E9DAC1;
-      background-color: #2E0001;
-      background: #460000;
 
-      /* body{
-        background-image: linear-gradient(240deg, #E9DAC1,#E9DAC1, white, white, white); 
-        height: 100vh;
-      } */
-
- }
 /* login/signupform */
 .form{
   position: absolute;
