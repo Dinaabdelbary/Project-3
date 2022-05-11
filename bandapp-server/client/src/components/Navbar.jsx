@@ -1,6 +1,6 @@
 // ----------- Things that don't work yet
 // 1. When logout, need to refresh to see changes. Has to do with state management.
-// 2. Search function not working yet -> check searchHandler and routes 
+// 2. Search function not working yet -> check searchHandler and routes
 // 3. Styling: need to fix the dropdown menu in mobile and color scheme
 
 import React, { useState, useEffect } from 'react';
@@ -15,6 +15,8 @@ const Navbar = () => {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const user = userData.currentUser
+  console.log('user: ', user.pendingReceivedRequests.lenght)
 
   useEffect(() => {
     loggedin()
@@ -31,6 +33,7 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     logout().then((done) => {
+      console.log(done)
       setLoggedInUser(null);
       navigate('/');
     });
@@ -54,11 +57,15 @@ const Navbar = () => {
       <nav id='navbar' itemprop='mainEntity' itemscope='itemscope' itemtype='https://schema.org/SiteNavigationElement'>
         <ul className='navbar'>
          <li><Link to="/">Home</Link></li>
-         <li>
-           <Link to={`/${userData.currentUser._id}`}>
-              <img className="avatar" src={userData.currentUser.profilePicture} alt="avatar"/>
+         {user.pendingReceivedRequests.lenght >= 1 ? 
+         <li><Link to={`/${user._id}`}>You've got a friend request!</Link></li>
+         : <li>
+           <Link to={`/${user._id}`}>
+              <img className="avatar" src={user.profilePicture} alt="avatar"/>
            </Link>
          </li>
+         }
+
          <li><button className="buttons" type='button' onClick={logoutHandler}>Logout</button></li>
         </ul>
       </nav>
