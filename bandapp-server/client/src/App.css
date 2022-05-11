@@ -54,17 +54,17 @@
   }
 
   /* colors */
- .colors{
+ /* .colors{
       background-color: #E9DAC1;
       background-color: #2E0001;
-      background: #460000;
+      background: #460000; */
 
       /* body{
         background-image: linear-gradient(240deg, #E9DAC1,#E9DAC1, white, white, white); 
         height: 100vh;
       } */
 
- }
+ 
 /* login/signupform */
 .form{
     position: absolute;
@@ -112,3 +112,61 @@
     font-size: 17px;
     transition: 0.4s;
   }
+
+
+/* login button*/
+
+.btn {
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  width: 150px;
+  cursor: pointer;
+}
+
+.btn-sl {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative; 
+}
+.btn-sl span {
+  z-index: 2; 
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+}
+.btn-sl::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.1);
+}
+.btn-sl::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.1);
+}
+.btn-sl:hover::before {
+  transform: rotate(-45deg);
+  background-color:#F5EEDC;
+}
+.btn-sl:hover::after {
+  transform: rotate(45deg);
+  background-color: rgba(255,255,255,0);
+}
+
+

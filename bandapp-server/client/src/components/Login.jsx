@@ -37,10 +37,10 @@ const Login = (props) => {
     };
 
     return (
-        <div>
+        <div className='form'>
             <input type="text" placeholder="Email" onChange={handleEmail} value={email} />
             <input type="password" placeholder="Password" onChange={handlePasswordChange} value={password} />
-            <button type="button" onClick={handleSubmit}>Login</button>
+            <button className='btn btn-sl' type="button" onClick={handleSubmit}>Login</button>
         </div>
     )
 };
