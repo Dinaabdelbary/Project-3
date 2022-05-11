@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "./services/auth";
 import { storedUser, currentUser } from "./features/auth/authSlice";
 import UserProfile from "./components/Geolocation";
-// import ProfileCard from './components/ProfileCard';
+import ProfileCard from './components/ProfileCard';
 import ProfilePage from "./components/ProfilePage";
 
 function App() {
@@ -69,6 +69,7 @@ function App() {
           />
           <Route path="/location" element={<UserProfile />} />
           <Route path="/:id" element={<ProfilePage />} />
+          <Route path="/ListOfUsers" element={<ProfileCard/>} />  
         </Routes>
         {/* <div>
           <ProfileCard/>

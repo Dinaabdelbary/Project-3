@@ -1,7 +1,4 @@
-
-   
 import axios from 'axios';
-
 
 const signup = (name, email, password) => {
     return axios
