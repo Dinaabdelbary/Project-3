@@ -33,22 +33,16 @@ function App() {
       );
   }, [dispatch]);
 
-  const logoutHandler = () => {
-    logout().then((done) => {
-      dispatch(currentUser(null));
-      navigate("/");
-    });
-  };
+  
   return (
     <div className="App">
       
       {userData.currentUser ? (
         <Navbar />
       ) : (
-        <>
-          <p>We don't have a user in the redux storage.</p>
-          <Link to="/login">Login</Link>
-        </>
+        <div>
+        <h1>Find other musicians. Connect. Play.</h1>
+        </div>
       )}
       <div>
         <Routes>

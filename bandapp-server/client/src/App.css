@@ -291,3 +291,9 @@ button {
 body {
   background-image: url("../public/WhatsApp\ Image\ 2022-05-11\ at\ 10.29.43\ AM.jpeg");
 }
+
+.container {
+  width: 80%;
+  padding: 10px;
+  margin: 0 auto;
+}

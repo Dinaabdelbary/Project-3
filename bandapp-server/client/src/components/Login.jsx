@@ -11,10 +11,10 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [password, sePassword] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleEmail = (event) => setEmail(event.target.value);
-  const handlePasswordChange = (event) => sePassword(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
   const handleSubmit = (event) => {
       event.preventDefault();

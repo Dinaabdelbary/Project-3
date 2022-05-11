@@ -1,11 +1,30 @@
 import React from 'react'
-import ListOfUsers from './ListOfUsers'
+import { Link, useNavigate } from 'react-router-dom';
 
-const Home = (props) => {
-    const { loggedInUser } = props
+const Home = () => {
+    const navigate = useNavigate()
+    const handleLogin = (event) => {
+        event.preventDefault()
+        navigate('/login')
+    }
+    const handleSignup = (event) => {
+        event.preventDefault()
+        navigate('/signup')
+    }
+
     return (
-        <div>
-             <ListOfUsers/>
+        
+        <div className='form'>
+        <div className='container'>
+        <button className="raise" onClick={handleLogin}>
+        Login
+        </button>
+        </div>
+        <div className='container'>
+        <button className="raise" onClick={handleSignup}>
+         Sign up
+        </button>
+        </div>
         </div>
     )
 }
