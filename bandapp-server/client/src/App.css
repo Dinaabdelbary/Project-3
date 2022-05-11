@@ -1,16 +1,19 @@
-/* wrap profile cards with this */
-.userslist {
 
+/* Profile */
+.profileList{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-
-
-/* Profile card */
 .profileCard {
-    border: 1px solid black;
+    border: 1px solid gray;
     width: 25%;
     padding: 15px 25px;
     
 } 
+.cardimg{
+  width: 150px;
+}
 
 /* buttons */
 .buttons{
@@ -82,8 +85,12 @@
   /* backdrop-filter: blur(10px);  test on home page */
   box-shadow: 10px 10px 40px -6px;
   text-align: center;
-  
   }
+
+  form{
+    padding-top: 30% ;
+  }
+ 
 
   /* navbar */
 
@@ -112,3 +119,59 @@
     font-size: 17px;
     transition: 0.4s;
   }
+  
+  .name{
+    font-size:1.3rem;
+    font-weight:500;
+    color:#444;
+  }
+
+  .details{
+    color:#888;
+    font-size:0.9rem;
+    padding-bottom:7px;
+  }
+
+  
+  .CoverImage {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    max-height: 300px;
+    max-width: 1000px;
+  }
+
+  .raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid gray;
+}
+
+input[type=password] {
+  border: none;
+  border-bottom: 2px solid gray;
+}
+
+
+button {
+  background:#460000;
+  color: #FFF6EA;
+  border: 2px solid;
+  border-radius: 5px;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+body {
+  background-image: url("../public/WhatsApp\ Image\ 2022-05-11\ at\ 10.29.43\ AM.jpeg");
+}
+

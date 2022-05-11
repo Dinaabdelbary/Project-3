@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Profiler, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 import { getUserList } from '../features/userApi/userApi';
-
+import ProfileCard from './ProfileCard';
 const UsersList = () => {
   const userData = useSelector(storedUser); // returns data from redux store
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -31,16 +31,14 @@ const UsersList = () => {
     // console.log('isPending', isPending)
     return (
       <div key={user._id}>
+        
+        <ProfileCard />
         <Link to={`/${user._id}`}>{user.name}</Link>
-        (
-          <button
+          <button className="raise"
             disabled={isPending}
             onClick={() => {
               handleConnect(user._id);
-            }}
-          >
-            Connect
-          </button>
+            }}>Connect</button>
         )
       </div>
     );

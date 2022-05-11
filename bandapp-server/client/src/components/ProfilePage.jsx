@@ -38,16 +38,16 @@ function ProfilePage() {
   };
   return (
     <div>
-      <img src="" alt="cover photo" />
-      <h4>Name: {user.name}</h4>
-      <p>Instrument I play: {user.instruments}</p>
-      <p>Genres: {user.genres}</p>
-      <p>Music I like: {user.listensto}</p>
-      <p>About me: {user.history}</p>
-      <p>Location: {user.location}</p>
-
-      <button onClick={clickHandler()}>Connect</button>
-      <button>Chat</button>
+      <img className="CoverImage" src="" alt="cover photo" />
+      <div className="name">Name: {user.name}</div>
+      <p className="details">Instrument I play: {user.instruments}</p>
+      <p className="details">Genres: {user.genres}</p>
+      <p className="details">Music I like: {user.listensto}</p>
+      <p className="details">About me: {user.history}</p>
+      <div class="details">
+  <i class="">place</i>{user.location}</div>
+      <button className="raise" onClick={clickHandler()}>Connect</button>
+      <button className="raise">Chat</button>
     </div>
   );
 }
