@@ -53,18 +53,7 @@
     color: darkslategrey;
   }
 
-  /* colors */
- .colors{
-      background-color: #E9DAC1;
-      background-color: #2E0001;
-      background: #460000;
 
-      /* body{
-        background-image: linear-gradient(240deg, #E9DAC1,#E9DAC1, white, white, white); 
-        height: 100vh;
-      } */
-
- }
 /* login/signupform */
 .form{
     position: absolute;
@@ -112,3 +101,19 @@
     font-size: 17px;
     transition: 0.4s;
   }
+
+
+  /* profile */
+
+  
+#header{
+  width:50vw;
+  max-width:400px;
+  min-width:300px;
+  height:150px;
+  background:url(http://i.imgur.com/woUbg3p.jpg);
+  background-size:cover;
+  background-position: center center;
+  transition: all .08s linear;
+}
+
