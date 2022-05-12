@@ -16,6 +16,10 @@ const loggedin = () => {
     return axios.get('/api/auth/loggedin')
 }
 
+const updatedprofile = () =>{
+    return axios.put('./api/user/')
+}
+
 export {
     signup,
     login,
