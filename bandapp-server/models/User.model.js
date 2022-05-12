@@ -31,5 +31,7 @@ const userSchema = Schema({
     friendList: [{type: Schema.Types.ObjectId, ref: "User"}]
 })
 
+userSchema.index({name:'text', location:'text', genres:'text', instruments:'text'})
+
 
 module.exports = model("User", userSchema);

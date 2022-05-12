@@ -1,18 +1,20 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
+import { Routes, Route } from "react-router-dom";
+import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import { useNavigate } from "react-router-dom";
+import UserProfile from "./components/Geolocation";
+import ProfileCard from './components/ProfileCard';
+import ProfilePage from "./components/ProfilePage";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import { useNavigate } from "react-router-dom";
 import { loggedin } from "./features/auth/authApi";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "./services/auth";
 import { storedUser, currentUser } from "./features/auth/authSlice";
-import UserProfile from "./components/Geolocation";
-import ProfileCard from './components/ProfileCard';
-import ProfilePage from "./components/ProfilePage";
+import SearchResult from "./components/SearchResult";
 
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
@@ -36,28 +38,26 @@ function App() {
   
   return (
     <div className="App">
+    <></>
       
       {userData.currentUser ? (
         <Navbar />
-      ) : (
-        <div>
-        <h1>Find other musicians. Connect. Play.</h1>
-        </div>
-      )}
+      ) : ''}
       <div>
         <Routes>
-          <Route path="/" element={<Home loggedInUser={loggedInUser} />} />
           <Route
             path="/signup"
-            element={<SignUp setLoggedInUser={setLoggedInUser} />}
+            element={<SignUp/>}
           />
           <Route
             path="/login"
-            element={<Login setLoggedInUser={setLoggedInUser} />}
+            element={<Login/>}
           />
           <Route path="/location" element={<UserProfile />} />
           <Route path="/:id" element={<ProfilePage />} />
           <Route path="/ListOfUsers" element={<ProfileCard/>} />  
+          <Route path="/" element={userData.currentUser ? <Home/> : <Landing/>}/>
+          <Route path="/search" element={<SearchResult/>}/>
         </Routes>
         {/* <div>
           <ProfileCard/>
