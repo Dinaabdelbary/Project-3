@@ -30,7 +30,9 @@ const Login = (props) => {
   };
 
   return (
-  
+  <div>
+    <h1>Find other musicians. Connect. Play.</h1>
+    <h3>No one to play music with? Find musicians in your area, connect with them and jam!</h3>
     <div className="form">
       <form onSubmit={handleSubmit}>
         <input
@@ -52,7 +54,7 @@ const Login = (props) => {
         </button>
       </form>
     </div>
-   
+    </div>
   );
 };
 

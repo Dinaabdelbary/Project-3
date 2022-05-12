@@ -23,7 +23,7 @@ passport.use(
         passwordField: 'password'
     },
         (email, password, done) => {
-        User.findOne({ email: email })
+        User.findOne({ email: email }).populate('pendingReceivedRequests')
             .then(found => {
                 if (found === null) {
                     done(null, false, { message: 'Wrong Credentials' })
