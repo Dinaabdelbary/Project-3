@@ -18,9 +18,7 @@ import SearchResult from "./components/SearchResult";
 
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     loggedin()

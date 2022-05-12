@@ -6,7 +6,7 @@ router.get("/search", (req, res) => {
   const { q } = req.query;
  console.log(q)
   User.find({$text : {$search: q ? q : ""}})
-    .then((users) => {
+    .then((users) => {  
       console.log(users)
       res.json(users)})
     .catch((err) => console.error(err));

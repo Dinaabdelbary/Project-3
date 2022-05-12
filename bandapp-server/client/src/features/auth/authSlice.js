@@ -1,19 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
-const initialState = {};
+const initialState = {
+    currentUser: null
+};
 
 export const authSlice = createSlice({
     name: 'currentUser',
     initialState,
-
     reducers: {
         currentUser: (state, action) => {
-            // console.log(currentUser)
-            // console.log(action, 'action in slice')
-            
             state.currentUser = action.payload
-
         }
     }
 });

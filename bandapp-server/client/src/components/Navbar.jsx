@@ -1,41 +1,23 @@
 // ----------- Things that don't work yet
-// 1. When logout, need to refresh to see changes. Has to do with state management.
-// 2. Search function not working yet -> check searchHandler and routes
-// 3. Styling: need to fix the dropdown menu in mobile and color scheme
+// Styling: need to fix the dropdown menu in mobile and color scheme
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { currentUser, storedUser } from '../features/auth/authSlice';
 import { logout } from '../services/auth';
-import { loggedin } from '../features/auth/authApi';
-import { useSelector, useDispatch } from 'react-redux';
-import { storedUser, currentUser } from '../features/auth/authSlice';
 
 
 const Navbar = () => {
   const navigate = useNavigate();
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
-  const [loggedInUser, setLoggedInUser] = useState(null);
   const [search, setSearch] = useState()
   const user = userData.currentUser
 
-  useEffect(() => {
-    loggedin()
-      .then((response) => {
-        dispatch(currentUser(response.data));
-      })
-      .catch((error) =>
-        console.log(
-          error.message,
-          'Error when trying to get info from loggedin axios request'
-        )
-      );
-  }, [dispatch]);
-
   const logoutHandler = () => {
     logout().then((done) => {
-      console.log(done)
-      setLoggedInUser(null);
+      dispatch(currentUser(null));
       navigate('/');
     });
   };
