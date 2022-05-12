@@ -7,12 +7,71 @@
 }
 .profileCard {
     border: 1px solid gray;
-    width: 25%;
+    background-color: #ededed;
+    border-radius: 2%;
+    opacity: 0.9;
+    width: 20%;
+    height: 10%;
     padding: 15px 25px;
-    
+    box-shadow: 0 0 100px rgba(0,0,0, .3); 
 } 
-.cardimg{
-  width: 150px;
+
+.card-header{
+  position: relative;
+  height: 220px;
+  background-size: cover;
+  background-position: top;
+}
+.card-header:after{
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,	rgb(128,21,0), rgba(181,181,181, 0.1));
+}
+
+
+.card-header-slanted-edge{
+  position: absolute;
+  bottom: -3px;
+  z-index: 1;
+  width: 100%;
+  right:0;
+  left:0;
+}
+
+
+svg .polygon{
+  fill: #ededed;
+  opacity: 0.9;
+}
+
+
+.cardpic{
+  height: 25%;
+  width: 25%;
+}
+
+.name{
+  font-size:1.3rem;
+  font-weight:500;
+  color:#444;
+}
+
+.details{
+  color:#888;
+  font-size:0.9rem;
+  padding-bottom:7px;
+}
+
+
+.CoverImage {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  max-height: 300px;
+  max-width: 1000px;
 }
 
 /* buttons */
@@ -36,6 +95,47 @@
 .buttons:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
   }
+
+  
+button {
+  background:#460000;
+  color: #FFF6EA;
+  border: 2px solid;
+  border-radius: 5px;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+.card-body{
+  text-align:center;
+  padding-left: 10px;
+}
+
+
+.title{
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 5px;
+  color: #919191;
+}
+
+
+.bio{
+  font-size: 14px;
+  color: #7B7B7B;
+  font-weight: 300;
+  margin: 10px auto;
+  line-height: 20px;
+}
+
+.cardname{
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 auto;
+  color:#444;
+}
 
   /* ========================================= ============================ */
 
@@ -237,27 +337,7 @@ text-align: center;
     background-color: #fff;
   }
 
-  .name{
-    font-size:1.3rem;
-    font-weight:500;
-    color:#444;
-  }
 
-  .details{
-    color:#888;
-    font-size:0.9rem;
-    padding-bottom:7px;
-  }
-
-  
-  .CoverImage {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0 auto;
-    max-height: 300px;
-    max-width: 1000px;
-  }
 
   .raise:hover,
 .raise:focus {
@@ -276,17 +356,6 @@ input[type=password] {
   border-bottom: 2px solid gray;
 }
 
-
-button {
-  background:#460000;
-  color: #FFF6EA;
-  border: 2px solid;
-  border-radius: 5px;
-  font: inherit;
-  line-height: 1;
-  margin: 0.5em;
-  padding: 1em 2em;
-}
 
 body {
   background-image: url("../public/WhatsApp\ Image\ 2022-05-11\ at\ 10.29.43\ AM.jpeg");

@@ -21,15 +21,21 @@ function ProfileCard() {
   return (
     <div className='profileList'>
     <div className='profileCard raise'>
-      <img className='cardimg' src="https://source.unsplash.com/user/c_v_r/">{user.img}</img>
-      <h4 className="name">{user.name}name</h4>
-      <p className="details">{user.instruments}instrument</p>
-      <p className="details">{user.genres}genres</p>
+    <div class="card-header">
+      <div class="card-header-slanted-edge">
+      <img>{user.img}</img>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path class="polygon" d="M-20,200,1000,0V200Z" /></svg>  
+      </div>
+      </div>
+      <div class="card-body">
+      <h2 className="cardname">{user.name}name</h2>
+      <h4 class="title">Guitarist</h4>
+      <div class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, aperiam.</div>
       <p className="details">{user.instruments}instruments</p>
       <p className="details">{user.location}location</p>
-      <button onClick={clickHandler()}>Connect</button>
-      <button>Chat</button>
-
+      <button className="button" onClick={clickHandler()}>add friend</button>
+      <button className="button" onClick={clickHandler()}>chat</button>
+     </div>
     </div>
     </div>
   );
