@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import { currentUser } from '../features/auth/authSlice';
 import { getUser } from "../features/userApi/userApi";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ProfileForm from "./ProfileForm";
+// import { storedUser, currentUser } from "./features/auth/authSlice";
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -16,8 +18,9 @@ function ProfilePage() {
     currentBands: [],
     friendList: [],
   });
-
+  const userData = useSelector(storedUser);
   const { id } = useParams();
+  const isOwner = id === currentUser._id;
 
   useEffect(() => {
     getUser(id)
@@ -35,8 +38,10 @@ function ProfilePage() {
 
 
   const clickHandler = () => {
+    // useNavigate(<ProfileForm/>)
   };
   return (
+
     <div>
       <img className="CoverImage" src="" alt="cover photo" />
       <div className="name">Name: {user.name}</div>
@@ -45,11 +50,18 @@ function ProfilePage() {
       <p className="details">Music I like: {user.listensto}</p>
       <p className="details">About me: {user.history}</p>
       <div class="details">
-  <i class="">place</i>{user.location}</div>
-      <button className="raise" onClick={clickHandler()}>Connect</button>
+      <i class="">place</i>{user.location}</div>
+    { isOwner  ?
+     <div> <button className="raise" onClick={clickHandler()}>edit</button></div> 
+     : 
+     <div>
+      <button className="raise" >Connect</button>
       <button className="raise">Chat</button>
+      </div> }
     </div>
   );
 }
 
 export default ProfilePage;
+
+
