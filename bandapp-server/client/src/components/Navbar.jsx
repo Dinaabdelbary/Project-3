@@ -16,7 +16,7 @@ const Navbar = () => {
   const user = userData.currentUser
 
   const logoutHandler = () => {
-    logout().then((done) => {
+    logout().then(() => {
       dispatch(currentUser(null));
       navigate('/');
     });
