@@ -65,6 +65,7 @@ router.post('/login', (req, res) => {
 router.delete('/logout', (req, res) => {
     // logout the user using passport
     req.logout();
+    req.session.destroy();
     res.json({ message: 'Successful logout' });
 })
 
