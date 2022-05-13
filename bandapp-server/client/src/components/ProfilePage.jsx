@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { getUser } from "../features/userApi/userApi";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getUser } from '../services/userApi';
 
-// import { storedUser, currentUser } from "./features/auth/authSlice";
+// import { storedUser, setCurrentUser } from "./features/auth/authSlice";
 
 function ProfilePage() {
   const [user, setUser] = useState({
-    name: "",
+    name: '',
     instruments: [],
-    location: "",
-    profilePicture: "",
-    coverPhoto: "",
+    location: '',
+    profilePicture: '',
+    coverPhoto: '',
     listensto: [],
     genres: [],
-    history: "",
+    history: '',
     currentBands: [],
     friendList: [],
   });
@@ -37,12 +36,10 @@ function ProfilePage() {
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
 
-
   const clickHandler = () => {
-   navigate("/editprofile")
+    navigate('/editprofile');
   };
   return (
-
     <div>
       <img className="CoverImage" src="" alt="cover photo" />
       <div className="name">Name: {user.name}</div>
@@ -51,18 +48,24 @@ function ProfilePage() {
       <p className="details">Music I like: {user.listensto}</p>
       <p className="details">About me: {user.history}</p>
       <div class="details">
-      <i class="">place</i>{user.location}</div>
-    { isOwner  ?
-     <div> <button className="raise" onClick={clickHandler}>edit</button></div> 
-     : 
-     <div>
-      <button className="raise" >Connect</button>
-      <button className="raise">Chat</button>
-      </div> }
+        <i class="">place</i>
+        {user.location}
+      </div>
+      {isOwner ? (
+        <div>
+          {' '}
+          <button className="raise" onClick={clickHandler}>
+            edit
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button className="raise">Connect</button>
+          <button className="raise">Chat</button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default ProfilePage;
-
-
