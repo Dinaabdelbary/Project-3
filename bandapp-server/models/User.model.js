@@ -24,7 +24,7 @@ const userSchema = Schema({
     coverPhoto: String,
     listensto : [String], //possible API call to Spotify
     genres : [String],
-    history : String,
+    bio : String,
     currentBands: [{type: Schema.Types.ObjectId, ref:Band}],
     pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
     pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
