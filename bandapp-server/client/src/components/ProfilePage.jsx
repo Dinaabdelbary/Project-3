@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUser } from '../services/userApi';
-
-// import { storedUser, setCurrentUser } from "./features/auth/authSlice";
+import { useSelector } from 'react-redux';
+import { storedUser } from "../features/auth/authSlice";
 
 function ProfilePage() {
   const [user, setUser] = useState({
