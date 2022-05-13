@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "./services/auth";
 import { storedUser, currentUser } from "./features/auth/authSlice";
 import SearchResult from "./components/SearchResult";
+import ProfileForm from "./components/ProfileForm"
 
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
@@ -56,10 +57,9 @@ function App() {
           <Route path="/ListOfUsers" element={<ProfileCard/>} />  
           <Route path="/" element={userData.currentUser ? <Home/> : <Landing/>}/>
           <Route path="/search" element={<SearchResult/>}/>
+          <Route path="/editprofile" element={<ProfileForm/>}/>
         </Routes>
-        {/* <div>
-          <ProfileCard/>
-        </div> */}
+       
       </div>
     </div>
   );

@@ -6,21 +6,29 @@
   flex-wrap: wrap;
 }
 .profileCard {
-    border: 1px solid gray;
-    background-color: #ededed;
-    border-radius: 2%;
+    /* border: 1px solid gray; */
+    background-color: #1f1f1f;
     opacity: 0.9;
+    border-radius: 2%;
     width: 20%;
     height: 10%;
     padding: 15px 25px;
     box-shadow: 0 0 100px rgba(0,0,0, .3); 
 } 
 
+svg .polygon{
+  fill: #1f1f1f;
+  opacity: 0.9;
+ 
+}
+
 .card-header{
   position: relative;
   height: 220px;
   background-size: cover;
   background-position: top;
+
+
 }
 .card-header:after{
   content:'';
@@ -40,11 +48,6 @@
   left:0;
 }
 
-
-svg .polygon{
-  fill: #ededed;
-  opacity: 0.9;
-}
 
 
 .cardpic{
@@ -162,13 +165,14 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
+  background-color: #282828;
+  opacity: 0.8;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   /* in case I need a separate tag for the form */
-background: rgba(255, 255, 255, 0.06);
 padding: 3em;
 height: 320px;
-border-radius: 10px;
+/* border-radius: 2%; */
 border-left: 2px rgba(255, 255, 255, 0.03);
 border-top: 2px rgba(255, 255, 255, 0.03);
 /* backdrop-filter: blur(10px);  test on home page */
@@ -186,7 +190,8 @@ text-align: center;
 
   .navmenu {
     width: 100%;
-    background:#2E0001;
+    background:#d3d3d3;
+    opacity:0.5;
     display: inline-block
   }
   #menu {
@@ -209,7 +214,8 @@ text-align: center;
     list-style-type: none;
     padding-left: 0;
     font-size: 0;
-    background-color: #2E0001
+    /* background-color: #d3d3d3;
+    opacity:0.9 */
   }
   nav li {
     display: block;
@@ -281,6 +287,9 @@ text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     color: white
   }
+
+
+
   @media only screen and (max-width:720px) {
     nav ul {
       width: 100%!important
@@ -329,6 +338,8 @@ text-align: center;
    }
   }
 
+
+
   .avatar {
     vertical-align: middle;
     width: 50px;
@@ -359,16 +370,6 @@ text-align: center;
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
   transform: translateY(-0.25em);
 
-}
-
-input[type=text] {
-  border: none;
-  border-bottom: 2px solid gray;
-}
-
-input[type=password] {
-  border: none;
-  border-bottom: 2px solid gray;
 }
 
 

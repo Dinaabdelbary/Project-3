@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUser } from "../features/userApi/userApi";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import ProfileForm from "./ProfileForm";
+
 // import { storedUser, currentUser } from "./features/auth/authSlice";
 
 function ProfilePage() {
@@ -20,7 +20,8 @@ function ProfilePage() {
   });
   const userData = useSelector(storedUser);
   const { id } = useParams();
-  const isOwner = id === currentUser._id;
+  const isOwner = id === userData.currentUser._id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUser(id)
@@ -38,7 +39,7 @@ function ProfilePage() {
 
 
   const clickHandler = () => {
-    // useNavigate(<ProfileForm/>)
+   navigate("/editprofile")
   };
   return (
 
@@ -52,7 +53,7 @@ function ProfilePage() {
       <div class="details">
       <i class="">place</i>{user.location}</div>
     { isOwner  ?
-     <div> <button className="raise" onClick={clickHandler()}>edit</button></div> 
+     <div> <button className="raise" onClick={clickHandler}>edit</button></div> 
      : 
      <div>
       <button className="raise" >Connect</button>

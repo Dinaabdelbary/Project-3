@@ -1,63 +1,58 @@
-// import React from 'react'
-// import { getUser } from "../features/userApi/userApi";
-// import { useSelector, useDispatch } from "react-redux";
-// import { storedUser, currentUser } from "./features/auth/authSlice";
+import React from 'react'
+import { getUser } from "../features/userApi/userApi";
+import { useSelector, useDispatch } from "react-redux";
+import { storedUser, currentUser } from "../features/auth/authSlice";
 
+function ProfileForm() { 
+        const [user, setUser] = useState({
+          name: "",
+          instruments: [],
+          location: "",
+          profilePicture: "",
+          coverPhoto: "",
+          listensto: [],
+          genres: [],
+          bio: "",
+          currentBands: [],
+          friendList: [],
+        }
+        )
 
-// function ProfileForm() {
-//         const [user, setUser] = useState({
-//           name: "",
-//           instruments: [],
-//           location: "",
-//           profilePicture: "",
-//           coverPhoto: "",
-//           listensto: [],
-//           genres: [],
-//           history: "",
-//           currentBands: [],
-//           friendList: [],
-//         }
-//     }
-    
-//    const handleSubmit = (event) => {
-//     event.preventDefault();
-//   axios.put("/api/user/:id")
-//     .then((user) => {
-//       // props.setLoggedInUser(user)
-//       dispatch(currentUser(user));
-//       navigate("/");
-//     })
-//     .catch((error) => {
-//       console.log(error, "Error when trying to send login request");
-//     });
-// };
+   const handleSubmit = (event) => {
+    event.preventDefault();
+  axios.put("/api/user/:id")
+    .then((user) => {
+      // props.setLoggedInUser(user)
+      dispatch(currentUser(user));
+      navigate("/");
+    })
+    .catch((error) => {
+      console.log(error, "Error when trying to update profile");
+    });
+};
 
-//   return (
+  return (
 
-//     <div>
-//      <form onSubmit={handleSubmit()}>
-// <img className="CoverImage" src="" alt="cover photo" />
-// <input type='file' />
-// <div className="name">Name: {user.name}</div>
-// <input type="text"></input>
-// <p className="details">Instrument I play: {user.instruments}</p>
-// <input type="text"></input>
-// <p className="details">Genres: {user.genres}</p>
-// <input type="text"></input>
-// <p className="details">Music I like: {user.listensto}</p>
-// <input type="text"></input>
-// <p className="details">About me: {user.history}</p>
-// <input type="text"></input>
-// <div class="details">
-// <i class="">place</i>{user.location}</div>
+    <div>
+     <form onSubmit={handleSubmit()}>
+<img className="CoverImage" src="" alt="cover photo" />
+<input type='file'/>
+<div className="name">Name: {user.name}</div>
+<input type="text"></input>
+<p className="details">Instruments: {user.instruments}</p>
+<input type="text"></input>
+<p className="details">Genres: {user.genres}</p>
+<input type="text"></input>
+<p className="details">Listens to: {user.listensto}</p>
+<input type="text"></input>
+<p className="details">Bio: {user.bio}</p>
+<input type="text"></input>
+<div class="details">
+<i className=''>Location</i>{user.location}</div>
+<button>Update</button>
+</form>
+</div>
+  )
+}
 
-// <button onClick={}>Update</button>
-// </form>
-
-// </div>
-
-
-//   )
-// }
-
-// export default ProfileForm
+export default ProfileForm;
