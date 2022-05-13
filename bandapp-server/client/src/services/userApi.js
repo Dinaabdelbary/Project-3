@@ -7,7 +7,13 @@ const getUser = (id) => {
 const getUserList = () => {
   return axios.get('/api/user/list');
 };
+
+const updateUser = (id) => {
+  return axios.put(`/api/user/${id}`)
+};
+
 export { 
     getUser,
-    getUserList 
+    getUserList,
+    updateUser
 };

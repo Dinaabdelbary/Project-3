@@ -23,21 +23,21 @@ const ProfileCard = () => {
     return (
         <div className='profileList'>
             <div className='profileCard raise'>
-                <div class='card-header'>
-                    <div class='card-header-slanted-edge'>
+                <div className='card-header'>
+                    <div className='card-header-slanted-edge'>
                         <img>{user.img}</img>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             viewBox='0 0 1000 200'
                         >
-                            <path class='polygon' d='M-20,200,1000,0V200Z' />
+                            <path className='polygon' d='M-20,200,1000,0V200Z' />
                         </svg>
                     </div>
                 </div>
-                <div class='card-body'>
+                <div className='card-body'>
                     <h2 className='cardname'>{user.name}name</h2>
-                    <h4 class='title'>Guitarist</h4>
-                    <div class='bio'>
+                    <h4 className='title'>Guitarist</h4>
+                    <div className='bio'>
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Dignissimos, aperiam.
                     </div>
