@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { getUser } from "../features/userApi/userApi";
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import ProfileForm from "./ProfileForm";
-// import { storedUser, currentUser } from "./features/auth/authSlice";
+import { currentUser, storedUser } from "../features/auth/authSlice";
+import { getUser } from "../features/userApi/userApi";
 
 function ProfilePage() {
   const [user, setUser] = useState({

@@ -1,21 +1,13 @@
 import React from 'react';
-import { signup } from '../features/auth/authApi'
-import { Link, useNavigate } from 'react-router-dom';
-
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    createUser,
-    storedUser,
-    currentUser,
-} from '../features/auth/authSlice';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signup } from '../features/auth/authApi';
+import { currentUser, storedUser } from '../features/auth/authSlice';
 
 const SignUp = (props) => {
 
     const dispatch = useDispatch(); // sends data to redux store
     const userData = useSelector(storedUser); // returns data from redux store
-
     const navigate = useNavigate();
 
     const [name, setName] = React.useState('');
@@ -25,6 +17,7 @@ const SignUp = (props) => {
     const submitUserRegisteration = () => {
         signup(name, email, password)
             .then(user => {
+                console.log('current user: ', currentUser)
                 dispatch(currentUser({currentUser:user.data}))
                 navigate('/');
             })
@@ -33,7 +26,7 @@ const SignUp = (props) => {
     return (
         <div>
     <h1>Find other musicians. Connect. Play.</h1>
-    <h3>No one to play music with? Find musicians in your area, connect with them and jam!</h3>
+    <h3>Wanna play music? Find musicians in your area, connect with them and jam!</h3>
     <div className="form">
         <div className="App">
             <input type="text" placeholder="Username" name="name" onChange={(event) => setName(event.target.value)} />
