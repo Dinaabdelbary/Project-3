@@ -1,9 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { currentUser } from "../features/auth/authSlice";
 import { login } from "../services/auth";
-import { Link, useNavigate } from "react-router-dom";
-
-import { useSelector, useDispatch } from "react-redux";
-import { currentUser, storedUser } from "../features/auth/authSlice";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ const Login = (props) => {
   return (
   <div>
     <h1>Find other musicians. Connect. Play.</h1>
-    <h3>No one to play music with? Find musicians in your area, connect with them and jam!</h3>
+    <h3>Wanna play music? Find musicians in your area, connect with them and jam!</h3>
     <div className="form">
       <form onSubmit={handleSubmit}>
         <input
