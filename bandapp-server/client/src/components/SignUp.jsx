@@ -17,8 +17,7 @@ const SignUp = (props) => {
     const submitUserRegisteration = () => {
         signup(name, email, password)
             .then(user => {
-                console.log('current user: ', currentUser)
-                dispatch(currentUser({currentUser:user.data}))
+                dispatch(currentUser(user.data))
                 navigate('/');
             })
             .catch(error => console.log(error, 'Error when trying to send signup request'))
