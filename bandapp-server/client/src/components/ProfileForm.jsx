@@ -1,8 +1,7 @@
 // import React from 'react'
-// import { getUser } from "../features/userApi/userApi";
+// import { getUser } from "../services/userApi";
 // import { useSelector, useDispatch } from "react-redux";
-// import { storedUser, currentUser } from "./features/auth/authSlice";
-
+// import { storedUser, setCurrentUser } from "./features/auth/authSlice";
 
 // function ProfileForm() {
 //         const [user, setUser] = useState({
@@ -18,13 +17,13 @@
 //           friendList: [],
 //         }
 //     }
-    
+
 //    const handleSubmit = (event) => {
 //     event.preventDefault();
 //   axios.put("/api/user/:id")
 //     .then((user) => {
 //       // props.setLoggedInUser(user)
-//       dispatch(currentUser(user));
+//       dispatch(setCurrentUser(user));
 //       navigate("/");
 //     })
 //     .catch((error) => {
@@ -55,7 +54,6 @@
 // </form>
 
 // </div>
-
 
 //   )
 // }

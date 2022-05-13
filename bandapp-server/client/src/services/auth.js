@@ -1,15 +1,8 @@
 import axios from 'axios';
 
 const signup = (name, email, password) => {
-    return axios
-        .post('/api/auth/signup', { name, email, password })
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            return error.response.data
-        });
-}
+    return axios.post('/api/auth/signup', { name, email, password });
+};
 
 const login = (email, password) => {
     return axios
@@ -18,9 +11,9 @@ const login = (email, password) => {
             return response.data;
         })
         .catch(error => {
-            return error.response.data
+            return error.response.data;
         });
-}
+};
 
 const logout = () => {
     return axios
@@ -29,8 +22,12 @@ const logout = () => {
             return response.data;
         })
         .catch(error => {
-            return error.response.data
+            return error.response.data;
         });
-}
+};
 
-export { signup, login, logout };
+const loggedin = () => {
+    return axios.get('/api/auth/loggedin');
+};
+
+export { signup, login, logout, loggedin };
