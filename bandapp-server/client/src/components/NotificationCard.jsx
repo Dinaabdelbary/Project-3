@@ -15,12 +15,11 @@ const NotificationCard = ({ user }) => {
       console.log('accepted user: ', acceptedUser );
     } catch (error) {
       console.log('error: ', error)
-    }    
-    Navigate(`/${user._id}`);
+    }
+    //redirect to `/${user._id}`. if you use navigate() it gets fucked. Check useNavigate()
   };
 
-  const handleDecline = async (event) => {
-    event.preventDefault();
+  const handleDecline = async () => {
     try {
       const declinedUser = await declineFriendRequest(user._id);
       console.log('declined user: ', declinedUser)
