@@ -14,6 +14,8 @@ const Navbar = () => {
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
 
+  console.log('user: ', user)
+
   const logoutHandler = () => {
     logout().then(() => {
       dispatch(setCurrentUser(null));
@@ -78,7 +80,6 @@ const Navbar = () => {
                 </li>
               )}
 
-              {showNotif && <Notification />}
 
               <li>
                 <button
@@ -92,6 +93,7 @@ const Navbar = () => {
             </ul>
           </nav>
         </div>
+      {showNotif && <Notification />}
       </div>
     </>
   );

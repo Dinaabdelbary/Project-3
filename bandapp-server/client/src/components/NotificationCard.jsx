@@ -6,22 +6,32 @@ import { acceptFriendRequest, declineFriendRequest } from '../services/userApi';
 
 const NotificationCard = ({ user }) => {
   const userData = useSelector(storedUser);
-  console.log(user)
+  console.log('user: ', user)
   
   const handleAccept = async (event) => {
     event.preventDefault();
-    await acceptFriendRequest(user._id);
+    try {
+      const acceptedUser = await acceptFriendRequest(user._id);
+      console.log('accepted user: ', acceptedUser );
+    } catch (error) {
+      console.log('error: ', error)
+    }    
     Navigate(`/${user._id}`);
   };
 
   const handleDecline = async (event) => {
     event.preventDefault();
-    await declineFriendRequest(user._id);
+    try {
+      const declinedUser = await declineFriendRequest(user._id);
+      console.log('declined user: ', declinedUser)
+    } catch (error) {
+      console.log('error',error);
+    }
   };
 
   return (
     <div className='container'>
-      <p style={{color: 'red'}}>{`${user.name} wants to connect!´`}</p>
+      <p>{`${user.name}`}  wants to connect!</p>
       <button className='buttons' onClick={handleAccept}>Accept</button>
       <button className='buttons' onClick={handleDecline}>Decline</button>
     </div>
