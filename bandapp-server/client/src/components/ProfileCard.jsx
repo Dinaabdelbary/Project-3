@@ -20,7 +20,8 @@ const ProfileCard = (props) => {
       <div className="profileCard raise">
         <div className="card-header">
           <div className="card-header-slanted-edge">
-            <img>{props.user.img}</img>
+          {/* add in img: src={props.user.profilePicture} */}
+            <img/>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
               <path className="polygon" d="M-20,200,1000,0V200Z" />
             </svg>
