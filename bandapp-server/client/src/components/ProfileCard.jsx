@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 import { sendFriendRequest } from '../services/userApi';
 
 const ProfileCard = (props) => {
   const userData = useSelector(storedUser);
+  const [isPending, setIsPending] = useState(false);
+
+  const isPendingInitialValue =
+    userData.currentUser?.pendingSentRequests.includes(props.user._id);
+
+  useEffect(() => {
+    setIsPending(isPendingInitialValue);
+  }, [isPendingInitialValue]);
 
   //clickHandler is only a placeholder until we have chat
   const clickHandler = () => {
+    sendFriendRequest(props.user._id)
+      .then(() => {
+        setIsPending(true);
+      })
+      .catch((error) => console.log(error));
     console.log('clicked');
   };
-
-  const isPending = userData.currentUser?.pendingSentRequests.includes(props.user._id);
 
   const isFriend = userData.currentUser?.friendList.includes(props.user._id);
 
@@ -20,14 +31,14 @@ const ProfileCard = (props) => {
       <div className="profileCard raise">
         <div className="card-header">
           <div className="card-header-slanted-edge">
-          <img src={props.user.profilePicture} className='avatar'/>
+            <img src={props.user.profilePicture} className="avatar" />
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
               <path className="polygon" d="M-20,200,1000,0V200Z" />
             </svg>
           </div>
         </div>
         <div className="card-body">
-          <h2 className="cardname">{props.user.name}name</h2>
+          <h2 className="cardname">{props.user.name}</h2>
           <h4 className="title">Guitarist</h4>
           <div className="bio">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -35,25 +46,17 @@ const ProfileCard = (props) => {
           </div>
           <p className="details">{props.user.instruments}instruments</p>
           <p className="details">{props.user.location}location</p>
-          {!isFriend ? (
+          {!isFriend && (
             <button
               className="raise"
               disabled={isPending}
-              onClick={() => {
-                sendFriendRequest(props.user._id)
-                  .then()
-                  .catch((error) => console.log(error));
-              }}
+              onClick={clickHandler}
             >
               {isPending ? `Pending...` : 'Connect'}
             </button>
-          ) : (
-            <></>
           )}
-
-          <button className="button" onClick={clickHandler()}>
-            chat
-          </button>
+          {/* add clickhandler when we have chat */}
+          <button className="button">chat</button>
         </div>
       </div>
     </div>
