@@ -15,6 +15,8 @@ import SignUp from './components/SignUp';
 import { setCurrentUser, storedUser } from './features/auth/authSlice';
 import { loggedin } from './services/auth';
 
+
+
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
   const dispatch = useDispatch();

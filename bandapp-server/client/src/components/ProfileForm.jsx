@@ -18,7 +18,7 @@ function ProfileForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put('/api/user/:id')
+      .put('/api/editprofile')
       .then((user) => {
         // props.setLoggedInUser(user)
         dispatch(setCurrentUser(user));

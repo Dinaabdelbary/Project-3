@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUser } from '../services/userApi';
+import { Link } from 'react-router-dom';
 
 const ProfileCard = () => {
     const [user, setUser] = useState({
@@ -43,6 +44,7 @@ const ProfileCard = () => {
                     </div>
                     <p className='details'>{user.instruments}instruments</p>
                     <p className='details'>{user.location}location</p>
+                    <Link to ={`/${id}`}> Visit Profile </Link>
                     <button className='button' onClick={clickHandler()}>
                         add friend
                     </button>

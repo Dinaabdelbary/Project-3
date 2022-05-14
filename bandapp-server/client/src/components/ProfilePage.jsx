@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUser } from '../services/userApi';
-
-// import { storedUser, setCurrentUser } from "./features/auth/authSlice";
+import { useSelector } from "react-redux";
+import { storedUser, setCurrentUser } from "../features/auth/authSlice";
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -41,7 +41,8 @@ function ProfilePage() {
   };
   return (
     <div>
-      <img className="CoverImage" src="" alt="cover photo" />
+      <img className="CoverImage" src='' alt="cover photo" > {user.coverPhoto} </img>
+      <img className='profilepic' src='' alt="profile pricture">{user.profilePicture} </img>
       <div className="name">Name: {user.name}</div>
       <p className="details">Instrument I play: {user.instruments}</p>
       <p className="details">Genres: {user.genres}</p>
