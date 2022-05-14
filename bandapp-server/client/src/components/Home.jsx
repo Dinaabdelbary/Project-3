@@ -1,8 +1,14 @@
 import React from 'react'
+import ListOfUsers from './ListOfUsers'
 
-const Home = () => {
+const Home = (props) => {
+
+  // getUserList()
+
   return (
-    <div>Home</div>
+    <div>
+    <ListOfUsers setChatId={props.setChatId}/>
+    </div>
   )
 }
 

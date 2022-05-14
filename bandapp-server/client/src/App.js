@@ -14,10 +14,12 @@ import SearchResult from './components/SearchResult';
 import SignUp from './components/SignUp';
 import { setCurrentUser, storedUser } from './features/auth/authSlice';
 import { loggedin } from './services/auth';
+import Chat from './components/Chat';
 
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
   const dispatch = useDispatch();
+  const [chatId, setChatId] = React.useState(null);
 
   useEffect(() => {
     loggedin()
@@ -34,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <></>
+      {chatId && <Chat chatId={chatId}/>}
 
       {userData.currentUser ? <Navbar /> : ''}
       <div>
@@ -46,7 +48,7 @@ function App() {
           <Route path="/ListOfUsers" element={<ProfileCard />} />
           <Route
             path="/"
-            element={userData.currentUser ? <Home /> : <Landing />}
+            element={userData.currentUser ? <Home setChatId={setChatId} /> : <Landing />}
           />
           <Route path="/search" element={<SearchResult />} />
           <Route path="/editprofile" element={<ProfileForm />} />
