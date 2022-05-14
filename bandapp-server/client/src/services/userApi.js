@@ -12,8 +12,23 @@ const updateUser = (id) => {
   return axios.put(`/api/user/${id}`)
 };
 
+const sendFriendRequest = (id) => {
+  return axios.get(`/connect/${id}`);
+};
+
+const acceptFriendRequest = (id) => {
+  return axios.get(`/connect/accept/${id}`)
+};
+
+const declineFriendRequest = (id) => {
+  return axios.get(`/decline/accept/${id}`)
+};
+
 export { 
     getUser,
     getUserList,
-    updateUser
+    updateUser,
+    sendFriendRequest,
+    acceptFriendRequest,
+    declineFriendRequest
 };

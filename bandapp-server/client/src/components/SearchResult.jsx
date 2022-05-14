@@ -10,10 +10,11 @@ const SearchResult = () => {
     useEffect(()=>{
         getSearchResult(query)
     .then((response) => {
-        console.log(response)
+        const allresults = response.data
     }).catch(error => console.log(error))
     })
 
+    
     
     return (
     <div>
