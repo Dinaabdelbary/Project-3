@@ -1,14 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { storedUser } from '../features/auth/authSlice'
+import {  useSelector } from 'react-redux'
+import { setAllUsers, storedUsers } from '../features/user/userSlice'
+import NotificationCard from './NotificationCard'
 
 
-const userData = useSelector(storedUser)
-const receivedRequests = userData.currentUser.pendingReceivedRequests
 
 const Notification = () => {
+
+    const listOfUsers = useSelector(storedUsers)
+    
+
   return (
-    <div>Notification</div>
+      
+    <div>
+    {listOfUsers.map(user => <NotificationCard user={user}/>)}
+
+    </div>
   )
 }
 
