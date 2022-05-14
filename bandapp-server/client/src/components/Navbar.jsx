@@ -8,7 +8,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const userData = useSelector(storedUser);
     const dispatch = useDispatch();
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState('');
     const [showDropDown, setShowDropDown] = useState(false);
     const user = userData.currentUser;
 
@@ -31,7 +31,7 @@ const Navbar = () => {
     // })
 
     // const notification = friendRequestsNotification.map( (notif, index) =>
-    //   <div key={index} class='toast-notification'>{notif}</div>
+    //   <div key={index} className='toast-notification'>{notif}</div>
     // );
 
     return (
@@ -47,6 +47,7 @@ const Navbar = () => {
                             size='15'
                             type='text'
                             autoComplete='off'
+                            value={search}
                         />
                         <input
                             id='button-submit'
@@ -60,9 +61,9 @@ const Navbar = () => {
                     <nav
                         style={{ display: showDropDown ? 'block' : 'none' }}
                         id='navbar'
-                        itemprop='mainEntity'
-                        itemscope='itemscope'
-                        itemtype='https://schema.org/SiteNavigationElement'
+                        itemProp='mainEntity'
+                        itemScope='itemscope'
+                        itemType='https://schema.org/SiteNavigationElement'
                     >
                         <ul className='navbar'>
                             <li onClick={handleHamburger}>
@@ -100,7 +101,6 @@ const Navbar = () => {
                 </div>
             </div>
         </>
-    );
-};
+    );};
 
 export default Navbar;
