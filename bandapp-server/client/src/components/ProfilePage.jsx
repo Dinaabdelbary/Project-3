@@ -41,8 +41,8 @@ function ProfilePage() {
   };
   return (
     <div>
-      <img className="CoverImage" src='' alt="cover photo" > {user.coverPhoto} </img>
-      <img className='profilepic' src='' alt="profile pricture">{user.profilePicture} </img>
+      {/* <img className="CoverImage" src='' alt="cover photo" > {user.coverPhoto} </img>
+      <img className='profilepic' src='' alt="profile pricture">{user.profilePicture} </img> */}
       <div className="name">Name: {user.name}</div>
       <p className="details">Instrument I play: {user.instruments}</p>
       <p className="details">Genres: {user.genres}</p>
