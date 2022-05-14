@@ -1,8 +1,16 @@
 import React from 'react'
+import {getUserList} from '../services/userApi'
+import ProfileCard from './ProfileCard'
+import ListOfUsers from './ListOfUsers'
 
 const Home = () => {
+
+  getUserList()
+
   return (
-    <div>Home</div>
+    <div>
+    <ListOfUsers/>
+    </div>
   )
 }
 
