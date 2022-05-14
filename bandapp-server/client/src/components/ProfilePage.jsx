@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getUser } from '../services/userApi';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
-import { loggedin } from '../services/auth';
+import { getUser } from '../services/userApi';
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -72,7 +71,7 @@ function ProfilePage() {
         <div>
           {' '}
           <button className='raise' onClick={clickHandler}>
-            edit
+            Edit profile
           </button>
         </div>
       ) : (
