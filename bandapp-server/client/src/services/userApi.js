@@ -21,7 +21,7 @@ const acceptFriendRequest = (id) => {
 };
 
 const declineFriendRequest = (id) => {
-  return axios.get(`/decline/accept/${id}`)
+  return axios.get(`/connect/decline/${id}`)
 };
 
 export { 
