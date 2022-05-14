@@ -26,17 +26,17 @@ const Navbar = () => {
 
     const handleHamburger = () => setShowDropDown(!showDropDown);
 
-    // const friendRequestsNotification = user.pendingReceivedRequests.map(request => {
-    //   return <p>{`${request.name} wants to connect!` }</p>
-    // })
+    const friendRequestsNotification = user.pendingReceivedRequests.map(() => {
+      return <button onClick={navigate(`/${user._id}`)}>You've got a friend request!</button>
+    });
 
-    // const notification = friendRequestsNotification.map( (notif, index) =>
-    //   <div key={index} className='toast-notification'>{notif}</div>
-    // );
+    const notification = friendRequestsNotification.map( (notif, index) =>
+      <div key={index} className='toast-notification'>{notif}</div>
+    );
 
     return (
         <>
-            {/* {notification} */}
+            
             <div className='content-wrapper'>
                 <div className='navmenu'>
                     <form onSubmit={searchHandler} id='search-form'>
