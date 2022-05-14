@@ -26,16 +26,17 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
- const io = require('socket.io')(server, {
+const io = require('socket.io')(server, {
   cors: {
-      origin: port,
-      methods: ["GET", "POST"]
+    origin: port,
+    methods: ["GET", "POST"]
   }
 });
 
 io.on('connection', socket => {
   socket.on('message', (messageData) => {
-      io.emit('message', messageData)
+    console.log(messageData)
+    io.emit('message', messageData)
   })
 })
 

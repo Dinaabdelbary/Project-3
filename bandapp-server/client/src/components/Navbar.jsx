@@ -60,9 +60,9 @@ const Navbar = () => {
                     <nav
                         style={{ display: showDropDown ? 'block' : 'none' }}
                         id='navbar'
-                        itemprop='mainEntity'
-                        itemscope='itemscope'
-                        itemtype='https://schema.org/SiteNavigationElement'
+                        itemProp='mainEntity'
+                        itemScope='itemscope'
+                        itemType='https://schema.org/SiteNavigationElement'
                     >
                         <ul className='navbar'>
                             <li onClick={handleHamburger}>
