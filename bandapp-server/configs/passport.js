@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id)
+    User.findById(id).populate('pendingReceivedRequests')
         .then(dbUser => {
             done(null, dbUser);
         })

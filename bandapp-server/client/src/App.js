@@ -22,6 +22,7 @@ function App() {
   useEffect(() => {
     loggedin()
       .then((response) => {
+        console.log('response after loggedin: ', response)
         dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
       })
       .catch((error) =>

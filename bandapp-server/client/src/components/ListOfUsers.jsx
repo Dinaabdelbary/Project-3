@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
+import { setAllUsers, storedUsers } from '../features/user/userSlice';
 import { getUserList } from '../services/userApi';
 import ProfileCard from './ProfileCard';
+import { useDispatch } from 'react-redux';
 
 const UsersList = () => {
   const userData = useSelector(storedUser); // returns data from redux store
   const [listOfUsers, setListOfUsers] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getUserList()
       .then((response) => {
         const users = response.data;
+        dispatch(setAllUsers(users));
         setListOfUsers(users);
       })
       .catch((error) => console.log(error));
