@@ -10,16 +10,16 @@ const NotificationCard = ({ user }) => {
   const allUsersData = useSelector(storedUsers);
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  
-  
+
+
   const handleAccept = async () => {
     try {
       const receivingUser = userData.currentUser
-      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter( (pendingRequest) => user._id !== pendingRequest._id)
-      const updatedFriendList = [ ...receivingUser.friendList, user._id ]
+      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter((pendingRequest) => user._id !== pendingRequest._id)
+      const updatedFriendList = [...receivingUser.friendList, user._id]
       const updateUserState = { ...receivingUser, pendingReceivedRequests: deletedPendingRequest, friendList: updatedFriendList }
       const acceptedUser = await acceptFriendRequest(user._id);
-      dispatch(setCurrentUser(updateUserState)) 
+      dispatch(setCurrentUser(updateUserState))
     } catch (error) {
       console.log('error: ', error)
     }
@@ -29,12 +29,12 @@ const NotificationCard = ({ user }) => {
   const handleDecline = async () => {
     try {
       const receivingUser = userData.currentUser
-      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter( (pendingRequest) => user._id !== pendingRequest._id)
+      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter((pendingRequest) => user._id !== pendingRequest._id)
       const declinedUser = await declineFriendRequest(user._id);
-      const updateUserState = { ...receivingUser, pendingReceivedRequests: deletedPendingRequest}
+      const updateUserState = { ...receivingUser, pendingReceivedRequests: deletedPendingRequest }
       dispatch(setCurrentUser(updateUserState))
     } catch (error) {
-      console.log('error',error);
+      console.log('error', error);
     }
   };
 
