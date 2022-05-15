@@ -51,12 +51,14 @@ router.get('/decline/:id', (req, res) => {
     )
       .then((update) => {
         console.log('declined friend request in db:',update);
+        res.redirect('/');
         res.json(update)
       })
       .catch((err) => console.log(err));
   });
 });
 
+//send friend request
 router.get('/:id', (req, res) => {
   const otherUserId = req.params.id;
   const currentUserId = req.session.passport.user;
@@ -76,10 +78,26 @@ router.get('/:id', (req, res) => {
       );
     })
     .then((update) => {
-      //   res.redirect(`/profile/${otherUserId}`);
       res.json(update);
+      res.redirect('/');
     })
     .catch((err) => console.log(err));
 });
+
+//unfollow
+router.get('/unfollow/:id', (req, res) => {
+  const otherUserId = req.params.id;
+  const currentUserId = req.session.passport.user;
+
+  User.findOneAndUpdate(
+    { _id: currentUserId },
+    { $pull: { friendList: otherUserId } },
+    { new: true }
+  )
+    .then((updatedUser) => {
+      req.session.currentUser = updatedUser;
+    }).catch(err => console.log(err))
+})
+
 
 module.exports = router;

@@ -1,17 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { storedUser } from '../features/auth/authSlice';
+import { setCurrentUser, storedUser } from '../features/auth/authSlice';
+import { storedUsers } from '../features/user/userSlice';
 import { acceptFriendRequest, declineFriendRequest } from '../services/userApi';
 
 const NotificationCard = ({ user }) => {
   const userData = useSelector(storedUser);
-  console.log('user: ', user)
+  const allUsersData = useSelector(storedUsers);
+  const dispatch = useDispatch()
+  console.log('userData: ', userData)
   
-  const handleAccept = async (event) => {
-    event.preventDefault();
+  const handleAccept = async () => {
     try {
       const acceptedUser = await acceptFriendRequest(user._id);
+      dispatch(setCurrentUser(userData))
       console.log('accepted user: ', acceptedUser );
     } catch (error) {
       console.log('error: ', error)

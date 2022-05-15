@@ -34,6 +34,8 @@ function ProfilePage() {
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
   const navigate = useNavigate();
+  
+  console.log('userdata', userData)
 
   if (!userData.currentUser) {
     useEffect(() => {
@@ -55,6 +57,7 @@ function ProfilePage() {
   const clickHandler = () => {
     navigate('/editprofile');
   };
+
   return (
     <div>
       <img className='CoverImage' src='' alt='cover photo' />
