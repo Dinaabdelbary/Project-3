@@ -22,7 +22,6 @@ function App() {
   useEffect(() => {
     loggedin()
       .then((response) => {
-        console.log('response after loggedin: ', response)
         dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
       })
       .catch((error) =>
@@ -44,7 +43,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/location" element={<UserProfile />} />
           <Route path="/:id" element={<ProfilePage />} />
-          <Route path="/ListOfUsers" element={<ProfileCard />} />
+          <Route path="/ListOfUsers" element={<ProfileCard/>} />
           <Route
             path="/"
             element={userData.currentUser ? <Home /> : <Landing />}

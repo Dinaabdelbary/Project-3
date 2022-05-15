@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 import { sendFriendRequest } from '../services/userApi';
+import { Link } from 'react-router-dom';
 
 const ProfileCard = (props) => {
   const userData = useSelector(storedUser);
@@ -38,7 +39,7 @@ const ProfileCard = (props) => {
           </div>
         </div>
         <div className="card-body">
-          <h2 className="cardname">{props.user.name}</h2>
+          <h2 className="cardname"><Link to={`/${props.user._id}`}>{props.user.name}</Link></h2>
           <h4 className="title">Guitarist</h4>
           <div className="bio">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
