@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { storedUsers } from '../features/user/userSlice';
 import { acceptFriendRequest, declineFriendRequest } from '../services/userApi';
@@ -9,23 +9,30 @@ const NotificationCard = ({ user }) => {
   const userData = useSelector(storedUser);
   const allUsersData = useSelector(storedUsers);
   const dispatch = useDispatch()
-  console.log('userData: ', userData)
+  const navigate = useNavigate();
+  
   
   const handleAccept = async () => {
     try {
+      const receivingUser = userData.currentUser
+      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter( (pendingRequest) => user._id !== pendingRequest._id)
+      const updatedFriendList = [ ...receivingUser.friendList, user._id ]
+      const updateUserState = { ...receivingUser, pendingReceivedRequests: deletedPendingRequest, friendList: updatedFriendList }
       const acceptedUser = await acceptFriendRequest(user._id);
-      dispatch(setCurrentUser(userData))
-      console.log('accepted user: ', acceptedUser );
+      dispatch(setCurrentUser(updateUserState)) 
     } catch (error) {
       console.log('error: ', error)
     }
-    //redirect to `/${user._id}`. if you use navigate() it gets fucked. Check useNavigate()
+    navigate(`/${user._id}`)
   };
 
   const handleDecline = async () => {
     try {
+      const receivingUser = userData.currentUser
+      const deletedPendingRequest = receivingUser.pendingReceivedRequests.filter( (pendingRequest) => user._id !== pendingRequest._id)
       const declinedUser = await declineFriendRequest(user._id);
-      console.log('declined user: ', declinedUser)
+      const updateUserState = { ...receivingUser, pendingReceivedRequests: deletedPendingRequest}
+      dispatch(setCurrentUser(updateUserState))
     } catch (error) {
       console.log('error',error);
     }

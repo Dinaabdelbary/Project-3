@@ -14,8 +14,6 @@ const Navbar = () => {
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
 
-  console.log('user: ', user)
-
   const logoutHandler = () => {
     logout().then(() => {
       dispatch(setCurrentUser(null));
