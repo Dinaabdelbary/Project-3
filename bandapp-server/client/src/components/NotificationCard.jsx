@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { storedUser } from '../features/auth/authSlice';
 import { acceptFriendRequest, declineFriendRequest } from '../services/userApi';
 
@@ -30,7 +30,7 @@ const NotificationCard = ({ user }) => {
 
   return (
     <div className='container'>
-      <p>{`${user.name}`}  wants to connect!</p>
+      <p><Link to={`/${user._id}`} >{`${user.name}`}</Link> wants to connect!</p>
       <button className='buttons' onClick={handleAccept}>Accept</button>
       <button className='buttons' onClick={handleDecline}>Decline</button>
     </div>
