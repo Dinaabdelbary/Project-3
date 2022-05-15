@@ -97,6 +97,7 @@ router.get('/unfollow/:id', (req, res) => {
     .then((updatedUser) => {
       req.session.currentUser = updatedUser;
     }).catch(err => console.log(err))
+    return res.json
 })
 
 
