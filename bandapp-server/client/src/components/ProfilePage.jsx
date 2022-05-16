@@ -34,26 +34,24 @@ function ProfilePage() {
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
   const navigate = useNavigate();
-  
-  console.log('userdata', userData)
 
-  if (!userData.currentUser) {
     useEffect(() => {
       getUser(id)
         .then((response) => {
           setUser(response.data);
+          console.log('user: ', user)
           dispatch(setCurrentUser(response.data));
+          
           return response.data;
+          
         })
         .catch((error) => {
           return error.response.data;
         });
     }, []);
-  }
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
-
   const clickHandler = () => {
     navigate('/editprofile');
   };

@@ -9,10 +9,6 @@ const Notification = () => {
     const listOfUsers = useSelector(storedUsers)
     const userData = useSelector(storedUser)
     const usersPendingRequest = userData.currentUser.pendingReceivedRequests
-     
-
-    //compare the current user Id with the other user's sent request array
-    // const usersSentRequest = currentUserId === listOfUsers.pendingSentRequests.includes(currentUserId)
 
     return (
 

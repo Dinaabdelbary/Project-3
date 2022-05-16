@@ -79,7 +79,6 @@ router.get('/:id', (req, res) => {
     })
     .then((update) => {
       res.json(update);
-      //res.redirect('/');   ----- not sure if this helps refresh the page
     })
     .catch((err) => console.log(err));
 });
@@ -97,6 +96,7 @@ router.get('/unfollow/:id', (req, res) => {
     .then((updatedUser) => {
       req.session.currentUser = updatedUser;
     }).catch(err => console.log(err))
+    return res.json({message: 'unfollow successful'})
 })
 
 
