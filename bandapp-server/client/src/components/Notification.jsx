@@ -1,22 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { storedUsers } from '../features/user/userSlice'
-import { storedUser } from '../features/auth/authSlice'
-import NotificationCard from './NotificationCard'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { storedUsers } from '../features/user/userSlice';
+import { storedUser } from '../features/auth/authSlice';
+import NotificationCard from './NotificationCard';
 
 const Notification = () => {
+  const listOfUsers = useSelector(storedUsers);
+  const userData = useSelector(storedUser);
+  const usersPendingRequest = userData.currentUser.pendingReceivedRequests;
 
-    const listOfUsers = useSelector(storedUsers)
-    const userData = useSelector(storedUser)
-    const usersPendingRequest = userData.currentUser.pendingReceivedRequests
+    console.log( listOfUsers);
 
-    return (
+  return (
+    <div>
+      {usersPendingRequest.map((user) => (
+        <NotificationCard user={user} />
+      ))}
+    </div>
+  );
+};
 
-        <div>
-            {usersPendingRequest.map(user => 
-            <NotificationCard user={user} />)}
-        </div>
-    )
-}
-
-export default Notification
+export default Notification;

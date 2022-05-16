@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
+import { loggedin } from '../services/auth';
 import { getLocation } from '../services/locationApi';
 import { updateUser } from '../services/userApi';
 
@@ -24,7 +25,7 @@ function ProfileForm() {
 
   if (!userData.currentUser) {
     useEffect(() => {
-      getUser(id)
+      loggedin()
         .then((response) => {
           setUser(response.data);
           dispatch(setCurrentUser(response.data));
@@ -81,35 +82,35 @@ function ProfileForm() {
       <form onSubmit={handleSubmit}>
         <img className='CoverImage' src='' alt='cover photo' />
         <input type='file' />
-        <div className='name'>Name: {user.name}</div>
+        <div className='name'>Name: {userData.currentUser.name}</div>
         <input
           type='text'
           name='name'
           value={user.name}
           onChange={handleStringChange}
         />
-        <p className='details'>Instruments: {user.instruments}</p>
+        <p className='details'>Instruments: {userData.currentUser.instruments}</p>
         <input
           type='text'
           name='instruments'
           value={user.instruments}
           onChange={handleArrayChange}
         />
-        <p className='details'>Genres: {user.genres}</p>
+        <p className='details'>Genres: {userData.currentUser.genres}</p>
         <input
           type='text'
           name='genres'
           value={user.genres}
           onChange={handleArrayChange}
         />
-        <p className='details'>Listens to: {user.listensto}</p>
+        <p className='details'>Listens to: {userData.currentUser.listensto}</p>
         <input
           type='text'
           name='listensto'
           value={user.listensto}
           onChange={handleArrayChange}
         />
-        <p className='details'>Bio: {user.bio}</p>
+        <p className='details'>Bio: {userData.currentUser.bio}</p>
         <textarea
           name='bio'
           value={user.bio}
