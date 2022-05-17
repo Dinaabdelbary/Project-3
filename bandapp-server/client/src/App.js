@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserProfile from './components/Geolocation';
+import IsLoggedIn from './components/IsLoggedIn';
 import Home from './components/Home';
 import Landing from './components/Landing';
 import Login from './components/Login';
@@ -33,23 +34,33 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <></>
-
+    <div className='App'>
       {userData.currentUser ? <Navbar /> : ''}
       <div>
         <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/location" element={<UserProfile />} />
-          <Route path="/:id" element={<ProfilePage />} />
-          <Route path="/ListOfUsers" element={<ProfileCard/>} />
           <Route
-            path="/"
+            path='/'
+            element={
+              <IsLoggedIn>
+                <Home />
+                <ProfilePage />
+                <ProfileForm />
+                <ProfileCard />
+              </IsLoggedIn>
+            }
+          />
+
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/location' element={<UserProfile />} />
+          <Route path='/:id' element={<ProfilePage />} />
+          <Route path='/ListOfUsers' element={<ProfileCard />} />
+          <Route
+            path='/'
             element={userData.currentUser ? <Home /> : <Landing />}
           />
-          <Route path="/search" element={<SearchResult />} />
-          <Route path="/editprofile" element={<ProfileForm />} />
+          <Route path='/search' element={<SearchResult />} />
+          <Route path='/editprofile' element={<ProfileForm />} />
         </Routes>
       </div>
     </div>
