@@ -55,6 +55,7 @@ function ProfileForm() {
   const handleInstrumentsChange = (event) => {
     event.preventDefault()
     let newArray = [...user.instruments, event.target.id];
+    console.log('new array of instruments; ', newArray)
     if (user.instruments.includes(event.target.id)) {
       newArray = newArray.filter(instrument => instrument !== event.target.id);
     } 
@@ -66,6 +67,7 @@ function ProfileForm() {
   const handleGenresChange = (event) => {
     event.preventDefault()
     let newArray = [...user.genres, event.target.id];
+    console.log('new array of genres; ', newArray)
     if (user.genres.includes(event.target.id)) {
       newArray = newArray.filter(genre => genre !== event.target.id);
     } 
@@ -78,7 +80,6 @@ function ProfileForm() {
     event.preventDefault();
     updateUser(id)
       .then((user) => {
-        console.log(user);
         setUser(user);
         dispatch(setCurrentUser(user));
         navigate('/');
@@ -123,6 +124,13 @@ function ProfileForm() {
         <input type="checkbox" id="bass" value="bass"  onChange={handleInstrumentsChange}/>
         <label htmlFor="vocals">Vocals</label>
         <input type="checkbox" id="vocals" value="vocals"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="keyboard">Keyboard</label>
+        <input type="checkbox" id="keyboard" value="keyboard"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="percussion">Percussion</label>
+        <input type="checkbox" id="percussion" value="percussion"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="other">other</label>
+        <input type="checkbox" id="other" value="other"  onChange={handleInstrumentsChange}/>
+
         
         <p className='details'>Genres: {userData.currentUser.genres}</p>
         <label htmlFor="rock">Rock</label>
@@ -131,6 +139,13 @@ function ProfileForm() {
         <input type="checkbox" id="electronic" value="electronic"  onChange={handleGenresChange}/>
         <label htmlFor="metal">Metal</label>
         <input type="checkbox" id="metal" value="metal"  onChange={handleGenresChange}/>
+        <label htmlFor="jazz">Jazz</label>
+        <input type="checkbox" id="jazz" value="jazz"  onChange={handleGenresChange}/>
+        <label htmlFor="hip hop/rap">Hip hop/Rap</label>
+        <input type="checkbox" id="hip hop/rap" value="hip hop/rap"  onChange={handleGenresChange}/>
+        <label htmlFor="pop">Pop</label>
+        <input type="checkbox" id="pop" value="pop"  onChange={handleGenresChange}/>
+
 
         <p className='details'>Listens to: {userData.currentUser.listensto}</p>
         <input
