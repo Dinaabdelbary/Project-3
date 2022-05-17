@@ -54,7 +54,6 @@ function ProfileForm() {
 
   const handleInstrumentsChange = (event) => {
     let newArray = [...user.instruments, event.target.id];
-    console.log('new array of instruments; ', newArray)
     if (user.instruments.includes(event.target.id)) {
       newArray = newArray.filter(instrument => instrument !== event.target.id);
     } 
@@ -115,32 +114,32 @@ function ProfileForm() {
         
         <p className='details'>Instruments: {userData.currentUser.instruments}</p>
         <label htmlFor="guitar">Guitar</label>
-        <input type="checkbox" id="guitar" value="guitar"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="guitar" value="guitar" onChange={handleInstrumentsChange}/>
         <label htmlFor="drums">Drums</label>
-        <input type="checkbox" id="drums" value="drums"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="drums" value="drums" onChange={handleInstrumentsChange}/>
         <label htmlFor="bass">Bass</label>
-        <input type="checkbox" id="bass" value="bass"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="bass" value="bass" onChange={handleInstrumentsChange}/>
         <label htmlFor="vocals">Vocals</label>
-        <input type="checkbox" id="vocals" value="vocals"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="vocals" value="vocals" onChange={handleInstrumentsChange}/>
         <label htmlFor="keyboard">Keyboard</label>
-        <input type="checkbox" id="keyboard" value="keyboard"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="keyboard" value="keyboard" onChange={handleInstrumentsChange}/>
         <label htmlFor="other">Other</label>
-        <input type="checkbox" id="other" value="other"  onChange={handleInstrumentsChange}/>
+        <input type="checkbox" id="other" value="other" onChange={handleInstrumentsChange}/>
 
         
         <p className='details'>Genres: {userData.currentUser.genres}</p>
         <label htmlFor="rock">Rock</label>
-        <input type="checkbox" id="rock" value="rock"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="rock" value="rock" onChange={handleGenresChange}/>
         <label htmlFor="electronic">Electronic</label>
-        <input type="checkbox" id="electronic" value="electronic"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="electronic" value="electronic" onChange={handleGenresChange}/>
         <label htmlFor="metal">Metal</label>
-        <input type="checkbox" id="metal" value="metal"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="metal" value="metal" onChange={handleGenresChange}/>
         <label htmlFor="jazz">Jazz</label>
-        <input type="checkbox" id="jazz" value="jazz"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="jazz" value="jazz" onChange={handleGenresChange}/>
         <label htmlFor="hip hop/rap">Hip hop/Rap</label>
-        <input type="checkbox" id="hip hop/rap" value="hip hop/rap"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="hip hop/rap" value="hip hop/rap" onChange={handleGenresChange}/>
         <label htmlFor="pop">Pop</label>
-        <input type="checkbox" id="pop" value="pop"  onChange={handleGenresChange}/>
+        <input type="checkbox" id="pop" value="pop" onChange={handleGenresChange}/>
 
 
         <p className='details'>Listens to: {userData.currentUser.listensto}</p>
