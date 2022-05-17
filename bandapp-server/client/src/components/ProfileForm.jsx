@@ -51,6 +51,29 @@ function ProfileForm() {
       [name]: [...[name], value],
     });
   };
+
+  const handleInstrumentsChange = (event) => {
+    event.preventDefault()
+    let newArray = [...user.instruments, event.target.id];
+    if (user.instruments.includes(event.target.id)) {
+      newArray = newArray.filter(instrument => instrument !== event.target.id);
+    } 
+    setUser({
+      instruments: newArray
+    });
+  };
+
+  const handleGenresChange = (event) => {
+    event.preventDefault()
+    let newArray = [...user.genres, event.target.id];
+    if (user.genres.includes(event.target.id)) {
+      newArray = newArray.filter(genre => genre !== event.target.id);
+    } 
+    setUser({
+      genres: newArray
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     updateUser(id)
@@ -64,6 +87,7 @@ function ProfileForm() {
         console.log(error, 'Error when trying to update profile');
       });
   };
+
   const getCurrentLocation = (event) => {
     event.preventDefault();
     const location = getLocation()
@@ -89,20 +113,25 @@ function ProfileForm() {
           value={user.name}
           onChange={handleStringChange}
         />
+        
         <p className='details'>Instruments: {userData.currentUser.instruments}</p>
-        <input
-          type='text'
-          name='instruments'
-          value={user.instruments}
-          onChange={handleArrayChange}
-        />
+        <label htmlFor="guitar">Guitar</label>
+        <input type="checkbox" id="guitar" value="guitar"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="drums">Drums</label>
+        <input type="checkbox" id="drums" value="drums"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="bass">Bass</label>
+        <input type="checkbox" id="bass" value="bass"  onChange={handleInstrumentsChange}/>
+        <label htmlFor="vocals">Vocals</label>
+        <input type="checkbox" id="vocals" value="vocals"  onChange={handleInstrumentsChange}/>
+        
         <p className='details'>Genres: {userData.currentUser.genres}</p>
-        <input
-          type='text'
-          name='genres'
-          value={user.genres}
-          onChange={handleArrayChange}
-        />
+        <label htmlFor="rock">Rock</label>
+        <input type="checkbox" id="rock" value="rock"  onChange={handleGenresChange}/>
+        <label htmlFor="electronic">Electronic</label>
+        <input type="checkbox" id="electronic" value="electronic"  onChange={handleGenresChange}/>
+        <label htmlFor="metal">Metal</label>
+        <input type="checkbox" id="metal" value="metal"  onChange={handleGenresChange}/>
+
         <p className='details'>Listens to: {userData.currentUser.listensto}</p>
         <input
           type='text'
