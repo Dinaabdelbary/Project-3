@@ -124,9 +124,7 @@ function ProfileForm() {
         <input type="checkbox" id="vocals" value="vocals"  onChange={handleInstrumentsChange}/>
         <label htmlFor="keyboard">Keyboard</label>
         <input type="checkbox" id="keyboard" value="keyboard"  onChange={handleInstrumentsChange}/>
-        <label htmlFor="percussion">Percussion</label>
-        <input type="checkbox" id="percussion" value="percussion"  onChange={handleInstrumentsChange}/>
-        <label htmlFor="other">other</label>
+        <label htmlFor="other">Other</label>
         <input type="checkbox" id="other" value="other"  onChange={handleInstrumentsChange}/>
 
         

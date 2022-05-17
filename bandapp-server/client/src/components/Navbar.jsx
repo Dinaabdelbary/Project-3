@@ -14,13 +14,14 @@ const Navbar = () => {
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
 const {id} =  useParams()
-  console.log(user._id)
   const logoutHandler = () => {
     logout().then(() => {
       dispatch(setCurrentUser(null));
       navigate('/');
     });
   };
+
+  console.log('user pending request', user.pendingReceivedRequests)
 
   const searchHandler = (event) => {
     event.preventDefault();
@@ -63,7 +64,7 @@ const {id} =  useParams()
               <li onClick={handleHamburger}>
                 <Link to="/">Home</Link>
               </li>
-              {user.pendingReceivedRequests ? (
+              {user.pendingReceivedRequests.length ? (
                 <li onClick={() => setShowNotif(!showNotif)}>
                   <p>You've got a friend request!</p>
                 </li>

@@ -17,7 +17,7 @@ const userSchema = Schema({
     },
     instruments :{
       type: [String],
-      enum: ['guitar', 'bass', 'drums', 'vocals', 'keyboard', 'percussion', 'saxophone']
+      enum: ['guitar', 'bass', 'drums', 'vocals', 'keyboard', 'other']
     },
     location : String, //possible API call to location API, otherwise just city
     profilePicture : {

@@ -93,8 +93,7 @@ router.get('/unfollow/:id', (req, res) => {
     { $pull: { friendList: otherUserId } },
     { new: true }
   )
-    .then((updatedUser) => {
-      req.session.currentUser = updatedUser;
+    .then(() => {
     }).catch(err => console.log(err))
     return res.json({message: 'unfollow successful'})
 })
