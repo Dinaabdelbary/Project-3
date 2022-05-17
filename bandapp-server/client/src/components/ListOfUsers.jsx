@@ -6,7 +6,7 @@ import { getUserList } from '../services/userApi';
 import ProfileCard from './ProfileCard';
 import { useDispatch } from 'react-redux';
 
-const UsersList = () => {
+const UsersList = (props) => {
   const userData = useSelector(storedUser); // returns data from redux store
   const [listOfUsers, setListOfUsers] = useState([]);
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const UsersList = () => {
     );
     const isCurrentUser = userData.currentUser._id === user._id;
     return (
-      <div key={user._id}>{!isCurrentUser && <ProfileCard user={user} />}</div>
+      <div key={user._id}>{!isCurrentUser && <ProfileCard user={user} setChatId={props.setChatId} />}</div>
     );
   });
 
