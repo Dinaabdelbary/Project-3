@@ -30,7 +30,7 @@ const {id} =  useParams()
 
   const handleHamburger = () => setShowDropDown(!showDropDown);
 
-  const friendRequestsNotification = user.pendingReceivedRequests.length && (
+  const friendRequestsNotification = user.pendingReceivedRequests && (
     <p onClick={() => setShowNotif(true)}>You've got a friend request!</p>
   );
 
@@ -64,7 +64,7 @@ const {id} =  useParams()
               <li onClick={handleHamburger}>
                 <Link to="/">Home</Link>
               </li>
-              {user.pendingReceivedRequests.length ? (
+              {user.pendingReceivedRequests ? (
                 <li onClick={() => setShowNotif(!showNotif)}>
                   <p>You've got a friend request!</p>
                 </li>
