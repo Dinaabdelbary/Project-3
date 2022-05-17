@@ -21,19 +21,28 @@ function ProfilePage() {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
 
-  if (!userData.currentUser) {
-      loggedin()
-        .then((response) => {
-          console.log(response.data);
-          dispatch(setCurrentUser(response.data));
-        })
-        .catch((error) => console.log(error));
-  }
+  // if (!userData.currentUser) {
+      // loggedin()
+      //   .then((response) => {
+      //     dispatch(setCurrentUser(response.data));
+      //   })
+      //   .catch((error) => console.log(error));
+      //   loggedin()
+      // .then((response) => {
+      //   dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
+      // })
+      // .catch((error) =>
+      //   console.log(
+      //     error.message,
+      //     // 'Error when trying to get info from loggedin axios request'
+      //   )
+      // );
+ // } 
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
-  const hasFriendRequest = userData.currentUser.pendingReceivedRequests.includes(id)
-  const isFriend = userData.currentUser.friendList.includes(id)
+  const hasFriendRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
+  const isFriend = userData.currentUser?.friendList.includes(id)
 
   console.log('has friend request: ', hasFriendRequest)
   console.log('is in friend list: ', isFriend)
@@ -41,15 +50,25 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    loggedin()
+      .then((response) => {
+        dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
+      })
+      .catch((error) =>
+        console.log(
+          error.message,
+          'Error when trying to get info from loggedin axios request'
+        )
+      );
       getUser(id)
       .then((response) => {
-
       setUser(response.data);
         return response.data;
       })
       .catch((error) => {
         return error.response.data;
       });
+      
   }, [id]);
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
