@@ -13,7 +13,7 @@ const Navbar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
-const {id} =  useParams()
+  const { id } = useParams()
   console.log()
   console.log(user._id)
   const logoutHandler = () => {
@@ -93,7 +93,7 @@ const {id} =  useParams()
             </ul>
           </nav>
         </div>
-      {showNotif && <Notification />}
+        {showNotif && <Notification />}
       </div>
     </>
   );

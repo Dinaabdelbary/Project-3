@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      {chatId && <Chat chatId={chatId}/>}
+      {chatId && <Chat chatId={chatId} />}
 
       {userData.currentUser ? <Navbar /> : ''}
       <div>

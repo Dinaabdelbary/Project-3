@@ -87,8 +87,9 @@ app.use('/band', bandRoutes);
 
 
 const auth = require("./routes/auth.routes");
-
 app.use("/api/auth", auth);
 
+const chat = require("./routes/chat.routes");
+app.use("/api/chat", chat);
 
 module.exports = app;

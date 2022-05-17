@@ -2,24 +2,37 @@ const express = require("express");
 const Conversation = require("../models/Conversation.model");
 const router = express.Router();
 
-router.post('/conversation/create', (req, res) => {
-    const {participants} = [];
-    Conversation.create({participants})
-    .then(newConv => {
-        res.json(newConv);
-    })
-    .catch(err => {
-        res.json(err)
-    })
+
+
+router.post('/conversation', (req, res) => {
+    const { participants } = req.body;
+    Conversation.find({ "participants": { "$all": participants } })
+        .then(match => {
+            if (!match.length) {
+                const newConv = new Conversation({
+                    participants
+                });
+                newConv.save().then(conv => res.json(conv))
+            } else {
+                res.json(match[0])
+            }
+        }).catch(err => console.log(err))
 });
 
-router.get('/conversation/:id', (req, res) => {
-    const {id} = req.params;
-    Conversation.findById(id)
-    .then(match => {
-        res.json(match)
-    })
-    .catch(err => {
-        res.json(err)
-    })
+router.post('/conversation/:id/new-message', (req, res) => {
+    const { id } = req.params;
+    const { messageData } = req.body;
+
+    Conversation.findByIdAndUpdate(id,
+        {
+            $push: { 'messages': messageData }
+        },
+        {
+            new: true
+        }
+    ).then(updatedConversation => {
+        res.json(updatedConversation)
+    }).catch(err => console.log(err))
 })
+
+module.exports = router;
