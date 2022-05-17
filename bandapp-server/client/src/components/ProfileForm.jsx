@@ -53,7 +53,6 @@ function ProfileForm() {
   };
 
   const handleInstrumentsChange = (event) => {
-    event.preventDefault()
     let newArray = [...user.instruments, event.target.id];
     console.log('new array of instruments; ', newArray)
     if (user.instruments.includes(event.target.id)) {
@@ -65,7 +64,6 @@ function ProfileForm() {
   };
 
   const handleGenresChange = (event) => {
-    event.preventDefault()
     let newArray = [...user.genres, event.target.id];
     console.log('new array of genres; ', newArray)
     if (user.genres.includes(event.target.id)) {
