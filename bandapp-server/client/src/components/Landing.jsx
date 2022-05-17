@@ -20,12 +20,12 @@ const Landing = () => {
       </h3>
       <div className='form'>
         <div className='container'>
-          <Link to='/login' className='buttons raise'>
+          <Link to='/login' className='form-button raise'>
             Login
           </Link>
         </div>
         <div className='container'>
-          <Link to='/signup' className='buttons raise'>
+          <Link to='/signup' className='form-button raise'>
             Signup
           </Link>
         </div>
