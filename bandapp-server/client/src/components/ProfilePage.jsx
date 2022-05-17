@@ -22,14 +22,12 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   if (!userData.currentUser) {
-
       loggedin()
         .then((response) => {
           console.log(response.data);
           dispatch(setCurrentUser(response.data));
         })
         .catch((error) => console.log(error));
-
   }
 
   const { id } = useParams();
