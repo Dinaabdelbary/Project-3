@@ -97,8 +97,30 @@ svg .polygon{
 
 .buttons:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-  }
+}
 
+.form-button {
+  background:#460000;
+  color: #FFF6EA;
+  border: 2px solid;
+  border-radius: 5px;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  border-radius: 8px 8px;
+}
+.form-button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
   
 button {
   background:#460000;

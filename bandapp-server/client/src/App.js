@@ -45,7 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/location" element={<UserProfile />} />
           <Route path="/:id" element={<ProfilePage />} />
-          <Route path="/ListOfUsers" element={<ProfileCard />} />
+          <Route path="/ListOfUsers" element={<ProfileCard/>} />
           <Route
             path="/"
             element={userData.currentUser ? <Home setChatId={setChatId} /> : <Landing />}

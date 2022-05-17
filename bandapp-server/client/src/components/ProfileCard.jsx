@@ -16,24 +16,33 @@ const ProfileCard = (props) => {
   });
   const { id } = useParams();
   const userData = useSelector(storedUser);
-
+  
   const [isPending, setIsPending] = useState(false);
-
+  
   const isPendingInitialValue =
-    userData.currentUser?.pendingSentRequests.includes(props.user._id);
-
+  userData.currentUser?.pendingSentRequests.includes(props.user._id);
+  
   useEffect(() => {
     setIsPending(isPendingInitialValue);
   }, [isPendingInitialValue]);
-
+  
   useEffect(() => {
     setUser(getUser(id));
   }, []);
-  //clickHandler is only a placeholder until we have chat
   const openChat = (recepientId) => {
     props.setChatId(recepientId);
   };
-
+  
+  
+  //clickHandler is only a placeholder until we have chat
+  const clickHandler = () => {
+    sendFriendRequest(props.user._id)
+      .then(() => {
+        setIsPending(true);
+      })
+      .catch((error) => console.log(error));
+    console.log('clicked');
+  };
 
   const isFriend = userData.currentUser?.friendList.includes(props.user._id);
 
@@ -49,31 +58,24 @@ const ProfileCard = (props) => {
           </div>
         </div>
         <div className="card-body">
-          <h2 className="cardname">{props.user.name}name</h2>
+          <h2 className="cardname"><Link to={`/${props.user._id}`}>{props.user.name}</Link></h2>
           <h4 className="title">Guitarist</h4>
           <div className="bio">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Dignissimos, aperiam.
           </div>
-          {/* <Link to ={`/${id}`}> Vitor's profile </Link> */}
           <p className="details">{props.user.instruments}instruments</p>
           <p className="details">{props.user.location}location</p>
-          {!isFriend ? (
+          {!isFriend && (
             <button
-              className=" sendrequestbtn"
+              className="raise"
               disabled={isPending}
-              onClick={() => {
-                sendFriendRequest(props.user._id)
-                  .then()
-                  .catch((error) => console.log(error));
-              }}
+              onClick={clickHandler}
             >
               {isPending ? `Pending...` : 'Connect'}
             </button>
-          ) : (
-            <></>
           )}
-
+          {/* add clickhandler when we have chat */}
           <button className="button" onClick={() => openChat(props.user._id)}>
             chat
           </button>
