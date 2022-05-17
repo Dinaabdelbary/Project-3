@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCurrentUser } from '../features/auth/authSlice';
 import { login } from '../services/auth';
 
@@ -62,6 +62,10 @@ const Login = () => {
             Login
           </button>
         </form>
+        <h4>Doesn't have an account yet?</h4>
+        <Link to='/signup' className="buttons raise">
+         Signup
+        </Link>
       </div>
     </div>
   );
