@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { logout } from '../services/auth';
 import Notification from './Notification';
@@ -13,7 +13,9 @@ const Navbar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
-
+const {id} =  useParams()
+  console.log()
+  console.log(user._id)
   const logoutHandler = () => {
     logout().then(() => {
       dispatch(setCurrentUser(null));
@@ -28,7 +30,7 @@ const Navbar = () => {
 
   const handleHamburger = () => setShowDropDown(!showDropDown);
 
-  const friendRequestsNotification = user.pendingReceivedRequests.length && (
+  const friendRequestsNotification = user.pendingReceivedRequests && (
     <p onClick={() => setShowNotif(true)}>You've got a friend request!</p>
   );
 
@@ -62,7 +64,7 @@ const Navbar = () => {
               <li onClick={handleHamburger}>
                 <Link to="/">Home</Link>
               </li>
-              {user.pendingReceivedRequests.length ? (
+              {user.pendingReceivedRequests ? (
                 <li onClick={() => setShowNotif(!showNotif)}>
                   <p>You've got a friend request!</p>
                 </li>

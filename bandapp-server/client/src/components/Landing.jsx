@@ -1,34 +1,37 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Landing = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleLogin = () => {
-        navigate('/login')
-    }
-    const handleSignup = () => {
-        navigate('/signup')
-    }
+//   const handleLogin = () => {
+//     navigate('/login');
+//   };
+//   const handleSignup = () => {
+//     navigate('/signup');
+//   };
 
-    return (
-        <div>
-        <h1>Find other musicians. Connect. Play.</h1>
-        <h3>No one to play music with? Find musicians in your area, connect with them and jam!</h3>
-        <div className='form'>
+  return (
+    <div>
+      <h1>Find other musicians. Connect. Play.</h1>
+      <h3>
+        No one to play music with? Find musicians in your area, connect with
+        them and jam!
+      </h3>
+      <div className='form'>
         <div className='container'>
-        <button className="raise" onClick={handleLogin}>
-        Login
-        </button>
+          <Link to='/login' className='buttons raise'>
+            Login
+          </Link>
         </div>
         <div className='container'>
-        <button className="raise" onClick={handleSignup}>
-         Sign up
-        </button>
+          <Link to='/signup' className='buttons raise'>
+            Signup
+          </Link>
         </div>
-        </div>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Landing
+export default Landing;

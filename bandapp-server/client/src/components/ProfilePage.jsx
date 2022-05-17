@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
+import { loggedin } from '../services/auth';
 import { getUser } from '../services/userApi';
 
 function ProfilePage() {
@@ -20,35 +21,33 @@ function ProfilePage() {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
 
-  // if (!userData.currentUser) {
-  //   useEffect(() => {
-  //     loggedin()
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         dispatch(setCurrentUser(response.data));
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }, [userData.currentUser]);
-  // }
+  if (!userData.currentUser) {
+
+      loggedin()
+        .then((response) => {
+          console.log(response.data);
+          dispatch(setCurrentUser(response.data));
+        })
+        .catch((error) => console.log(error));
+
+  }
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
+
   const navigate = useNavigate();
 
-    useEffect(() => {
+  useEffect(() => {
       getUser(id)
-        .then((response) => {
-          setUser(response.data);
-          console.log('user: ', user)
-          dispatch(setCurrentUser(response.data));
-          
-          return response.data;
-          
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
-    }, []);
+      .then((response) => {
+
+      setUser(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }, [id]);
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],

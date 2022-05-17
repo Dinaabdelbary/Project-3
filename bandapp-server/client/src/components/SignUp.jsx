@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCurrentUser } from '../features/auth/authSlice';
 import { signup } from '../services/auth';
 
@@ -8,16 +8,22 @@ const SignUp = () => {
   const dispatch = useDispatch(); // sends data to redux store
   const navigate = useNavigate();
 
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const submitUserRegisteration = (event) => {
-      event.preventDefault();
+    event.preventDefault();
     signup(name, email, password)
-      .then((user) => {
-        dispatch(setCurrentUser(user.data));
-        navigate('/');
+      .then((response) => {
+        if (response.message) {
+          setError(response.message);
+        } else {
+          dispatch(setCurrentUser(response.data));
+          setError('');
+          navigate('/');
+        }
       })
       .catch((error) =>
         console.log(error, 'Error when trying to send signup request')
@@ -32,6 +38,7 @@ const SignUp = () => {
       </h3>
       <div className='form'>
         <div className='App'>
+          {error ? <h4>{error}</h4> : <></>}
           <form onSubmit={submitUserRegisteration}>
             <input
               type='text'
@@ -57,6 +64,10 @@ const SignUp = () => {
             <button className='raise'>Register</button>
           </form>
         </div>
+        <h4>Alredy registered?</h4>
+        <Link to='/login' className="buttons raise">
+         Login
+        </Link>
       </div>
     </div>
   );
