@@ -15,11 +15,25 @@ import SignUp from './components/SignUp';
 import { setCurrentUser, storedUser } from './features/auth/authSlice';
 import { loggedin } from './services/auth';
 import Chat from './components/Chat';
+import io from "socket.io-client";
 
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
   const dispatch = useDispatch();
   const [chatId, setChatId] = React.useState(null);
+  const [feed, setFeed] = React.useState(null);
+
+  const socketRef = React.useRef();
+
+  React.useEffect(() => {
+    socketRef.current = io.connect(process.env.REACT_APP_API_BASE_URL);
+    socketRef.current.on('message', (messageData) => {
+      console.log('GOT A MSG !!!!', messageData, feed)
+      const { _id } = messageData.sendBy;
+      setChatId(_id);
+      feed && setFeed({ ...feed, messages: [...feed.messages, messageData] })
+    });
+  }, [feed]);
 
   useEffect(() => {
     loggedin()
@@ -36,8 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      {chatId && <Chat chatId={chatId} />}
-
+      {chatId && <Chat chatId={chatId} socketRef={socketRef} feed={feed} setFeed={setFeed} setChatId={setChatId} />}
       {userData.currentUser ? <Navbar /> : ''}
       <div>
         <Routes>
@@ -45,7 +58,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/location" element={<UserProfile />} />
           <Route path="/:id" element={<ProfilePage />} />
-          <Route path="/ListOfUsers" element={<ProfileCard/>} />
+          <Route path="/ListOfUsers" element={<ProfileCard />} />
           <Route
             path="/"
             element={userData.currentUser ? <Home setChatId={setChatId} /> : <Landing />}

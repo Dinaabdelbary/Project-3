@@ -16,24 +16,24 @@ const ProfileCard = (props) => {
   });
   const { id } = useParams();
   const userData = useSelector(storedUser);
-  
+
   const [isPending, setIsPending] = useState(false);
-  
+
   const isPendingInitialValue =
-  userData.currentUser?.pendingSentRequests.includes(props.user._id);
-  
+    userData.currentUser?.pendingSentRequests.includes(props.user._id);
+
   useEffect(() => {
     setIsPending(isPendingInitialValue);
   }, [isPendingInitialValue]);
-  
+
   useEffect(() => {
     setUser(getUser(id));
   }, []);
   const openChat = (recepientId) => {
     props.setChatId(recepientId);
   };
-  
-  
+
+
   //clickHandler is only a placeholder until we have chat
   const clickHandler = () => {
     sendFriendRequest(props.user._id)

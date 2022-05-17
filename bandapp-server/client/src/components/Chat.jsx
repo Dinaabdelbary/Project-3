@@ -2,31 +2,25 @@ import axios from 'axios';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { getPreviousMessages, sendMessage } from '../services/chat'
 
 function Chat(props) {
 
   const userData = useSelector(storedUser); // returns data from redux store
-  const [feed, setFeed] = React.useState(null);
   const [message, setMessage] = React.useState('');
-
-  const socketRef = React.useRef();
   const participants = [props.chatId, userData.currentUser._id];
+
+  const handleCloseChat = () => {
+    props.setChatId(null)
+    props.setFeed(null)
+  }
 
   React.useEffect(() => {
     getPreviousMessages(participants).then(res => {
-      setFeed(res)
+      props.setFeed(res)
     }).catch(err => console.log(err))
-  }, []);
-
-  React.useEffect(() => {
-    socketRef.current = io.connect(process.env.REACT_APP_API_BASE_URL);
-    socketRef.current.on('message', (messageData) => {
-      console.log('GOT A MSG !!!!', messageData)
-      feed && setFeed({ ...feed, messages: [...feed.messages, messageData] })
-    });
-  }, [feed]);
+  }, [props.chatId]);
 
   const handleChange = (event) => {
     const { value } = event.target
@@ -35,12 +29,12 @@ function Chat(props) {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    sendMessage({ message, room: feed._id, sendBy: userData.currentUser }).then(() => {
-      socketRef.current.emit('message', { message, room: feed._id, sendBy: userData.currentUser })
+    sendMessage({ message, room: props.feed._id, sendBy: userData.currentUser }).then(() => {
+      props.socketRef.current.emit('message', { message, room: props.feed._id, sendBy: userData.currentUser })
     }).catch(err => console.log(err))
   }
 
-  const pastMessages = feed ? feed.messages.map(x => {
+  const pastMessages = props.feed ? props.feed.messages.map(x => {
     return (
       <div key={x._id} className="message-bubble">
         {x.message}
@@ -50,6 +44,7 @@ function Chat(props) {
 
   return (
     <div id='chat-container'>
+      <button onClick={handleCloseChat}>close</button>
       <div>
         {pastMessages}
       </div>
