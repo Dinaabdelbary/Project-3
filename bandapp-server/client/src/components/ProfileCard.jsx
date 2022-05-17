@@ -60,7 +60,7 @@ const ProfileCard = (props) => {
           <p className="details">{props.user.location}location</p>
           {!isFriend ? (
             <button
-              className="raise"
+              className=" sendrequestbtn"
               disabled={isPending}
               onClick={() => {
                 sendFriendRequest(props.user._id)
