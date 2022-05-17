@@ -34,7 +34,7 @@ function ProfilePage() {
       // .catch((error) =>
       //   console.log(
       //     error.message,
-      //     // 'Error when trying to get info from loggedin axios request'
+      //     'Error when trying to get info from loggedin axios request'
       //   )
       // );
  // } 
@@ -68,7 +68,6 @@ function ProfilePage() {
       .catch((error) => {
         return error.response.data;
       });
-      
   }, [id]);
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
