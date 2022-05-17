@@ -15,7 +15,10 @@ const userSchema = Schema({
       type: String, //list of instruments and proficiency(not required)
       required: true
     },
-    instruments : [String],
+    instruments :{
+      type: [String],
+      enum: ['guitar', 'bass', 'drums', 'vocals', 'keyboard', 'other']
+    },
     location : String, //possible API call to location API, otherwise just city
     profilePicture : {
       type: String,
@@ -23,7 +26,10 @@ const userSchema = Schema({
     },
     coverPhoto: String,
     listensto : [String], //possible API call to Spotify
-    genres : [String],
+    genres : {
+      type: [String],
+      enum: ['rock', 'jazz', 'electronic', 'hip hop/rap', 'metal', 'pop']
+    },
     bio : String,
     currentBands: [{type: Schema.Types.ObjectId, ref:Band}],
     pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],

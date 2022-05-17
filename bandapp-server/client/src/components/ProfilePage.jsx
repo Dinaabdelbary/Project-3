@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { loggedin } from '../services/auth';
-import { getUser } from '../services/userApi';
+import { getUser, unfollow } from '../services/userApi';
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -21,26 +21,47 @@ function ProfilePage() {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
 
-  if (!userData.currentUser) {
-
-      loggedin()
-        .then((response) => {
-          console.log(response.data);
-          dispatch(setCurrentUser(response.data));
-        })
-        .catch((error) => console.log(error));
-
-  }
+  // if (!userData.currentUser) {
+      // loggedin()
+      //   .then((response) => {
+      //     dispatch(setCurrentUser(response.data));
+      //   })
+      //   .catch((error) => console.log(error));
+      //   loggedin()
+      // .then((response) => {
+      //   dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
+      // })
+      // .catch((error) =>
+      //   console.log(
+      //     error.message,
+      //     'Error when trying to get info from loggedin axios request'
+      //   )
+      // );
+ // } 
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
+  const hasFriendRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
+  const isFriend = userData.currentUser?.friendList.includes(id)
+
+  console.log('has friend request: ', hasFriendRequest)
+  console.log('is in friend list: ', isFriend)
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    loggedin()
+      .then((response) => {
+        dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
+      })
+      .catch((error) =>
+        console.log(
+          error.message,
+          'Error when trying to get info from loggedin axios request'
+        )
+      );
       getUser(id)
       .then((response) => {
-
       setUser(response.data);
         return response.data;
       })
@@ -54,6 +75,13 @@ function ProfilePage() {
   const clickHandler = () => {
     navigate('/editprofile');
   };
+
+  const unfollowHandler = () => {
+    unfollow(id).then((updatedUser) => {
+      console.log('user after promise: ', updatedUser)
+      dispatch(setCurrentUser(updatedUser));
+  }).catch(error => console.log(error))
+}
 
   return (
     <div>
@@ -80,6 +108,15 @@ function ProfilePage() {
           <button className='raise'>Chat</button>
         </div>
       )}
+        {isFriend && 
+        <div>
+          <button
+              className="raise"
+              onClick={unfollowHandler}
+            >Unfollow</button>
+            </div>
+        }
+
     </div>
   );
 }

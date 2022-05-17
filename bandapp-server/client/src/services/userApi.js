@@ -24,11 +24,16 @@ const declineFriendRequest = (id) => {
   return axios.get(`/connect/decline/${id}`)
 };
 
+const unfollow = (id) => {
+  return axios.get(`/connect/unfollow/${id}`)
+}
+
 export { 
     getUser,
     getUserList,
     updateUser,
     sendFriendRequest,
     acceptFriendRequest,
-    declineFriendRequest
+    declineFriendRequest,
+    unfollow
 };
