@@ -44,7 +44,7 @@ app.use("/api", allRoutes);
 
 app.use(
   session({
-    secret: "sooo secret",
+    secret: "javascript is fun",
     resave: false,
     store: store,
     saveUninitialized: false,

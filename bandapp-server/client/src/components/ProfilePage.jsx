@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { loggedin } from '../services/auth';
 import { getUser, unfollow } from '../services/userApi';
+import Notification from './Notification'
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -117,6 +118,7 @@ function ProfilePage() {
             >Unfollow</button>
             </div>
         }
+        {user.pendingReceivedRequests && <Notification/>}
 
     </div>
   );
