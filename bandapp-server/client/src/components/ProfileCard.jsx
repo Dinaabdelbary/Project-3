@@ -43,7 +43,7 @@ const ProfileCard = (props) => {
           <h4 className="title">Guitarist</h4>
           <div className="bio">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Dignissimos, aperiam.
+            Dignissimos, aperiam.{props.user.bio}
           </div>
           <p className="details">{props.user.instruments}instruments</p>
           <p className="details">{props.user.location}location</p>

@@ -26,7 +26,7 @@ const UsersList = () => {
     const isCurrentUser = userData.currentUser._id === user._id;
     const isFriend = userData.currentUser?.friendList.includes(user._id)
     return (
-      <div key={user._id}>{!isCurrentUser & !isFriend && <ProfileCard user={user} />}</div>
+      <div key={user._id}>{!isCurrentUser && !isFriend && <ProfileCard user={user} />}</div>
     );
   });
 

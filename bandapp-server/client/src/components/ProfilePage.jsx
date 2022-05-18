@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { loggedin } from '../services/auth';
 import { getUser, unfollow } from '../services/userApi';
-import Notification from './Notification'
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -15,7 +14,7 @@ function ProfilePage() {
     coverPhoto: '',
     listensto: [],
     genres: [],
-    history: '',
+    bio: '',
     currentBands: [],
     friendList: [],
   });
@@ -81,7 +80,7 @@ function ProfilePage() {
   const unfollowHandler = () => {
     unfollow(id).then((updatedUser) => {
       console.log('user after promise: ', updatedUser)
-      dispatch(setCurrentUser(updatedUser));
+      // dispatch(setCurrentUser(updatedUser));
   }).catch(error => console.log(error))
 }
 
@@ -91,12 +90,12 @@ function ProfilePage() {
       <div className='name'>Name: {user.name}</div>
       <p className='details'>Instrument I play: {user.instruments}</p>
       <p className='details'>Genres: {user.genres}</p>
-      <p className='details'>Music I like: {user.listensto}</p>
-      <p className='details'>About me: {user.history}</p>
+      <p className='details'>About me: {user.bio}</p>
       <div className='details'>
         <i className=''>place</i>
         {user.location}
       </div>
+      {/* {hasFriendRequest && <Notification/>} */}
       {isOwner ? (
         <div>
           {' '}
@@ -118,7 +117,7 @@ function ProfilePage() {
             >Unfollow</button>
             </div>
         }
-        {user.pendingReceivedRequests && <Notification/>}
+        
 
     </div>
   );

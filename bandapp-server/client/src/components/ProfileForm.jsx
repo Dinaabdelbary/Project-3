@@ -101,7 +101,7 @@ function ProfileForm() {
           type='text'
           name='name'
           placeholder={userData.currentUser.name}
-          value={user.name}
+          value={userData.currentUser.name}
           onChange={handleStringChange}
         />
         

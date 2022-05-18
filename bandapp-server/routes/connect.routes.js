@@ -79,6 +79,7 @@ router.get('/:id', (req, res) => {
     })
     .then((update) => {
       res.json(update);
+      res.redirect(`/${otherUserId}`);
     })
     .catch((err) => console.log(err));
 });
@@ -93,9 +94,9 @@ router.get('/unfollow/:id', (req, res) => {
     { $pull: { friendList: otherUserId } },
     { new: true }
   )
-    .then(() => {
+    .then((update) => {
+      res.json(update)
     }).catch(err => console.log(err))
-    return res.json({message: 'unfollow successful'})
 })
 
 

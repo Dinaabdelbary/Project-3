@@ -28,7 +28,7 @@ const FriendList = () => {
 
     return (
       <div key={user._id}>
-        {!isCurrentUser & isFriend && <ProfileCard user={user} />}
+        {!isCurrentUser && isFriend && <ProfileCard user={user} />}
       </div>
     );
   });
