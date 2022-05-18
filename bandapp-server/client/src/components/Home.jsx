@@ -1,13 +1,16 @@
 import React from 'react'
 import {getUserList} from '../services/userApi'
 import ListOfUsers from './ListOfUsers'
+import FriendList from './FriendList'
 
 const Home = () => {
 
-  getUserList()
+  getUserList()  
 
   return (
+
     <div>
+    <FriendList/>
     <ListOfUsers/>
     </div>
   )
