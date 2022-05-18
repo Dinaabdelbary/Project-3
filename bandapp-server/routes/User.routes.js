@@ -16,7 +16,6 @@ const User = require('../models/User.model');
 //================================//Get /api/user/ === GET ALL USERS =======================================
 
 router.get('/user/list', (req, res) => {
-  // console.log('user list working')  
   User.find()
   .then(allUsers => {
     res.json(allUsers)
@@ -27,7 +26,6 @@ router.get('/user/list', (req, res) => {
 //================================//Get /api/user/:id === GET A SPECIFIC USER =======================================
 
 router.get('/user/:id', (req, res) => {
-  // console.log('user ID')
   const { id } = req.params;
   User.findById(id)
   .then(user => {
@@ -40,10 +38,11 @@ router.get('/user/:id', (req, res) => {
 
 //================================//Get /api/user/:id === UPDATE USER =======================================
 
-router.put('/user/:id', (req, res) => {
+router.post('/user/profile/:id', (req, res) => {
   const { id } = req.params;
-  const {name, email, password, instruments, location, listento, genre, bio, profilePicture, coverPhoto } = req.body;
-  User.findByIdAndUpdate(id, {name, email, password, instruments, location, listento, genre, bio, profilePicture, coverPhoto })
+  console.log('req.body : ', req.body)
+  const {name, email, password, instruments, location, genres, bio, profilePicture } = req.body;
+  User.findByIdAndUpdate(id, {name, email, password, instruments, location, genres, bio, profilePicture})
   .then(() => {
     res.json('Your profile has been updated.')
   }).catch(error => res.json(error))

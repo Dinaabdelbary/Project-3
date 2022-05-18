@@ -15,8 +15,6 @@ function ProfileForm() {
     instruments: [],
     location: '',
     profilePicture: '',
-    coverPhoto: '',
-    listensto: [],
     genres: [],
     bio: '',
     currentBands: [],
@@ -44,31 +42,35 @@ function ProfileForm() {
       [name]: value,
     });
   };
-  const handleArrayChange = (event) => {
-    const { name, value } = event.target;
-    setUser({
-      ...user,
-      [name]: [...[name], value],
-    });
-  };
+  // const handleArrayChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUser({
+  //     ...user,
+  //     [name]: [...[name], value],
+  //   });
+  // };
 
   const handleCheckboxChange = async (event, type) => {
     let newArray = [...user[type], event.target.id];
     if (user[type].includes(event.target.id)) {
       newArray = newArray.filter(element => element !== event.target.id);
-    } 
-    await setUser({ ...user,
+    } try {
+      await setUser({ ...user,
       [type]: newArray
     });
+    } catch (error) {
+      console.log(error) 
+    }
+    
   };
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateUser(id)
-      .then((user) => {
-        setUser(user);
-        dispatch(setCurrentUser(user));
+    updateUser(id, user)
+      .then((updatedUser) => {
+        setUser(updatedUser); 
+        dispatch(setCurrentUser(updatedUser));
         navigate('/');
       })
       .catch((error) => {
@@ -88,17 +90,18 @@ function ProfileForm() {
       })
       .catch((error) => console.error(error));
   };
-  console.log('user after function', user)
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <img className='CoverImage' src='' alt='cover photo' />
-        <input type='file' />
+        <input type='file' value={user.profilePicture}/>
         <div className='name'>Name: {userData.currentUser.name}</div>
         <input
           type='text'
           name='name'
-          value={user.name}
+          placeholder={userData.currentUser.name}
+          value={userData.currentUser.name}
           onChange={handleStringChange}
         />
         
@@ -132,13 +135,13 @@ function ProfileForm() {
         <input type="checkbox" id="pop" value="pop" onChange={(event)=>handleCheckboxChange(event, 'genres')}/>
 
 
-        <p className='details'>Listens to: {userData.currentUser.listensto}</p>
+        {/* <p className='details'>Listens to: {userData.currentUser.listensto}</p>
         <input
           type='text'
           name='listensto'
           value={user.listensto}
           onChange={handleArrayChange}
-        />
+        /> */}
         <p className='details'>Bio: {userData.currentUser.bio}</p>
         <textarea
           name='bio'

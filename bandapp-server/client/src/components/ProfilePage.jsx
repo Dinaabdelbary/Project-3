@@ -14,7 +14,7 @@ function ProfilePage() {
     coverPhoto: '',
     listensto: [],
     genres: [],
-    history: '',
+    bio: '',
     currentBands: [],
     friendList: [],
   });
@@ -41,6 +41,7 @@ function ProfilePage() {
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
+  console.log("profile user data",userData);
   const hasFriendRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
   const isFriend = userData.currentUser?.friendList.includes(id)
 
@@ -73,13 +74,13 @@ function ProfilePage() {
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   const clickHandler = () => {
-    navigate('/editprofile');
+    navigate(`/editprofile/${id}`);
   };
 
   const unfollowHandler = () => {
     unfollow(id).then((updatedUser) => {
       console.log('user after promise: ', updatedUser)
-      dispatch(setCurrentUser(updatedUser));
+      // dispatch(setCurrentUser(updatedUser));
   }).catch(error => console.log(error))
 }
 
@@ -89,12 +90,12 @@ function ProfilePage() {
       <div className='name'>Name: {user.name}</div>
       <p className='details'>Instrument I play: {user.instruments}</p>
       <p className='details'>Genres: {user.genres}</p>
-      <p className='details'>Music I like: {user.listensto}</p>
-      <p className='details'>About me: {user.history}</p>
+      <p className='details'>About me: {user.bio}</p>
       <div className='details'>
         <i className=''>place</i>
         {user.location}
       </div>
+      {/* {hasFriendRequest && <Notification/>} */}
       {isOwner ? (
         <div>
           {' '}
@@ -116,6 +117,7 @@ function ProfilePage() {
             >Unfollow</button>
             </div>
         }
+        
 
     </div>
   );

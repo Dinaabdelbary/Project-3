@@ -49,7 +49,7 @@ function App() {
             element={userData.currentUser ? <Home /> : <Landing />}
           />
           <Route path="/search" element={<SearchResult />} />
-          <Route path="/editprofile" element={<ProfileForm />} />
+          <Route path="/editprofile/:id" element={<ProfileForm />} />
         </Routes>
       </div>
     </div>
