@@ -8,8 +8,8 @@ const getUserList = () => {
   return axios.get('/api/user/list');
 };
 
-const updateUser = (id) => {
-  return axios.put(`/api/user/${id}`)
+const updateUser = (id, user) => {
+  return axios.post(`/api/profile/user/${id}`, user)
 };
 
 const sendFriendRequest = (id) => {

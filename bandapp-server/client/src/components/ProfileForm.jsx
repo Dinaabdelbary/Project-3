@@ -15,7 +15,6 @@ function ProfileForm() {
     instruments: [],
     location: '',
     profilePicture: '',
-    coverPhoto: '',
     listensto: [],
     genres: [],
     bio: '',
@@ -56,19 +55,23 @@ function ProfileForm() {
     let newArray = [...user[type], event.target.id];
     if (user[type].includes(event.target.id)) {
       newArray = newArray.filter(element => element !== event.target.id);
-    } 
-    await setUser({ ...user,
+    } try {
+      await setUser({ ...user,
       [type]: newArray
     });
+    } catch (error) {
+      console.log(error) 
+    }
+    
   };
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateUser(id)
-      .then((user) => {
-        setUser(user);
-        dispatch(setCurrentUser(user));
+    updateUser(id, user)
+      .then((updatedUser) => {
+        setUser(updatedUser); 
+        dispatch(setCurrentUser(updatedUser));
         navigate('/');
       })
       .catch((error) => {
@@ -98,6 +101,7 @@ function ProfileForm() {
         <input
           type='text'
           name='name'
+          placeholder={userData.currentUser.name}
           value={user.name}
           onChange={handleStringChange}
         />

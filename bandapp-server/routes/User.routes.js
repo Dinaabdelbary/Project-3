@@ -40,10 +40,10 @@ router.get('/user/:id', (req, res) => {
 
 //================================//Get /api/user/:id === UPDATE USER =======================================
 
-router.put('/user/:id', (req, res) => {
+router.put('/profile/user/:id', (req, res) => {
   const { id } = req.params;
-  const {name, email, password, instruments, location, listento, genre, bio, profilePicture, coverPhoto } = req.body;
-  User.findByIdAndUpdate(id, {name, email, password, instruments, location, listento, genre, bio, profilePicture, coverPhoto })
+  const {name, email, password, instruments, location, listensto, genres, bio, profilePicture } = req.body;
+  User.findByIdAndUpdate(id, {name, email, password, instruments, location, listensto, genres, bio, profilePicture })
   .then(() => {
     res.json('Your profile has been updated.')
   }).catch(error => res.json(error))

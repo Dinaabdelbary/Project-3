@@ -41,6 +41,7 @@ function ProfilePage() {
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
+  console.log("profile user data",userData);
   const hasFriendRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
   const isFriend = userData.currentUser?.friendList.includes(id)
 
@@ -73,7 +74,7 @@ function ProfilePage() {
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   const clickHandler = () => {
-    navigate('/editprofile');
+    navigate(`/editprofile/${id}`);
   };
 
   const unfollowHandler = () => {
