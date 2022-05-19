@@ -32,8 +32,7 @@ const UsersList = (props) => {
   });
 
   return (
-    <div>
-      <h2>List of users</h2>
+    <div className='user-list'>
       {allUsers}
     </div>
   );

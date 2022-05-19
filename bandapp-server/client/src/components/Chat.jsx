@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 // import io from "socket.io-client";
 import { getPreviousMessages, sendMessage } from '../services/chat'
+import { FaWindowClose } from "react-icons/fa";
 
 function Chat(props) {
 
@@ -43,15 +44,21 @@ function Chat(props) {
   }) : []
 
   return (
+
     <div id='chat-container'>
-      <button onClick={handleCloseChat}>close</button>
-      <div>
-        {pastMessages}
+      <div className='chat-header'>
+        <h3>Insert name</h3>
+        
+        <div onClick={handleCloseChat}><FaWindowClose/></div>
       </div>
-      <form onSubmit={handleSendMessage}>
-        <input type="text" name="message" value={message} onChange={handleChange} />
-        <button type="submit">Send</button>
+      <div className='chat-body'>
+        {pastMessages}
+        <form className='chat-input' onSubmit={handleSendMessage}>
+        <input type="text" name="message" className='send-bubble'value={message} onChange={handleChange} />
+        <button className='send-button' type="submit">Send</button>
       </form>
+      </div>
+      
     </div>
   )
 }

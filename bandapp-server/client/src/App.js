@@ -17,6 +17,8 @@ import { loggedin } from './services/auth';
 import Chat from './components/Chat';
 import io from "socket.io-client";
 
+
+
 function App() {
   const userData = useSelector(storedUser); // gets user from global state
   const dispatch = useDispatch();

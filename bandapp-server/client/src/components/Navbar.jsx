@@ -31,7 +31,7 @@ const Navbar = () => {
   const handleHamburger = () => setShowDropDown(!showDropDown);
 
   const friendRequestsNotification = user.pendingReceivedRequests && (
-    <p onClick={() => setShowNotif(true)}>You've got a friend request!</p>
+    <p onClick={() => setShowNotif(true)}>Friend request!</p>
   );
 
   return (
@@ -66,7 +66,7 @@ const Navbar = () => {
               </li>
               {user.pendingReceivedRequests ? (
                 <li onClick={() => setShowNotif(!showNotif)}>
-                  <p>You've got a friend request!</p>
+                  <p>Friend request!</p>
                 </li>
               ) : (
                 <li onClick={handleHamburger}>
@@ -79,22 +79,21 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
-
-
-              <li>
-                <button
+           
+            </ul>
+          </nav>
+        </div>
+        {showNotif && <Notification />}
+      </div>
+       {/* <li>
+      <button
                   className="buttons"
                   type="button"
                   onClick={logoutHandler}
                 >
                   Logout
                 </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        {showNotif && <Notification />}
-      </div>
+                </li> */}
     </>
   );
 };

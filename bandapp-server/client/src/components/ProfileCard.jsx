@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getUser } from '../services/userApi';
-import { useSelector } from 'react-redux';
-import { storedUser } from '../features/auth/authSlice';
-import { sendFriendRequest } from '../services/userApi';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getUser } from "../services/userApi";
+import { useSelector } from "react-redux";
+import { storedUser } from "../features/auth/authSlice";
+import { sendFriendRequest } from "../services/userApi";
+import { Link } from "react-router-dom";
+import { FaRocketchat } from "react-icons/fa";
 
 const ProfileCard = (props) => {
   const [user, setUser] = useState({
-    name: '',
+    name: "",
     instruments: [],
-    location: '',
-    profilePicture: '',
+    location: "",
+    profilePicture: "",
     genres: [],
   });
   const { id } = useParams();
@@ -33,7 +34,6 @@ const ProfileCard = (props) => {
     props.setChatId(recepientId);
   };
 
-
   //clickHandler is only a placeholder until we have chat
   const clickHandler = () => {
     sendFriendRequest(props.user._id)
@@ -41,24 +41,31 @@ const ProfileCard = (props) => {
         setIsPending(true);
       })
       .catch((error) => console.log(error));
-    console.log('clicked');
+    console.log("clicked");
   };
 
   const isFriend = userData.currentUser?.friendList.includes(props.user._id);
 
   return (
     <div className="profileList">
-      <div className="profileCard raise">
-        <div className="card-header">
+      <div className="profileCard">
+        <div className="card-header" style={{backgroundImage: `url(${props.user.profilePicture})`,backgroundSize:"cover"}}>
           <div className="card-header-slanted-edge">
-            <img src={props.user.profilePicture} className="avatar" />
+            {/* <img src={props.user.profilePicture} className="avatar" /> */}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
               <path className="polygon" d="M-20,200,1000,0V200Z" />
             </svg>
           </div>
         </div>
         <div className="card-body">
-          <h2 className="cardname"><Link to={`/${props.user._id}`}>{props.user.name}</Link></h2>
+          <div className="cardHeader">
+            <h2 className="cardname">
+              <Link to={`/${props.user._id}`}>{props.user.name}</Link>
+            </h2>
+            <div onClick={() => openChat(props.user._id)} className="chatIcon">
+              <FaRocketchat  color="white"/>
+            </div>
+          </div>
           <h4 className="title">Guitarist</h4>
           <div className="bio">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -72,13 +79,13 @@ const ProfileCard = (props) => {
               disabled={isPending}
               onClick={clickHandler}
             >
-              {isPending ? `Pending...` : 'Connect'}
+              {isPending ? `Pending...` : "Connect"}
             </button>
           )}
           {/* add clickhandler when we have chat */}
-          <button className="button" onClick={() => openChat(props.user._id)}>
+          {/* <button className="button" onClick={() => openChat(props.user._id)}>
             chat
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
