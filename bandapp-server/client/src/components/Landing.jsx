@@ -1,15 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
-  const navigate = useNavigate();
-
-//   const handleLogin = () => {
-//     navigate('/login');
-//   };
-//   const handleSignup = () => {
-//     navigate('/signup');
-//   };
 
   return (
     <div>

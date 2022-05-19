@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
-import { loggedin } from '../services/auth';
 import { getUser, unfollow } from '../services/userApi';
 
 function ProfilePage() {
@@ -21,24 +20,6 @@ function ProfilePage() {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
 
-  // if (!userData.currentUser) {
-      // loggedin()
-      //   .then((response) => {
-      //     dispatch(setCurrentUser(response.data));
-      //   })
-      //   .catch((error) => console.log(error));
-      //   loggedin()
-      // .then((response) => {
-      //   dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
-      // })
-      // .catch((error) =>
-      //   console.log(
-      //     error.message,
-      //     'Error when trying to get info from loggedin axios request'
-      //   )
-      // );
- // } 
-
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
   console.log("profile user data",userData);
@@ -51,16 +32,6 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loggedin()
-      .then((response) => {
-        dispatch(setCurrentUser(response.data)); //retrieve current user and send to global state
-      })
-      .catch((error) =>
-        console.log(
-          error.message,
-          'Error when trying to get info from loggedin axios request'
-        )
-      );
       getUser(id)
       .then((response) => {
       setUser(response.data);
