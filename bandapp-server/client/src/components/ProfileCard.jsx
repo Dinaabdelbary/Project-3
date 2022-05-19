@@ -7,21 +7,22 @@ import { Link } from 'react-router-dom';
 const ProfileCard = (props) => {
   const userData = useSelector(storedUser);
   const [isPending, setIsPending] = useState(false);
-  const dispatch = useDispatch()
-
-  const hasSentRequest =
-    userData.currentUser?.pendingSentRequests.includes(props.user._id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    const hasSentRequest = userData.currentUser?.pendingSentRequests.includes(
+      props.user._id
+    );
     setIsPending(hasSentRequest);
-  }, [hasSentRequest]);
+  }, []);
 
   //clickHandler is only a placeholder until we have chat
   const clickHandler = () => {
     sendFriendRequest(props.user._id)
       .then((response) => {
-        console.log('response after sending friend request', response)
-        dispatch(setCurrentUser(response.data))
+        // add user id in sentRequest list of loggedin user
+        console.log('response after sending friend request', response);
+        dispatch(setCurrentUser(response.data));
         setIsPending(true);
       })
       .catch((error) => console.log(error));
@@ -31,28 +32,30 @@ const ProfileCard = (props) => {
   const isFriend = userData.currentUser?.friendList.includes(props.user._id);
 
   return (
-    <div className="profileList">
-      <div className="profileCard raise">
-        <div className="card-header">
-          <div className="card-header-slanted-edge">
-            <img src={props.user.profilePicture} className="avatar" />
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
-              <path className="polygon" d="M-20,200,1000,0V200Z" />
+    <div className='profileList'>
+      <div className='profileCard raise'>
+        <div className='card-header'>
+          <div className='card-header-slanted-edge'>
+            <img src={props.user.profilePicture} className='avatar' />
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 200'>
+              <path className='polygon' d='M-20,200,1000,0V200Z' />
             </svg>
           </div>
         </div>
-        <div className="card-body">
-          <h2 className="cardname"><Link to={`/${props.user._id}`}>{props.user.name}</Link></h2>
-          <h4 className="title">Guitarist</h4>
-          <div className="bio">
+        <div className='card-body'>
+          <h2 className='cardname'>
+            <Link to={`/${props.user._id}`}>{props.user.name}</Link>
+          </h2>
+          <h4 className='title'>Guitarist</h4>
+          <div className='bio'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Dignissimos, aperiam.{props.user.bio}
           </div>
-          <p className="details">{props.user.instruments}instruments</p>
-          <p className="details">{props.user.location}location</p>
+          <p className='details'>{props.user.instruments}instruments</p>
+          <p className='details'>{props.user.location}location</p>
           {!isFriend && (
             <button
-              className="raise"
+              className='raise'
               disabled={isPending}
               onClick={clickHandler}
             >
@@ -60,7 +63,7 @@ const ProfileCard = (props) => {
             </button>
           )}
           {/* add clickhandler when we have chat */}
-          <button className="button">chat</button>
+          <button className='button'>chat</button>
         </div>
       </div>
     </div>

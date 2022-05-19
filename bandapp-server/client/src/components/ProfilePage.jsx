@@ -25,21 +25,24 @@ function ProfilePage() {
   const isOwner = id === userData.currentUser?._id;
   //const hasReceivedRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
   const isFriend = userData.currentUser?.friendList.includes(id);
-  const hasSentRequest = userData.currentUser?.pendingSentRequests.includes(id);
 
+  const hasSentRequest = userData.currentUser?.pendingSentRequests.includes(id);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsPending(true)
+    setIsPending(hasSentRequest);
+    console.log('hasSentRequest:', hasSentRequest);
     getUser(id)
       .then((response) => {
+        console.log('response.data:', response.data);
         setUser(response.data);
+
         return response.data;
       })
       .catch((error) => {
         return error.response.data;
       });
-  }, [id]);
+  }, [hasSentRequest]);
 
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
@@ -51,7 +54,8 @@ function ProfilePage() {
   const connectHandler = () => {
     sendFriendRequest(id)
       .then((response) => {
-        console.log('response after connect: ',response);
+        console.log('response after connect: ', response);
+        setIsPending(true);
         dispatch(setCurrentUser(response.data));
       })
       .catch((error) => console.log(error));
@@ -68,38 +72,38 @@ function ProfilePage() {
 
   return (
     <div>
-      <img className="CoverImage" src="" alt="cover photo" />
-      <div className="name">Name: {user?.name}</div>
-      <p className="details">Instrument I play: {user?.instruments}</p>
-      <p className="details">Genres: {user?.genres}</p>
-      <p className="details">About me: {user?.bio}</p>
-      <div className="details">
-        <i className="">place</i>
+      <img className='CoverImage' src='' alt='cover photo' />
+      <div className='name'>Name: {user?.name}</div>
+      <p className='details'>Instrument I play: {user?.instruments}</p>
+      <p className='details'>Genres: {user?.genres}</p>
+      <p className='details'>About me: {user?.bio}</p>
+      <div className='details'>
+        <i className=''>place</i>
         {user?.location}
       </div>
       {/* {hasReceivedRequest && <Notification/>} */}
       {isOwner ? (
         <div>
           {' '}
-          <button className="raise" onClick={clickHandler}>
+          <button className='raise' onClick={clickHandler}>
             Edit profile
           </button>
         </div>
       ) : (
         <div>
           <button
-            className="raise"
+            className='raise'
             onClick={connectHandler}
             disabled={isPending}
           >
             {isPending ? `Pending...` : 'Connect'}
           </button>
-          <button className="raise">Chat</button>
+          <button className='raise'>Chat</button>
         </div>
       )}
       {isFriend && (
         <div>
-          <button className="raise" onClick={unfollowHandler}>
+          <button className='raise' onClick={unfollowHandler}>
             Unfollow
           </button>
         </div>
