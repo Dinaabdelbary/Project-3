@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { getLocation } from '../services/locationApi';
@@ -7,8 +7,7 @@ import { updateUser } from '../services/userApi';
 
 function ProfileForm() {
   const userData = useSelector(storedUser);
-
-  console.log(userData);
+  const dispatch = useDispatch
   const { id } = useParams();
   const [user, setUser] = useState({
     name: '',

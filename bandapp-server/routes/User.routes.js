@@ -43,8 +43,8 @@ router.post('/profile/user/:id', (req, res) => {
   console.log('req.body : ', req.body)
   const {name, email, password, instruments, location, genres, bio, profilePicture } = req.body;
   User.findByIdAndUpdate(id, {name, email, password, instruments, location, genres, bio, profilePicture})
-  .then(() => {
-    res.json('Your profile has been updated.')
+  .then((updatedUser) => {
+    res.json(updatedUser)
   }).catch(error => res.json(error))
 });
 

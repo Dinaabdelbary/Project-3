@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
-import { setAllUsers, storedUsers } from '../features/user/userSlice';
+import { setAllUsers } from '../features/user/userSlice';
 import { getUserList } from '../services/userApi';
 import ProfileCard from './ProfileCard';
 import { useDispatch } from 'react-redux';
@@ -32,7 +32,7 @@ const UsersList = () => {
 
   return (
     <div>
-      <h2>Find cool musicians</h2>
+      <h2>Find musicians!</h2>
       {allUsers}
     </div>
   );

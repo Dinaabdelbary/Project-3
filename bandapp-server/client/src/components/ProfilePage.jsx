@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
-import { getUser, unfollow } from '../services/userApi';
+import { sendFriendRequest, getUser, unfollow } from '../services/userApi';
 
 function ProfilePage() {
   const [user, setUser] = useState({
@@ -19,28 +19,30 @@ function ProfilePage() {
   });
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
+  const [isPending, setIsPending] = useState(false);
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
-  console.log("profile user data",userData);
-  const hasFriendRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
-  const isFriend = userData.currentUser?.friendList.includes(id)
-
-  console.log('has friend request: ', hasFriendRequest)
-  console.log('is in friend list: ', isFriend)
+  console.log('profile user data', userData);
+  //const hasReceivedRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
+  const isFriend = userData.currentUser?.friendList.includes(id);
+  const hasSentRequest = userData.currentUser?.pendingSentRequests.includes(id);
+  console.log(userData.currentUser.pendingSentRequests, "")
 
   const navigate = useNavigate();
 
   useEffect(() => {
-      getUser(id)
+    setIsPending(true)
+    getUser(id)
       .then((response) => {
-      setUser(response.data);
+        setUser(response.data);
         return response.data;
       })
       .catch((error) => {
         return error.response.data;
       });
   }, [id]);
+
   /////MIGHT NEED TO DISPLAY IF IT'S OUR PROFILE
   // pendingSentRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
   // pendingReceivedRequests: [{type: Schema.Types.ObjectId, ref: "User"}],
@@ -48,48 +50,62 @@ function ProfilePage() {
     navigate(`/editprofile/${id}`);
   };
 
+  const connectHandler = () => {
+    sendFriendRequest(id)
+      .then((response) => {
+        console.log('response after connect: ',response);
+        dispatch(setCurrentUser(response.data));
+      })
+      .catch((error) => console.log(error));
+  };
+
   const unfollowHandler = () => {
-    unfollow(id).then((updatedUser) => {
-      console.log('user after promise: ', updatedUser)
-      // dispatch(setCurrentUser(updatedUser));
-  }).catch(error => console.log(error))
-}
+    unfollow(id)
+      .then((updatedUser) => {
+        console.log('user after promise: ', updatedUser.data);
+        dispatch(setCurrentUser(updatedUser.data));
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
-      <img className='CoverImage' src='' alt='cover photo' />
-      <div className='name'>Name: {user.name}</div>
-      <p className='details'>Instrument I play: {user.instruments}</p>
-      <p className='details'>Genres: {user.genres}</p>
-      <p className='details'>About me: {user.bio}</p>
-      <div className='details'>
-        <i className=''>place</i>
+      <img className="CoverImage" src="" alt="cover photo" />
+      <div className="name">Name: {user.name}</div>
+      <p className="details">Instrument I play: {user.instruments}</p>
+      <p className="details">Genres: {user.genres}</p>
+      <p className="details">About me: {user.bio}</p>
+      <div className="details">
+        <i className="">place</i>
         {user.location}
       </div>
-      {/* {hasFriendRequest && <Notification/>} */}
+      {/* {hasReceivedRequest && <Notification/>} */}
       {isOwner ? (
         <div>
           {' '}
-          <button className='raise' onClick={clickHandler}>
+          <button className="raise" onClick={clickHandler}>
             Edit profile
           </button>
         </div>
       ) : (
         <div>
-          <button className='raise'>Connect</button>
-          <button className='raise'>Chat</button>
+          <button
+            className="raise"
+            onClick={connectHandler}
+            disabled={isPending}
+          >
+            {isPending ? `Pending...` : 'Connect'}
+          </button>
+          <button className="raise">Chat</button>
         </div>
       )}
-        {isFriend && 
+      {isFriend && (
         <div>
-          <button
-              className="raise"
-              onClick={unfollowHandler}
-            >Unfollow</button>
-            </div>
-        }
-        
-
+          <button className="raise" onClick={unfollowHandler}>
+            Unfollow
+          </button>
+        </div>
+      )}
     </div>
   );
 }
