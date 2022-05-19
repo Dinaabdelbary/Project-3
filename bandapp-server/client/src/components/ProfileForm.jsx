@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
-import { loggedin } from '../services/auth';
 import { getLocation } from '../services/locationApi';
 import { updateUser } from '../services/userApi';
 
@@ -22,20 +21,6 @@ function ProfileForm() {
     currentBands: [],
     friendList: [],
   });
-
-  if (!userData.currentUser) {
-    useEffect(() => {
-      loggedin()
-        .then((response) => {
-          setUser(response.data);
-          dispatch(setCurrentUser(response.data));
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
-    }, []);
-  }
 
   const handleStringChange = (event) => {
     const { name, value } = event.target;
