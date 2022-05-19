@@ -38,7 +38,7 @@ router.get('/user/:id', (req, res) => {
 
 //================================//Get /api/user/:id === UPDATE USER =======================================
 
-router.post('/user/profile/:id', (req, res) => {
+router.post('/profile/user/:id', (req, res) => {
   const { id } = req.params;
   console.log('req.body : ', req.body)
   const {name, email, password, instruments, location, genres, bio, profilePicture } = req.body;
