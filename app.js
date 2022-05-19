@@ -75,7 +75,7 @@ app.use(express.static(path.join(__dirname, "frontend/build")));
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
 
-const userRoutes = require("./routes/user.routes");
+const userRoutes = require("./routes/User.routes");
 app.use("/api", userRoutes);
 
 const searchRoutes = require("./routes/search.routes");
@@ -86,7 +86,6 @@ app.use("/connect", connectRoutes);
 
 const bandRoutes = require('./routes/band.routes');
 app.use('/band', bandRoutes);
-
 
 const auth = require("./routes/auth.routes");
 app.use("/api/auth", auth);
