@@ -25,25 +25,18 @@ const UsersList = (props) => {
     const isCurrentUser = userData.currentUser._id === user._id;
     const isFriend = userData.currentUser?.friendList.includes(user._id);
     return (
-      // <<<<<<< HEAD
       <div key={user._id}>
         {!isCurrentUser && !isFriend && (
           <ProfileCard user={user} setChatId={props.setChatId} />
         )}
       </div>
-      // =======
-      //       <div key={user._id}>{!isCurrentUser && <ProfileCard user={user} setChatId={props.setChatId} />}</div>
-      // >>>>>>> origin/socketio
     );
   });
 
   return (
-    // <<<<<<< HEAD
     <div className='user-list'>
       <h2>Find musicians!</h2>
-      {/* =======
-    <div className='user-list'>
->>>>>>> origin/socketio */}
+
       {allUsers}
     </div>
   );

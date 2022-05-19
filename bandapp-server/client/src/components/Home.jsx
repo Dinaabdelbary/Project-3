@@ -5,21 +5,14 @@ import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
 import { getUserList } from '../services/userApi';
 
-// <<<<<<< HEAD
 const Home = (props) => {
   const userData = useSelector(storedUser);
   console.log('userdata in home: ', userData);
 
   getUserList();
-  // =======
-  // const Home = (props) => {
-
-  //   // getUserList()
-  // >>>>>>> origin/socketio
 
   return (
     <div>
-      {/* <<<<<<< HEAD */}
       {userData.currentUser.friendList.length ? (
         <FriendList />
       ) : (
@@ -27,9 +20,6 @@ const Home = (props) => {
       )}
 
       <ListOfUsers setChatId={props.setChatId} />
-      {/* =======
-    <ListOfUsers setChatId={props.setChatId}/>
->>>>>>> origin/socketio */}
     </div>
   );
 };

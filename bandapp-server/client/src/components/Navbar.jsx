@@ -13,13 +13,9 @@ const Navbar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const user = userData.currentUser;
-  // <<<<<<< HEAD
+
   const { id } = useParams();
-  // =======
-  //   const { id } = useParams()
-  //   console.log()
-  //   console.log(user._id)
-  // >>>>>>> origin/socketio
+
   const logoutHandler = () => {
     logout().then(() => {
       dispatch(setCurrentUser(null));
@@ -34,13 +30,8 @@ const Navbar = () => {
 
   const handleHamburger = () => setShowDropDown(!showDropDown);
 
-  // <<<<<<< HEAD
   const friendRequestsNotification = user?.pendingReceivedRequests && (
     <p onClick={() => setShowNotif(true)}>Friend request!</p>
-    // =======
-    //   const friendRequestsNotification = user.pendingReceivedRequests && (
-    //     <p onClick={() => setShowNotif(true)}>Friend request!</p>
-    // >>>>>>> origin/socketio
   );
 
   return (
@@ -93,15 +84,6 @@ const Navbar = () => {
         </div>
         {showNotif && <Notification />}
       </div>
-      {/* <li>
-      <button
-                  className="buttons"
-                  type="button"
-                  onClick={logoutHandler}
-                >
-                  Logout
-                </button>
-                </li> */}
     </>
   );
 };
