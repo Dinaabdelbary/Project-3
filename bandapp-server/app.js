@@ -44,7 +44,7 @@ app.use("/api", allRoutes);
 
 app.use(
   session({
-    secret: "javascipt is fun",
+    secret: "javascript is fun",
     resave: false,
     store: store,
     saveUninitialized: false,
@@ -70,7 +70,6 @@ app.locals.title = "Express - Generated with IronGenerator";
 
 const userRoutes = require("./routes/user.routes");
 app.use("/api", userRoutes);
-
 
 const searchRoutes = require("./routes/search.routes");
 app.use("/api", searchRoutes);

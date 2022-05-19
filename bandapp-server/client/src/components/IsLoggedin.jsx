@@ -8,7 +8,7 @@ import Landing from './Landing';
 const IsLoggedin = ({ children }) => {
   const userData = useSelector(storedUser);
   const dispatch = useDispatch();
-  if (!userData) {
+  if (!userData.currentUser) {
     loggedin()
       .then((response) => {
         console.log(response.data);

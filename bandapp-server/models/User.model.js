@@ -24,8 +24,8 @@ const userSchema = Schema({
       type: String,
       default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Musician_-_The_Noun_Project.svg/1200px-Musician_-_The_Noun_Project.svg.png'
     },
-    coverPhoto: String,
-    listensto : [String], //possible API call to Spotify
+    // coverPhoto: String,
+    // listensto : [String], possible API call to Spotify
     genres : {
       type: [String],
       enum: ['rock', 'jazz', 'electronic', 'hip hop/rap', 'metal', 'pop']

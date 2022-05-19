@@ -24,17 +24,13 @@ function App() {
         <Routes>
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
-          {/* <Route
-            path='/'
-            element={userData.currentUser ? <Home /> : <Landing />}
-          /> */}
           <Route element={<IsLoggedIn />}>
             <Route path='/' element={<Home />} />
             <Route path='/location' element={<UserProfile />} />
             <Route path='/:id' element={<ProfilePage />} />
             <Route path='/ListOfUsers' element={<ProfileCard />} />
             <Route path='/search' element={<SearchResult />} />
-            <Route path='/editprofile' element={<ProfileForm />} />
+            <Route path='/editprofile/:id' element={<ProfileForm />} />
           </Route>
         </Routes>
       </div>
