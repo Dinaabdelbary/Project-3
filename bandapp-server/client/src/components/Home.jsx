@@ -3,6 +3,7 @@ import ListOfUsers from './ListOfUsers';
 import FriendList from './FriendList';
 import { useSelector } from 'react-redux';
 import { storedUser } from '../features/auth/authSlice';
+import { getUserList } from '../services/userApi';
 
 // <<<<<<< HEAD
 const Home = (props) => {

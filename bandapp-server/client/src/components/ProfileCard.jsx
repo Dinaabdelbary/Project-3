@@ -5,6 +5,8 @@ import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { sendFriendRequest } from '../services/userApi';
 import { Link } from 'react-router-dom';
 import { FaRocketchat } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import { getUser } from '../services/userApi';
 // =======
 // import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
