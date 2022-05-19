@@ -13,12 +13,17 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User.model");
 
 require("./configs/passport.js");
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const app = express();
 // const server = require('./configs/socketio')(app);
+const MONGO_URI = process.env.MONGO_URI
+console.log('mongoURI: ', MONGO_URI)
 
 mongoose
-  .connect(process.env.MONGO_CONNECT || "mongodb://localhost/bandmatchDB", {
+  .connect(MONGO_URI, { //|| "mongodb://localhost/bandmatchDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -36,7 +41,7 @@ app.use(cors({
   credentials: true,
   origin: process.env.ORIGIN
 }));
-const url = "mongodb://localhost/bandmatchDB" || process.env.MONGO_URI;
+const url = process.env.MONGO_URI //|| "mongodb://localhost/bandmatchDB" ;
 let store = new MongoStore({
   mongoUrl: url,
   collection: "sessions",
