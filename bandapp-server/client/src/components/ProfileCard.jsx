@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { storedUser } from '../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { sendFriendRequest } from '../services/userApi';
 import { Link } from 'react-router-dom';
 
 const ProfileCard = (props) => {
   const userData = useSelector(storedUser);
   const [isPending, setIsPending] = useState(false);
+  const dispatch = useDispatch()
 
-  const isPendingInitialValue =
+  const hasSentRequest =
     userData.currentUser?.pendingSentRequests.includes(props.user._id);
 
   useEffect(() => {
-    setIsPending(isPendingInitialValue);
-  }, [isPendingInitialValue]);
+    setIsPending(hasSentRequest);
+  }, [hasSentRequest]);
 
   //clickHandler is only a placeholder until we have chat
   const clickHandler = () => {
     sendFriendRequest(props.user._id)
-      .then(() => {
+      .then((response) => {
+        console.log('response after sending friend request', response)
+        dispatch(setCurrentUser(response.data))
         setIsPending(true);
       })
       .catch((error) => console.log(error));

@@ -10,7 +10,7 @@ const getUserList = () => {
 
 const updateUser = (id, user) => {
   console.log('id and user: ', id, user)
-  return axios.post(`/api/user/profile/${id}`, user)
+  return axios.post(`/api/profile/user/${id}`, user)
 };
 
 const sendFriendRequest = (id) => {

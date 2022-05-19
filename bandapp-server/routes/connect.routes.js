@@ -23,8 +23,8 @@ router.get('/accept/:id', (req, res) => {
         },
         { new: true }
       ).then((update) => {
-        console.log('accepted friend request in db:', update)
-        res.json(update)
+        console.log('accepted friend request in db:', update);
+        res.json(update);
       });
     })
     .catch((err) => console.log(err));
@@ -32,9 +32,9 @@ router.get('/accept/:id', (req, res) => {
 
 router.get('/decline/:id', (req, res) => {
   const otherUserId = req.params.id;
-  console.log('req.params.id: ',otherUserId)
+  console.log('req.params.id: ', otherUserId);
   const currentUserId = req.session.passport.user;
-  console.log('req.session.passport.user: ',currentUserId)
+  console.log('req.session.passport.user: ', currentUserId);
 
   User.findOneAndUpdate(
     { _id: currentUserId },
@@ -50,15 +50,40 @@ router.get('/decline/:id', (req, res) => {
       { new: true }
     )
       .then((update) => {
-        console.log('declined friend request in db:',update);
+        console.log('declined friend request in db:', update);
         res.redirect('/');
-        res.json(update)
+        res.json(update);
       })
       .catch((err) => console.log(err));
   });
 });
 
 //send friend request
+// router.get('/:id', (req, res) => {
+//   const otherUserId = req.params.id;
+//   const currentUserId = req.session.passport.user;
+
+//   User.findOneAndUpdate(
+//     { _id: currentUserId },
+//     { $push: { pendingSentRequests: otherUserId } },
+//     { new: true }
+//   )
+//     .then((updatedUser) => {
+//       req.session.currentUser = updatedUser;
+
+//       return User.findOneAndUpdate(
+//         { _id: otherUserId },
+//         { $push: { pendingReceivedRequests: currentUserId } },
+//         { new: true }
+//       );
+//     })
+//     .then((update) => {
+//       res.json(update);
+//       res.redirect(`/${otherUserId}`);
+//     })
+//     .catch((err) => console.log(err));
+// });
+
 router.get('/:id', (req, res) => {
   const otherUserId = req.params.id;
   const currentUserId = req.session.passport.user;
@@ -67,21 +92,23 @@ router.get('/:id', (req, res) => {
     { _id: currentUserId },
     { $push: { pendingSentRequests: otherUserId } },
     { new: true }
-  )
+  ).populate('pendingSentRequests')
     .then((updatedUser) => {
       req.session.currentUser = updatedUser;
-
-      return User.findOneAndUpdate(
+      User.findOneAndUpdate(
         { _id: otherUserId },
         { $push: { pendingReceivedRequests: currentUserId } },
         { new: true }
-      );
+      ).populate('pendingReceivedRequests')
+        .then(() => console.log('updated added user'))
+        .catch((error) =>
+          console.error(error, 'error when updating added user')
+        );
+      res.json(updatedUser);
     })
-    .then((update) => {
-      res.json(update);
-      res.redirect(`/${otherUserId}`);
-    })
-    .catch((err) => console.log(err));
+    .catch((err) =>
+      console.log(err, error, 'error when updating request sender user')
+    );
 });
 
 //unfollow
@@ -95,9 +122,9 @@ router.get('/unfollow/:id', (req, res) => {
     { new: true }
   )
     .then((update) => {
-      res.json(update)
-    }).catch(err => console.log(err))
-})
-
+      res.json(update);
+    })
+    .catch((err) => console.log(err));
+});
 
 module.exports = router;
