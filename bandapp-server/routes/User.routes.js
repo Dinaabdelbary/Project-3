@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require('../models/User.model');
+const fileUploader = require('../configs/cloudinary')
 
 
 // ===================================//Post /api/user ==== CREATE A USER  =============================
@@ -61,3 +62,18 @@ router.delete('/user/:id', (req, res) => {
 
 module.exports = router;
 
+
+//================================// CLOUDINARY =======================================
+
+router.post(
+	'/fileUpload',
+	fileUploader.single('profilePicture'),
+	(req, res, next) => {
+    console.log('req.file: ', req.file)
+		if (!req.file) {
+			next(new Error('No file uploaded!'));
+			return;
+		}
+		res.json({ secure_url: req.file.path });
+	}
+);
