@@ -6,7 +6,7 @@ import { getUserList } from '../services/userApi';
 import ProfileCard from './ProfileCard';
 import { useDispatch } from 'react-redux';
 
-const UsersList = () => {
+const UsersList = (props) => {
   const userData = useSelector(storedUser); // returns data from redux store
   const [listOfUsers, setListOfUsers] = useState([]);
   const dispatch = useDispatch();
@@ -22,17 +22,21 @@ const UsersList = () => {
   }, []);
 
   const allUsers = listOfUsers.map((user) => {
-   
     const isCurrentUser = userData.currentUser._id === user._id;
-    const isFriend = userData.currentUser?.friendList.includes(user._id)
+    const isFriend = userData.currentUser?.friendList.includes(user._id);
     return (
-      <div key={user._id}>{!isCurrentUser && !isFriend && <ProfileCard user={user} />}</div>
+      <div key={user._id}>
+        {!isCurrentUser && !isFriend && (
+          <ProfileCard user={user} setChatId={props.setChatId} />
+        )}
+      </div>
     );
   });
 
   return (
-    <div>
+    <div className='user-list'>
       <h2>Find musicians!</h2>
+
       {allUsers}
     </div>
   );

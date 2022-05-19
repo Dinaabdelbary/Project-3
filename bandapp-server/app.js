@@ -15,6 +15,7 @@ const User = require("./models/User.model");
 require("./configs/passport.js");
 
 const app = express();
+// const server = require('./configs/socketio')(app);
 
 mongoose
   .connect(process.env.MONGO_CONNECT || "mongodb://localhost/bandmatchDB", {
@@ -31,7 +32,10 @@ mongoose
   });
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: process.env.ORIGIN
+}));
 const url = "mongodb://localhost/bandmatchDB" || process.env.MONGO_URI;
 let store = new MongoStore({
   mongoUrl: url,
@@ -81,5 +85,8 @@ app.use('/band', bandRoutes);
 
 const auth = require("./routes/auth.routes");
 app.use("/api/auth", auth);
+
+const chat = require("./routes/chat.routes");
+app.use("/api/chat", chat);
 
 module.exports = app;

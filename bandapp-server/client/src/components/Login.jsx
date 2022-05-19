@@ -35,36 +35,40 @@ const Login = () => {
   console.log(error);
 
   return (
+
     <div>
-      <h1>Find other musicians. Connect. Play.</h1>
+
+      <div className='project-name'>
+      <h1>PROJECT NAME</h1>
       <h3>
-        Wanna play music? Find musicians in your area, connect with them and
-        jam!
+      Find musicians in your area, connect, and jam!
       </h3>
+      </div>
+
       <div className='form'>
         {error ? <h4>{error}</h4> : <></>}
         <form onSubmit={handleSubmit}>
           <input
-            type='text'
+            type='text' className='e-mail'
             placeholder='Email'
             onChange={handleEmail}
             value={email}
           />
           <br />
-          <input
+          <input className='e-mail'
             type='password'
             placeholder='Password'
             onChange={handlePasswordChange}
             value={password}
           />
           <br />
-          <button className='raise' type='submit'>
+          <button type='submit'>
             Login
           </button>
         </form>
-        <h4>Doesn't have an account yet?</h4>
-        <Link to='/signup' className="form-button raise">
-         Signup
+        <h4>New here?</h4>
+        <Link to='/signup'>
+         Go to signup
         </Link>
       </div>
     </div>
