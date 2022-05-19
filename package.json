@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "npm start --prefix client"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

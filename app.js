@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express();
-// const server = require('./configs/socketio')(app);
+
 const MONGO_URI = process.env.MONGO_URI
 console.log('mongoURI: ', MONGO_URI)
 
