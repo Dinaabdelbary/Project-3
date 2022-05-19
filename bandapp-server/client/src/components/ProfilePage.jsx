@@ -23,11 +23,9 @@ function ProfilePage() {
 
   const { id } = useParams();
   const isOwner = id === userData.currentUser?._id;
-  console.log('profile user data', userData);
   //const hasReceivedRequest = userData.currentUser?.pendingReceivedRequests.includes(id)
   const isFriend = userData.currentUser?.friendList.includes(id);
   const hasSentRequest = userData.currentUser?.pendingSentRequests.includes(id);
-  console.log(userData.currentUser.pendingSentRequests, "")
 
   const navigate = useNavigate();
 
@@ -71,13 +69,13 @@ function ProfilePage() {
   return (
     <div>
       <img className="CoverImage" src="" alt="cover photo" />
-      <div className="name">Name: {user.name}</div>
-      <p className="details">Instrument I play: {user.instruments}</p>
-      <p className="details">Genres: {user.genres}</p>
-      <p className="details">About me: {user.bio}</p>
+      <div className="name">Name: {user?.name}</div>
+      <p className="details">Instrument I play: {user?.instruments}</p>
+      <p className="details">Genres: {user?.genres}</p>
+      <p className="details">About me: {user?.bio}</p>
       <div className="details">
         <i className="">place</i>
-        {user.location}
+        {user?.location}
       </div>
       {/* {hasReceivedRequest && <Notification/>} */}
       {isOwner ? (

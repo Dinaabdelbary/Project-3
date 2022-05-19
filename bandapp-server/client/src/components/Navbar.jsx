@@ -21,8 +21,6 @@ const {id} =  useParams()
     });
   };
 
-  console.log('user pending request', user.pendingReceivedRequests)
-
   const searchHandler = (event) => {
     event.preventDefault();
     navigate(`/search/?q=${search}`);
@@ -30,7 +28,7 @@ const {id} =  useParams()
 
   const handleHamburger = () => setShowDropDown(!showDropDown);
 
-  const friendRequestsNotification = user.pendingReceivedRequests && (
+  const friendRequestsNotification = user?.pendingReceivedRequests && (
     <p onClick={() => setShowNotif(true)}>You've got a friend request!</p>
   );
 
@@ -64,16 +62,16 @@ const {id} =  useParams()
               <li onClick={handleHamburger}>
                 <Link to="/">Home</Link>
               </li>
-              {user.pendingReceivedRequests.length ? (
+              {user?.pendingReceivedRequests?.length ? (
                 <li onClick={() => setShowNotif(!showNotif)}>
                   <p>You've got a friend request!</p>
                 </li>
               ) : (
                 <li onClick={handleHamburger}>
-                  <Link to={`/${user._id}`}>
+                  <Link to={`/${user?._id}`}>
                     <img
                       className="avatar"
-                      src={user.profilePicture}
+                      src={user?.profilePicture}
                       alt="avatar"
                     />
                   </Link>

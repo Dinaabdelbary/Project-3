@@ -7,7 +7,7 @@ import { updateUser, uploadImage } from '../services/userApi';
 
 function ProfileForm() {
   const userData = useSelector(storedUser);
-  const dispatch = useDispatch
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [user, setUser] = useState({
     name: '',
@@ -34,7 +34,7 @@ function ProfileForm() {
 		const uploadedImage = await uploadImage(uploadData);
     console.log('uploadData: ', uploadData)
     setUser({...user, profilePicture: uploadedImage.data.secure_url})
-		//setImage(uploadedImage.data.secure_url);
+		setImage(uploadedImage.data.secure_url);
 	};
 
   const handleCheckboxChange = async (event, type) => {
@@ -51,7 +51,6 @@ function ProfileForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
     if (user.name === '') {
       setUser({ ...user, name: userData.currentUser.name });
       console.log(
@@ -87,7 +86,7 @@ function ProfileForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <img className='CoverImage' src={userData.currentUser.profilePicture} alt='cover photo'/>
+        <img className='CoverImage' src={image || userData.currentUser.profilePicture} alt='cover photo'/>
         <input type='file' onChange={handleImageUpload}/>
         <div className='name'>Name: {userData.currentUser.name}</div>
         <input
