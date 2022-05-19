@@ -29,6 +29,10 @@ const unfollow = (id) => {
   return axios.get(`/connect/unfollow/${id}`)
 }
 
+const uploadImage = (file) => {
+  return axios.post('/api/fileUpload', file)
+}
+
 export { 
     getUser,
     getUserList,
@@ -36,5 +40,6 @@ export {
     sendFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
-    unfollow
+    unfollow,
+    uploadImage
 };

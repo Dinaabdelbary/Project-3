@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrentUser, storedUser } from '../features/auth/authSlice';
 import { getLocation } from '../services/locationApi';
-import { updateUser } from '../services/userApi';
+import { updateUser, uploadImage } from '../services/userApi';
 
 function ProfileForm() {
   const userData = useSelector(storedUser);
@@ -18,6 +18,8 @@ function ProfileForm() {
     bio: '',
   });
 
+  const [image, setImage] = useState('')
+
   const handleStringChange = (event) => {
     const { name, value } = event.target;
     setUser({
@@ -25,6 +27,15 @@ function ProfileForm() {
       [name]: value,
     });
   };
+
+  const handleImageUpload = async (event) => {
+		const uploadData = new FormData();
+		uploadData.append('profilePicture', event.target.files[0]);
+		const uploadedImage = await uploadImage(uploadData);
+    console.log('uploadData: ', uploadData)
+    setUser({...user, profilePicture: uploadedImage.data.secure_url})
+		//setImage(uploadedImage.data.secure_url);
+	};
 
   const handleCheckboxChange = async (event, type) => {
     let newArray = [...user[type], event.target.id];
@@ -54,7 +65,6 @@ function ProfileForm() {
       .then((updatedUser) => {
         setUser(updatedUser);
         dispatch(setCurrentUser(updatedUser));
-        navigate('/');
       })
       .catch((error) => {
         console.log(error, 'Error when trying to update profile');
@@ -77,8 +87,8 @@ function ProfileForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <img className='CoverImage' src='' alt='cover photo' />
-        <input type='file' value={user.profilePicture} />
+        <img className='CoverImage' src={userData.currentUser.profilePicture} alt='cover photo'/>
+        <input type='file' onChange={handleImageUpload}/>
         <div className='name'>Name: {userData.currentUser.name}</div>
         <input
           type='text'
