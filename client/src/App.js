@@ -15,6 +15,7 @@ import SignUp from './components/SignUp';
 import Chat from './components/Chat';
 import io from 'socket.io-client';
 //this is gonna work
+//Now for real
 
 import { storedUser } from './features/auth/authSlice';
 
