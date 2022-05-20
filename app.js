@@ -11,7 +11,6 @@ const MongoStore = require("connect-mongo");
 
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User.model");
-//some bs
 
 require("./configs/passport.js");
 if (process.env.NODE_ENV !== 'production') {
