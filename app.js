@@ -8,6 +8,7 @@ const session = require("express-session");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
+//random change
 
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User.model");
