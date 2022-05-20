@@ -16,7 +16,7 @@ const fileUploader = require('../configs/cloudinary')
 
 //================================//Get /api/user/ === GET ALL USERS =======================================
 
-router.get('/user/list', (req, res) => {
+router.get('/list', (req, res) => {
   User.find()
   .then(allUsers => {
     res.json(allUsers)
